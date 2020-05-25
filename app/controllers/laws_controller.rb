@@ -1,0 +1,2 @@
+class LawsController < ApplicationController
+end

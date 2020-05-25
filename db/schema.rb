@@ -10,10 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_25_134156) do
+ActiveRecord::Schema.define(version: 2020_05_25_141419) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "deputies", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.string "job"
+    t.string "birth_place"
+    t.date "birth_date"
+    t.string "party"
+    t.string "twitter"
+    t.string "facebook"
+    t.string "website"
+    t.string "revenue"
+    t.integer "circonscription"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "laws", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.string "ressource_link"
+    t.string "current_status"
+    t.date "last_status_update"
+    t.date "start_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -27,4 +55,16 @@ ActiveRecord::Schema.define(version: 2020_05_25_134156) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "votes", force: :cascade do |t|
+    t.string "deputy_position"
+    t.bigint "deputy_id", null: false
+    t.bigint "law_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["deputy_id"], name: "index_votes_on_deputy_id"
+    t.index ["law_id"], name: "index_votes_on_law_id"
+  end
+
+  add_foreign_key "votes", "deputies"
+  add_foreign_key "votes", "laws"
 end
