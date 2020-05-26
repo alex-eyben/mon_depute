@@ -8,7 +8,7 @@ class ImportDeputiesJob < ApplicationJob
 
   def perform(quantity)
     puts "coucou"
-    parse_deputies_files(quantity).class
+    parse_deputies_files(quantity)
   end
 
   def parse_deputies_files(quantity)
