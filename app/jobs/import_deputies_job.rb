@@ -9,12 +9,13 @@ class ImportDeputiesJob < ApplicationJob
   def perform(quantity)
     @url = "http://data.assemblee-nationale.fr/static/openData/repository/15/amo/deputes_actifs_mandats_actifs_organes/AMO10_deputes_actifs_mandats_actifs_organes_XV.json.zip"
     puts "coucou"
-    @parties = import_parties(2000)
+    @parties = import_parties(1500)
     parse_deputies_files(quantity)
   end
 
   def import_parties(quantity)
     # parties = []
+    quantity += 577
     parties = {}
     file = open(@url)
     Zip::File.open(file) do |zip_file|
@@ -37,7 +38,6 @@ class ImportDeputiesJob < ApplicationJob
 
   def parse_deputies_files(quantity)
     # @url = "http://data.assemblee-nationale.fr/static/openData/repository/15/amo/deputes_actifs_mandats_actifs_organes/AMO10_deputes_actifs_mandats_actifs_organes_XV.json.zip"
-    puts @parties
     file = open(@url)
     deputies = []
     Zip::File.open(file) do |zip_file|
@@ -56,7 +56,8 @@ class ImportDeputiesJob < ApplicationJob
         ## deputy[:other_adresses] = data["acteur"]["adresses"]["adresse"].reject{|address|address["typeLibelle"]=="Mèl"}
         deputy[:job] = data['acteur']['profession']["libelleCourant"]
         deputy[:revenue] = data['acteur']["uri_hatvp"]
-        deputy[:party] = data["acteur"]["mandats"]["mandat"].select{|mandat|mandat["typeOrgane"]=="PARPOL"}.first["uid"]
+        # deputy[:party] = data["acteur"]["mandats"]["mandat"].select{|mandat|mandat["typeOrgane"]=="PARPOL"}.first["uid"]
+        deputy[:party] = @parties[data["acteur"]["mandats"]["mandat"].select{|mandat|mandat["typeOrgane"]=="PARPOL"}.first["organes"]["organeRef"]]
         deputy[:circonscription] = [data["acteur"]["mandats"]["mandat"].last["election"]["lieu"]["numDepartement"], data["acteur"]["mandats"]["mandat"].last["election"]["lieu"]["numCirco"]]
         ## puts JSON.pretty_generate(data["acteur"]["mandats"]["mandat"].last["election"]["lieu"])
         deputies << deputy
