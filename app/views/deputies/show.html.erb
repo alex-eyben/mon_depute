@@ -17,3 +17,23 @@ Revenus en 2019 : <%= @deputy.revenue %>€
 <i class="fab fa-twitter"><%= @deputy.twitter %></i>
 <br>
 <i class="fab fa-facebook-f"><%= @deputy.facebook %></i>
+
+<% @votes.each do |vote| %>
+  <div class="law-card">
+          <div class="law-card-details">
+            <h3><%= vote.law.title %></h3>
+            <p><strong>Adopté le <%= vote.law.last_status_update %></strong> : 350 votes pour, 248 votes contre, 57 abstentions</p>
+            <h4><%= vote.deputy_position %></h4>
+          </div>
+          <div class="law-card-interaction-card">
+            <div class="interaction-like">
+              <i class="far fa-thumbs-up"></i>
+              <i class="far fa-thumbs-down"></i>
+            </div>
+            <a href="#" class="button button-primary width-grow">Détails</a>
+          </div>
+        </div>
+  <% end %>
+
+<a href="#" class="button button-primary width-grow">Détails</a>
+<%= link_to "Détails", class: 'button button-primary width-grow' %>
