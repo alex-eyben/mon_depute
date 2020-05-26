@@ -7,12 +7,37 @@ class ImportDeputiesJob < ApplicationJob
   queue_as :default
 
   def perform(quantity)
+    @url = "http://data.assemblee-nationale.fr/static/openData/repository/15/amo/deputes_actifs_mandats_actifs_organes/AMO10_deputes_actifs_mandats_actifs_organes_XV.json.zip"
     puts "coucou"
+    @parties = import_parties(2000)
     parse_deputies_files(quantity)
   end
 
+  def import_parties(quantity)
+    # parties = []
+    parties = {}
+    file = open(@url)
+    Zip::File.open(file) do |zip_file|
+      zip_file.first(quantity).each_with_index do |entry, index|
+          if entry.name.include?("organe")
+            data = JSON.parse(entry.get_input_stream.read)
+            if data["organe"]["codeType"] == "PARPOL"
+              # party = {}
+              # party[:uid] = data["organe"]["uid"]
+              parties["#{data["organe"]["uid"]}"] = data["organe"]["libelleEdition"]
+              # parties << party
+            end
+          end
+      end
+      puts JSON.pretty_generate(parties)
+      puts "All OK ===> in parties"
+      return parties
+    end
+  end
+
   def parse_deputies_files(quantity)
-    @url = "http://data.assemblee-nationale.fr/static/openData/repository/15/amo/deputes_actifs_mandats_actifs_organes/AMO10_deputes_actifs_mandats_actifs_organes_XV.json.zip"
+    # @url = "http://data.assemblee-nationale.fr/static/openData/repository/15/amo/deputes_actifs_mandats_actifs_organes/AMO10_deputes_actifs_mandats_actifs_organes_XV.json.zip"
+    puts @parties
     file = open(@url)
     deputies = []
     Zip::File.open(file) do |zip_file|
