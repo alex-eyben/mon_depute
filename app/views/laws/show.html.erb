@@ -1,0 +1,13 @@
+<div id = "grey-background" class = "d-flex justify-content-center">
+  <div class = "col-lg-6 d-flex flex-column"> 
+    <div class="d-flex justify-content-around">
+      <h3><%= @law.start_date %></h3>
+      <h3><%= @law.last_status_update %></h3>
+    </div>
+    <h1><%= @law.title %></h1>
+    <p><%= @law.content %></p>
+    <div class = "d-flex justify-content-center">
+      <%= link_to "Lire plus sur vie-publique.fr", @law.ressource_link, class:"button button-primary" %>
+    </div>
+  </div>
+</div>
