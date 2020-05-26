@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   get 'laws/:id', to: 'laws#show'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  resources :deputies, only: [:show]
 end
