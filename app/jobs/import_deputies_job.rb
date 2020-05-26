@@ -6,16 +6,16 @@ require 'json'
 class ImportDeputiesJob < ApplicationJob
   queue_as :default
 
-  def perform(quantity = 1000)
+  def perform(quantity = 1500)
     @url = "http://data.assemblee-nationale.fr/static/openData/repository/15/amo/deputes_actifs_mandats_actifs_organes/AMO10_deputes_actifs_mandats_actifs_organes_XV.json.zip"
     puts "Off we go"
-    @parties = import_parties(1500)
-    parse_deputies_files(quantity)
+    @parties = import_parties(quantity + 577) # the zip_file doesnt recognize folders so we pass deputies here too. adding 577 to quantity insure that if specified quantity is 1 we get 1 organ and not 1 deputy. alright this is not very clear sorry.
+    import_deputies(quantity)
   end
 
   def import_parties(quantity)
     puts "import_parties is starting up"
-    quantity += 577 # the zip_file doesnt recognize folders so we pass deputies here too. adding 577 to quantity insure that if specified quantity is 1 we get 1 organ and not 1 deputy. alright this is not very clear sorry.
+    # quantity += 577
     parties = {}
     file = open(@url)
     Zip::File.open(file) do |zip_file|
@@ -33,7 +33,8 @@ class ImportDeputiesJob < ApplicationJob
     end
   end
 
-  def parse_deputies_files(quantity)
+  def import_deputies(quantity)
+    puts "import_deputies is firing up"
     deputies = []
     file = open(@url)
     Zip::File.open(file) do |zip_file|
@@ -60,14 +61,16 @@ class ImportDeputiesJob < ApplicationJob
           deputy[:job] = data['acteur']['profession']["libelleCourant"]
           deputy[:revenue] = data['acteur']["uri_hatvp"] # todo: scrape hatvp
           deputy[:party] = data["acteur"]["mandats"]["mandat"].select{|mandat|mandat["typeOrgane"]=="PARPOL"}.empty? ? "N/A" : @parties[data["acteur"]["mandats"]["mandat"].select{|mandat|mandat["typeOrgane"]=="PARPOL"}.first["organes"]["organeRef"]]
-          deputy[:circonscription] = [data["acteur"]["mandats"]["mandat"].select{|mandat|mandat["organes"]["organeRef"]=="PO717460"}.first["election"]["lieu"]["numDepartement"], data["acteur"]["mandats"]["mandat"].select{|mandat|mandat["organes"]["organeRef"]=="PO717460"}.first["election"]["lieu"]["numCirco"]]
+          deputy[:circonscription] = [data["acteur"]["mandats"]["mandat"].select{|mandat|mandat["organes"]["organeRef"]=="PO717460"}.first["election"]["lieu"]["numDepartement"], data["acteur"]["mandats"]["mandat"].select{|mandat|mandat["organes"]["organeRef"]=="PO717460"}.first["election"]["lieu"]["numCirco"]].join("000")
           deputies << deputy
-          p "INDEX : #{index} -------------------------------------------------------------------------"
+          print "|"
+          # p "INDEX : #{index} -------------------------------------------------------------------------" # useful for debug
         end
       end
-      puts JSON.pretty_generate(deputies)
-      puts "All OK ===> in deputies"
+      # puts JSON.pretty_generate(deputies) # useful for debug
+      puts " =========> Done! :)"
       puts "number of deputies : #{deputies.size}"
+      puts "All OK ===> in deputies"
       return deputies
     end
   end
