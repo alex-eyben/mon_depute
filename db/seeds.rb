@@ -47,9 +47,11 @@ loi_du_13_mai =  { title: "Lois du 13 mai",
                 start_date:  Date.today
               }
 
+laws = []
 [lois_du_11_mai, loi_du_13_mai ].each do |attributes|
   law = Law.create!(attributes)
   puts "Created #{law.title}"
+  laws << law
 end
 
 puts "Creating votes..."
@@ -60,5 +62,3 @@ abstenu = Vote.create!(deputy_position: "Abstenu", deputy: deputies.sample, law:
 
 puts "Finished!"
 
-
->>>>>>> master
