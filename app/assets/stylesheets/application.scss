@@ -11,3 +11,18 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+
+h1, h3 {
+  color: $deep-green;
+  font-weight: 400;
+}
+
+h2, h4 {
+  color: $light-green;
+  font-weight: 400;
+}
+
+p {
+  color: $gray;
+  font-weight: 300;
+}
