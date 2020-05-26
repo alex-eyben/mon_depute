@@ -7,7 +7,7 @@
     <h1><%= @law.title %></h1>
     <p><%= @law.content %></p>
     <div class = "d-flex justify-content-center">
-      <a href=<% @law.ressource_link %> >Lire plus sur vie-publique.fr</a>
+      <%= link_to "Lire plus sur vie-publique.fr", @law.ressource_link, class:"button button-primary" %>
     </div>
   </div>
 </div>
