@@ -1,3 +1,4 @@
+
 puts "Cleaning database..."
 User.destroy_all
 Vote.destroy_all
@@ -24,6 +25,7 @@ deputies = []
 end
 
 puts "Creating laws..."
+<<<<<<< HEAD
 lois_du_11_mai = { title: "Lois du 11 mai", 
             content: "Présenté au Conseil des ministres du 2 mai 2020 par Édouard Philippe, 
             Premier ministre, le projet de loi avait été adopté en première lecture
@@ -61,4 +63,3 @@ pour = Vote.create!(deputy_position: "Pour", deputy: deputies.sample, law: laws.
 abstenu = Vote.create!(deputy_position: "Abstenu", deputy: deputies.sample, law: laws.sample )
 
 puts "Finished!"
-
