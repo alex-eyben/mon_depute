@@ -1,12 +1,27 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
 puts "Cleaning database..."
+User.destroy_all
+Vote.destroy_all
 Law.destroy_all
+Deputy.destroy_all
+
+puts 'Creating users...'
+alex = User.create!(email: "alex@lewagon.org", password: "alex@lewagon.org")
+madeline = User.create!(email: "madeline@lewagon.org", password: "madeline@lewagon.org")
+ugo = User.create!(email: "ugo@lewagon.org", password: "ugo@lewagon.org")
+victor = User.create!(email: "victor@lewagon.org", password: "victor@lewagon.org")
+puts 'Finished creating users...'
+
+puts "Creating deputies..."
+amadou = { first_name: "Aude", last_name: "Amadou", email: "aude.amadou@assemblee-nationale.fr", job: "Ex-sportive de haut niveau", birth_place: "Coutances", birth_date: Time.now.to_datetime, party: "LREM", twitter: "https://twitter.com/AudeAmadou", facebook: "AmadouAude", website: "www.aude-amadou.info", revenue: 45000, circonscription: 4 }
+ferrara = { first_name: "Jean-Jacques", last_name: "Ferrara", email: "jean-jacques.ferrara@assemblee-nationale.fr", job: "Médecin", birth_place: "Marseille", birth_date: Time.now.to_datetime, party: "LREM", twitter: "@JJFerara", facebook: "JJFerara", website: "www.ferrara.info", revenue: 78000, circonscription: 1 }
+thillaye = { first_name: "Sabine", last_name: "Thillaye", email: "sabine.thillaye@assemblee-nationale.fr", job: "Chef d'entreprise", birth_place: "Remscheid", birth_date: Time.now.to_datetime, party: "LREM", twitter: "@SabineThillaye", facebook: "SabineThillaye", website: "www.sabine-thillaye.info", revenue: 52000, circonscription: 5 }
+
+deputies = []
+[ amadou, ferrara, thillaye ].each do |attributes|
+  deputy = Deputy.create!(attributes)
+  puts "Created #{deputy.last_name}"
+  deputies << deputy
+end
 
 puts "Creating laws..."
 lois_du_11_mai = { title: "Lois du 11 mai", 
@@ -36,4 +51,14 @@ loi_du_13_mai =  { title: "Lois du 13 mai",
   law = Law.create!(attributes)
   puts "Created #{law.title}"
 end
+
+puts "Creating votes..."
+
+contre = Vote.create!(deputy_position: "Contre", deputy: deputies.sample, law: laws.sample )
+pour = Vote.create!(deputy_position: "Pour", deputy: deputies.sample, law: laws.sample )
+abstenu = Vote.create!(deputy_position: "Abstenu", deputy: deputies.sample, law: laws.sample )
+
 puts "Finished!"
+
+
+>>>>>>> master
