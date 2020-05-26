@@ -8,7 +8,7 @@ class ImportDeputiesJob < ApplicationJob
 
   def perform(quantity)
     puts "coucou"
-    parse_deputies_files(quantity)
+    parse_deputies_files(quantity).class
   end
 
   def parse_deputies_files(quantity)
@@ -19,23 +19,23 @@ class ImportDeputiesJob < ApplicationJob
       zip_file.first(quantity).each_with_index do |entry, index|
         data = JSON.parse(entry.get_input_stream.read)
         deputy = {}
-        # p data["acteur"]["uid"]["@xsi:type"]
-        # p data["acteur"]["uid"]["#text"]
+        ## p data["acteur"]["uid"]["@xsi:type"]
+        ## p data["acteur"]["uid"]["#text"]
         deputy[:first_name] = data["acteur"]["etatCivil"]["ident"]["prenom"]
         deputy[:last_name] = data["acteur"]["etatCivil"]["ident"]["nom"]
         deputy[:birth_date] = data["acteur"]["etatCivil"]["infoNaissance"]["dateNais"].to_date
-        deputy[:birth_infos] = data["acteur"]["etatCivil"]["infoNaissance"]
+        # deputy[:birth_infos] = data["acteur"]["etatCivil"]["infoNaissance"]
         deputy[:birth_place] = data['acteur']['etatCivil']['infoNaissance']['villeNais']
         deputy[:email] = data["acteur"]["adresses"]["adresse"].select{|address|address["typeLibelle"]=="Mèl"}.first["valElec"]
-        deputy[:adresses_elec] = data['acteur']['adresses']['adresse'][1..-1].map{|address| address = { address["typeLibelle"] => address["valElec"]} }
-        # deputy[:other_adresses] = data["acteur"]["adresses"]["adresse"].reject{|address|address["typeLibelle"]=="Mèl"}
+        # deputy[:adresses_elec] = data['acteur']['adresses']['adresse'][1..-1].map{|address| address = { address["typeLibelle"] => address["valElec"]} }
+        ## deputy[:other_adresses] = data["acteur"]["adresses"]["adresse"].reject{|address|address["typeLibelle"]=="Mèl"}
         deputy[:job] = data['acteur']['profession']["libelleCourant"]
         deputy[:revenue] = data['acteur']["uri_hatvp"]
         deputy[:party] = data["acteur"]["mandats"]["mandat"].select{|mandat|mandat["typeOrgane"]=="PARPOL"}.first["uid"]
         deputy[:circonscription] = [data["acteur"]["mandats"]["mandat"].last["election"]["lieu"]["numDepartement"], data["acteur"]["mandats"]["mandat"].last["election"]["lieu"]["numCirco"]]
-        # puts JSON.pretty_generate(data["acteur"]["mandats"]["mandat"].last["election"]["lieu"])
+        ## puts JSON.pretty_generate(data["acteur"]["mandats"]["mandat"].last["election"]["lieu"])
         deputies << deputy
-        # p deputy
+        ## p deputy
         p "INDEX : #{index}"
       end
       puts JSON.pretty_generate(deputies)
