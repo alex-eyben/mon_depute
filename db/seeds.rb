@@ -1,9 +1,9 @@
 
 puts "Cleaning database..."
 User.destroy_all
-Deputy.destroy_all
-Law.destroy_all
 Vote.destroy_all
+Law.destroy_all
+Deputy.destroy_all
 
 puts 'Creating users...'
 alex = User.create!(email: "alex@lewagon.org", password: "alex@lewagon.org")
