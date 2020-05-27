@@ -41,17 +41,17 @@ end
 # end
 
 puts "Creating laws..."
-lois_du_11_mai = { title: "Loi du 11 mai",
-            content: "Présenté au Conseil des ministres du 2 mai 2020 par Édouard Philippe,
-            Premier ministre, le projet de loi avait été adopté en première lecture
-             avec modifications par le Sénat le 5 mai et par l'Assemblée nationale le 8 mai 2020.
-             Après accord en commission mixte paritaire, le texte avait été définitivement adopté
-             par l'Assemblée nationale et par le Sénat le 9 mai.
-            Le 2 mai, le gouvernement a engagé la procédure accélérée.",
-            ressource_link: "https://vie-publique.fr/loi/274230-loi-du-11-mai-2020-prolongation-etat-durgence-sanitaire",
-            current_status: "adoptée",
+avia = { title: "Loi Avia visant à lutter contre les contenus haineux sur internet",
+            content: "La proposition de loi oblige les opérateurs de plateforme en ligne et les moteurs de recherche à retirer 
+            dans un délai de 24 heures, après notification par une ou plusieurs personnes, des contenus 
+            manifestement illicites tels que les incitations à la haine, les injures à caractère raciste 
+            ou anti-religieuses. Pour les contenus terroristes ou pédopornographiques, le délai de retrait 
+            est réduit à une heure.",
+            ressource_link: "https://www.vie-publique.fr/loi/268070-loi-avia-lutte-contre-les-contenus-haineux-sur-internet",
+            current_status: "Adoptée",
             last_status_update: Date.today,
             start_date:  Date.today
+            scrutin_id: 2039
             }
 loi_du_13_mai =  { title: "Loi du 13 mai",
                 content: "La Commission invite les pays de l'UE et ceux associés à
