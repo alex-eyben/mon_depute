@@ -13,6 +13,7 @@ victor = User.create!(email: "victor@lewagon.org", password: "victor@lewagon.org
 puts 'Finished creating users...'
 
 puts "Creating deputies..."
+
 amadou = { first_name: "Aude", last_name: "Amadou", email: "aude.amadou@assemblee-nationale.fr", job: "Ex-sportive de haut niveau", birth_place: "Coutances", birth_date: Time.now.to_datetime, party: "LREM", twitter: "https://twitter.com/AudeAmadou", facebook: "AmadouAude", website: "www.aude-amadou.info", revenue: 45000, circonscription: 4 }
 ferrara = { first_name: "Jean-Jacques", last_name: "Ferrara", email: "jean-jacques.ferrara@assemblee-nationale.fr", job: "Médecin", birth_place: "Marseille", birth_date: Time.now.to_datetime, party: "LREM", twitter: "@JJFerara", facebook: "JJFerara", website: "www.ferrara.info", revenue: 78000, circonscription: 1 }
 thillaye = { first_name: "Sabine", last_name: "Thillaye", email: "sabine.thillaye@assemblee-nationale.fr", job: "Chef d'entreprise", birth_place: "Remscheid", birth_date: Time.now.to_datetime, party: "LREM", twitter: "@SabineThillaye", facebook: "SabineThillaye", website: "www.sabine-thillaye.info", revenue: 52000, circonscription: 5 }
@@ -23,6 +24,18 @@ deputies = []
   puts "Created #{deputy.last_name}"
   deputies << deputy
 end
+
+# we can use following method to create attributes based on actual deputies. For the moment we're limited to 25 as method breaks on the 26th for insane reasons. WIP
+# ImportDeputiesJob.perform_now(25)
+# The method returns an array we can iterate on instead of on deputies
+# to try, un comment following lines and comment lines 17 to 26
+
+# deputies = []
+# ImportDeputiesJob.perform_now(25).each do |attributes|
+#   deputy = Deputy.create!(attributes)
+#   puts "Created #{deputy.last_name}"
+#   deputies << deputy
+# end
 
 puts "Creating laws..."
 lois_du_11_mai = { title: "Lois du 11 mai", 
