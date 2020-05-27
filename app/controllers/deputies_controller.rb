@@ -11,6 +11,10 @@ class DeputiesController < ApplicationController
     
     # get the circonscription number
     city_searched = result.first.data["address"]["city"]
+    if city_searched == nil
+      city_searched = result.first.data["address"]["town"]
+    end
+    
     department = result.first.data["address"]["postcode"][0..1]
     if department.first == "0"
       searched_department = department[1]
