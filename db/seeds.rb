@@ -1,3 +1,4 @@
+require "csv"
 
 puts "Cleaning database..."
 User.destroy_all
@@ -15,8 +16,8 @@ puts 'Finished creating users...'
 
 puts "Creating deputies..."
 
-amadou = { first_name: "Aude", last_name: "Amadou", email: "aude.amadou@assemblee-nationale.fr", job: "Ex-sportive de haut niveau", birth_place: "Coutances", birth_date: Time.now.to_datetime, party: "LREM", twitter: "https://twitter.com/AudeAmadou", facebook: "AmadouAude", website: "www.aude-amadou.info", revenue: 45000, circonscription: 420, department: 67 }
-ferrara = { first_name: "Jean-Jacques", last_name: "Ferrara", email: "jean-jacques.ferrara@assemblee-nationale.fr", job: "Médecin", birth_place: "Marseille", birth_date: Time.now.to_datetime, party: "LREM", twitter: "@JJFerara", facebook: "JJFerara", website: "www.ferrara.info", revenue: 78000, circonscription: 182, department: 37 }
+amadou = { first_name: "Aude", last_name: "Amadou", email: "aude.amadou@assemblee-nationale.fr", job: "Ex-sportive de haut niveau", birth_place: "Coutances", birth_date: Time.now.to_datetime, party: "LREM", twitter: "https://twitter.com/AudeAmadou", facebook: "AmadouAude", website: "www.aude-amadou.info", revenue: 45000, circonscription: 5, department: 1 }
+ferrara = { first_name: "Jean-Jacques", last_name: "Ferrara", email: "jean-jacques.ferrara@assemblee-nationale.fr", job: "Médecin", birth_place: "Marseille", birth_date: Time.now.to_datetime, party: "LREM", twitter: "@JJFerara", facebook: "JJFerara", website: "www.ferrara.info", revenue: 78000, circonscription: 420, department: 92 }
 thillaye = { first_name: "Sabine", last_name: "Thillaye", email: "sabine.thillaye@assemblee-nationale.fr", job: "Chef d'entreprise", birth_place: "Remscheid", birth_date: Time.now.to_datetime, party: "LREM", twitter: "@SabineThillaye", facebook: "SabineThillaye", website: "www.sabine-thillaye.info", revenue: 52000, circonscription: 92, department: 92 }
 
 deputies = []
@@ -78,6 +79,17 @@ pour = Vote.create!(deputy_position: "Pour", deputy: deputies.sample, law: laws.
 abstenu = Vote.create!(deputy_position: "Abstenu", deputy: deputies.sample, law: laws.sample )
 
 puts "Creating locations..."
+
+# Location from CSV, uncomment to create 37k locations
+
+# file_path = Rails.root.join("db/csv", "locations.csv")
+# options = { col_sep: ";", headers: :first_row }
+# CSV.foreach(file_path, options) do |row|
+#   department_code = row[1].to_i
+#   commune = row[6]
+#   circonscription = row[8].to_i
+#   Location.create!(department: department_code, commune: commune, circonscription: circonscription)
+# end
 
 abergement = Location.create!(department: 1, commune: "L'Abergement-de-Varey", circonscription: 420)
 portes = Location.create!(department: 30, commune: "Portes", circonscription: 420)
