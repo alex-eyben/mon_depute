@@ -40,6 +40,7 @@ def creating_deputies_full
 # We can pass a number in arg to limit number of deputies, ie :
 # ImportDeputiesJob.perform_now(10)
 # The method returns an array we can iterate on instead of on deputies
+
 # to try, un-comment following lines and comment lines 19 to 28
   puts "Creating deputies..."
 
@@ -76,6 +77,7 @@ def creating_laws
               last_status_update: Date.today,
               start_date:  Date.today,
               scrutin_id: 2039
+
               }
   bioethique =  { title: "Projet de loi relatif à la bioéthique",
                   content: "Le projet de loi élargit l'accès à la procréation médicalement assistée
