@@ -1,94 +1,19 @@
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <h1>Texts</h1>
-      <hr>
-      <h1>Main title</h1>
-      <h2>Secondary title</h2>
-      <h3>Third title</h3>
-      <h4>Forth title</h4>
-      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatibus cumque natus labore, neque necessitatibus doloremque voluptatem aliquid impedit deserunt. Deserunt assumenda similique repellendus mollitia consequatur illo aspernatur aliquid fuga porro.</p>
-      <hr>
-
-      <h1>Buttons</h1>
-      <hr>
-      <a href="#" class="button button-primary">More info</a>
-      <a href="#" class="button button-danger">More info</a>
-      <hr>
-
-      <h1>Avatars</h1>
-      <hr>
-      <div class="avatar-container">
-        <img src="https://gal.img.pmdstatic.net/fit/http.3A.2F.2Fprd2-bone-image.2Es3-website-eu-west-1.2Eamazonaws.2Ecom.2Fgal.2Fvar.2Fgal.2Fstorage.2Fimages.2Fmedia.2Fmultiupload_du_29_avril_2014.2Fnicolascage.2F2915581-1-fre-FR.2Fnicolascage.2Ejpg/480x480/quality/80/nicolas-cage-qui-va-se-souvenir-de-telles-merdes.jpg" alt="" class="avatar-bordered">
-        <h3>Martin Dupont</h3>
-      </div>
-
-      <hr>
-
-      <h1>Cards</h1>
-      <hr>
-
-      <div class="deputy-card">
-        <div class="avatar-container">
-          <img src="https://gal.img.pmdstatic.net/fit/http.3A.2F.2Fprd2-bone-image.2Es3-website-eu-west-1.2Eamazonaws.2Ecom.2Fgal.2Fvar.2Fgal.2Fstorage.2Fimages.2Fmedia.2Fmultiupload_du_29_avril_2014.2Fnicolascage.2F2915581-1-fre-FR.2Fnicolascage.2Ejpg/480x480/quality/80/nicolas-cage-qui-va-se-souvenir-de-telles-merdes.jpg" alt="" class="avatar-bordered">
-          <h3>Martin Dupont</h3>
-        </div>
-        <h4>LREM</h4>
-        <div class="deputy-card-social-container">
-          <i class="fab fa-facebook-f"><a href=""></a></i>
-          <i class="fab fa-twitter"><a href=""></a></i>
-        </div>
-        <div class="deputy-details-container">
-          <p>38 ans</p>
-          <p>Médecin</p>
-        </div>
-        <div class="deputy-details-container">
-          <p>Profil:</p>
-          <p>Frondeur</p>
-        </div>
-        <div class="deputy-details-container">
-          <p>email: mp@lrem.com</p>
-          <p>www.lrem.fr</p>
-        </div>
-        <div class="deputy-card-details-container">
-          <p>Revenus année 2017: 129k€</p>
-        </div>
-        <a href="#" class="button button-primary width-grow">Suivre</a>
-      </div>
-
-      <div class="law-card">
-        <div class="law-card-details">
-          <h3>Projet de loi relatif à la bioéthique</h3>
-          <p><strong>Adopté le 05/03/2020</strong>: 350 votes pour, 248 votes contre, 57 abstentions</p>
-          <h4>CONTRE</h4>
-        </div>
-        <div class="law-card-interaction-card">
-          <div class="interaction-like">
-            <i class="far fa-thumbs-up"></i>
-            <i class="far fa-thumbs-down"></i>
-          </div>
-          <a href="#" class="button button-primary width-grow">Détails</a>
-        </div>
-      </div>
-
-
-      <hr>
-
-      <h1>Inputs</h1>
-      <%= form_tag results_deputies_path, method: :get do %>
-        <%= text_field_tag :query,
-          params[:query],
-          class: "form-control",
-          id: "location-search",
-          placeholder: "Find a movie"
-        %>
-        <%= submit_tag "Search", class: "btn btn-primary" %>
-      <% end %>
-      <hr>
-
-      <hr>
-      <h1>Pages#home</h1>
-      <p>Find me in app/views/pages/home.html.erb</p>
+<div class="container d-flex justify-content-center d-flex align-items-center vh-100">
+ 
+  <div class="col">
+    <div class="d-flex flex-column align-items-center mb-5">
+      <h1>MonDéputé</h1>
+      <h2>Découvrez qui est votre élu</h2>
     </div>
+    <%= form_tag results_deputies_path, class:"d-flex", method: :get do %>
+      <%= text_field_tag :query,
+        params[:query],
+        class: "form-control",
+        id: "location-search",
+        placeholder: "Rechercher une commune, un code postal, un député..."
+      %>
+      <%= submit_tag "Search", class: "btn btn-primary" %>
+    <% end %>
+  
   </div>
 </div>
