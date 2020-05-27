@@ -11,7 +11,13 @@ class DeputiesController < ApplicationController
     
     # get the circonscription number
     city_searched = result.first.data["address"]["city"]
-    commune = Location.where(commune: city_searched).first
+    department = result.first.data["address"]["postcode"][0..1]
+    if department.first == "0"
+      searched_department = department[1]
+    else
+      searched_department = department
+    end
+    commune = Location.where(commune: city_searched, department: searched_department).first
     circonscription = commune.circonscription
 
     # get the deputy
