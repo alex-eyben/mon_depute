@@ -1,22 +1,30 @@
-
-
-<h2><%= @deputy.first_name %> <%= @deputy.last_name %></h2>
-
-<%= @deputy.party %>
-<br>
-<%= @deputy.birth_date %>
-<br>
-<%= @deputy.job %>
-<br>
-Email : <%= @deputy.email %>
-<br>
-<%= @deputy.website %>
-<br>
-Revenus en 2019 : <%= @deputy.revenue %>€
-<br>
-<i class="fab fa-twitter"><%= @deputy.twitter %></i>
-<br>
-<i class="fab fa-facebook-f"><%= @deputy.facebook %></i>
+<div class="deputy-card">
+        <div class="avatar-container">
+          <img src="https://gal.img.pmdstatic.net/fit/http.3A.2F.2Fprd2-bone-image.2Es3-website-eu-west-1.2Eamazonaws.2Ecom.2Fgal.2Fvar.2Fgal.2Fstorage.2Fimages.2Fmedia.2Fmultiupload_du_29_avril_2014.2Fnicolascage.2F2915581-1-fre-FR.2Fnicolascage.2Ejpg/480x480/quality/80/nicolas-cage-qui-va-se-souvenir-de-telles-merdes.jpg" alt="" class="avatar-bordered">
+          <h3><%= @deputy.first_name %> <%= @deputy.last_name %></h3>
+        </div>
+        <h4><%= @deputy.party %></h4>
+        <div class="deputy-card-social-container">
+          <i class="fab fa-facebook-f"><a href="#"></a></i>
+          <i class="fab fa-twitter"><a href="#"></a></i>
+        </div>
+        <div class="deputy-details-container">
+          <p>38 ans</p>
+          <p><%= @deputy.job %></p>
+        </div>
+        <div class="deputy-details-container">
+          <p>Profil:</p>
+          <p>Frondeur</p>
+        </div>
+        <div class="deputy-details-container">
+          <p>email: <%= @deputy.email %></p>
+          <p><%= @deputy.website %></p>
+        </div>
+        <div class="deputy-card-details-container">
+          <p>Revenus année 2017: <%= @deputy.revenue %>€</p>
+        </div>
+        <a href="#" class="button button-primary width-grow">Suivre</a>
+      </div>
 
 <% @votes.each do |vote| %>
   <div class="law-card">
