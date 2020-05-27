@@ -64,31 +64,85 @@ end
 
 def creating_laws
   puts "Creating laws..."
-  lois_du_11_mai = { title: "Loi du 11 mai",
-              content: "Présenté au Conseil des ministres du 2 mai 2020 par Édouard Philippe,
-              Premier ministre, le projet de loi avait été adopté en première lecture
-               avec modifications par le Sénat le 5 mai et par l'Assemblée nationale le 8 mai 2020.
-               Après accord en commission mixte paritaire, le texte avait été définitivement adopté
-               par l'Assemblée nationale et par le Sénat le 9 mai.
-              Le 2 mai, le gouvernement a engagé la procédure accélérée.",
-              ressource_link: "https://vie-publique.fr/loi/274230-loi-du-11-mai-2020-prolongation-etat-durgence-sanitaire",
-              current_status: "adoptée",
+  avia = { title: "Loi Avia visant à lutter contre les contenus haineux sur internet",
+              content: "La proposition de loi oblige les opérateurs de plateforme en ligne et 
+              les moteurs de recherche à retirer dans un délai de 24 heures, après notification 
+              par une ou plusieurs personnes, des contenus manifestement illicites tels que les 
+              incitations à la haine, les injures à caractère raciste ou anti-religieuses. 
+              Pour les contenus terroristes ou pédopornographiques, le délai de retrait est 
+              réduit à une heure.",
+              ressource_link: "https://www.vie-publique.fr/loi/268070-loi-avia-lutte-contre-les-contenus-haineux-sur-internet",
+              current_status: "Adoptée",
               last_status_update: Date.today,
-              start_date:  Date.today
+              start_date:  Date.today,
+              scrutin_id: 2039
               }
-  loi_du_13_mai =  { title: "Loi du 13 mai",
-                  content: "La Commission invite les pays de l'UE et ceux associés à
-                  l'espace Schengen (Islande, Liechtenstein, Norvège, Suisse) à s’engager à lever
-                  progressivement les contrôles aux frontières intérieures.
-                  Elle propose également une approche par étapes pour rétablir des déplacements sans restrictions.",
-                  ressource_link: "https://www.vie-publique.fr/en-bref/274361-retour-progressif-la-libre-circulation-des-personnes",
-                  current_status: "en cours",
+  bioethique =  { title: "Projet de loi relatif à la bioéthique",
+                  content: "Le projet de loi élargit l'accès à la procréation médicalement assistée 
+                  (PMA) aux couples de femme et aux femmes célibataires. Actuellement, 
+                  la PMA est uniquement accessible aux couples hétérosexuels sur indication médicale. ",
+                  ressource_link: "https://www.vie-publique.fr/loi/268659-projet-de-loi-bioethique-pma",
+                  current_status: "Adoptée",
                   last_status_update:  Date.today,
-                  start_date:  Date.today
+                  start_date:  Date.today,
+                  scrutin_id: 2146
+                }
+  violences =  { title: "Loi du 28 décembre 2019 visant à agir contre les violences au sein de la famille",
+                  content: "Le texte vise à faire reculer les violences faites aux femmes et notamment les féminicides.
+                  La loi fixe à six jours maximum le délai de délivrance par le juge aux affaires familiales d’une 
+                  ordonnance de protection. Créée par la loi du 9 juillet 2010 relative aux 
+                  violences faites spécifiquement aux femmes, aux violences au sein des couples et aux 
+                  incidences de ces dernières sur les enfants l’ordonnance de protection permet au juge 
+                  d’attester de la réalité des violences subies et de mettre en place, sans attendre la 
+                  décision de la victime sur le dépôt d’une plainte, les mesures d’urgence : éviction du 
+                  conjoint violent, relogement 'hors de portée du conjoint en cas de départ du domicile conjugal, 
+                  interdiction pour le conjoint violent de porter une arme.'",
+                  ressource_link: "https://www.vie-publique.fr/loi/271281-proposition-de-loi-action-contre-les-violences-au-sein-de-la-famille",
+                  current_status: "Adoptée",
+                  last_status_update:  Date.today,
+                  start_date:  Date.today,
+                  scrutin_id: 2147
+                }
+  urgence =  { title: "Etat d'urgence : loi renforçant la sécurité intérieure et la lutte contre le terrorisme",
+                  content: "La loi vise à doter l'État de nouveaux instruments de lutte contre le terrorisme 
+                  afin de pouvoir mettre fin au régime dérogatoire de l'état d'urgence.
+                  Pour cela, la loi intègre dans le droit commun des dispositions jusque-là réservées à l'état d'urgence.",
+                  ressource_link: "https://www.vie-publique.fr/loi/20775-loi-securite-interieure-et-la-lutte-contre-le-terrorisme",
+                  current_status: "Adoptée",
+                  last_status_update:  Date.today,
+                  start_date:  Date.today,
+                  scrutin_id: 138
+                }
+  climat =  { title: "Projet de loi relatif à l'énergie et au climat",
+                  content: "La loi énergie et climat du 8 novembre 2019 vise à répondre à l’urgence 
+                  écologique et climatique. Elle inscrit cette urgence dans le code de l’énergie 
+                  ainsi que l’objectif d'une neutralité carbone en 2050, en divisant les émissions 
+                  de gaz à effet de serre par six au moins d'ici cette date.",
+                  ressource_link: "https://www.vie-publique.fr/loi/23814-loi-energie-et-climat-du-8-novembre-2019",
+                  current_status: "Adoptée",
+                  last_status_update:  Date.today,
+                  start_date:  Date.today,
+                  scrutin_id: 2065
+                }
+  peche =  { title: "Interdiction de la pêche électrique",
+                  content: "Interdite dans de nombreux pays, la pêche électrique consiste à 
+                  capturer des poissons à l'aide d'un courant électrique. Des décharges sont envoyées 
+                  dans le sédiment afin de capturer les poissons plats (soles, limandes, carrelets, etc.). 
+                  Cette méthode est critiquée pour son impact sur les poissons : ces derniers montrent souvent
+                  des brûlures, des ecchymoses et des déformations du squelette consécutives à 
+                  l'électrocution. La pêche électrique se distingue également par son caractère non 
+                  sélectif, atteignant sans distinction tous les organismes à portée de l'impulsion. 
+                  En mer du Nord, où elle est pratiquée depuis une dizaine d'années, les ressources 
+                  halieutiques de la zone se raréfient, en particulier les stocks de soles et de plies.",
+                  ressource_link: "https://www.vie-publique.fr/en-bref/19954-union-europeenne-protestations-contre-la-peche-electrique",
+                  current_status: "Adoptée",
+                  last_status_update:  Date.today,
+                  start_date:  Date.today,
+                  scrutin_id: 389
                 }
 
   @laws = []
-  [lois_du_11_mai, loi_du_13_mai ].each do |attributes|
+  [ avia, bioethique, violences, urgence, climat, peche ].each do |attributes|
     law = Law.create!(attributes)
     puts "Created #{law.title}"
     @laws << law
