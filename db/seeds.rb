@@ -152,4 +152,4 @@ def seed(full_or_light)
   puts "Finished!"
 end
 
-seed("full") # change to "full" to seed with real infos (takes longer and calls assemblee nationale website)
+seed("light") # change to "full" to seed with real infos (takes longer and calls assemblee nationale website)
