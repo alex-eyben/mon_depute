@@ -12,5 +12,6 @@ class DeputiesController < ApplicationController
     location = Location.where(commune: city).first
     circonscription = location.circonscription
     @deputy = Deputy.where(circonscription: circonscription).first
+    redirect_to deputy_path(@deputy)
   end
 end
