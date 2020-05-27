@@ -75,6 +75,15 @@
       <hr>
 
       <h1>Inputs</h1>
+      <%= form_tag results_deputies_path, method: :get do %>
+        <%= text_field_tag :query,
+          params[:query],
+          class: "form-control",
+          id: "location-search",
+          placeholder: "Find a movie"
+        %>
+        <%= submit_tag "Search", class: "btn btn-primary" %>
+      <% end %>
       <hr>
 
       <hr>

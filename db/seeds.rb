@@ -4,6 +4,7 @@ User.destroy_all
 Vote.destroy_all
 Law.destroy_all
 Deputy.destroy_all
+Location.destroy_all
 
 puts 'Creating users...'
 alex = User.create!(email: "alex@lewagon.org", password: "alex@lewagon.org")
@@ -75,5 +76,12 @@ puts "Creating votes..."
 contre = Vote.create!(deputy_position: "Contre", deputy: deputies.sample, law: laws.sample )
 pour = Vote.create!(deputy_position: "Pour", deputy: deputies.sample, law: laws.sample )
 abstenu = Vote.create!(deputy_position: "Abstenu", deputy: deputies.sample, law: laws.sample )
+
+puts "Creating locations..."
+
+abergement = Location.create!(department: 1, commune: "L'Abergement-de-Varey", circonscription: 420)
+portes = Location.create!(department: 30, commune: "Portes", circonscription: 420)
+nouzilly = Location.create!(department: 37, commune: "Nouzilly", circonscription: 182)
+lille = Location.create!(department: 59, commune: "Lille", circonscription: 92)
 
 puts "Finished!"
