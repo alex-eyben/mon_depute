@@ -80,18 +80,20 @@ abstenu = Vote.create!(deputy_position: "Abstenu", deputy: deputies.sample, law:
 
 puts "Creating locations..."
 
-file_path = Rails.root.join("db/csv", "locations.csv")
-options = { col_sep: ";", headers: :first_row }
-CSV.foreach(file_path, options) do |row|
-  department_code = row[1].to_i
-  commune = row[6]
-  circonscription = row[8].to_i
-  Location.create!(department: department_code, commune: commune, circonscription: circonscription)
-end
+# Location from CSV, uncomment to create 37k locations
 
-# abergement = Location.create!(department: 1, commune: "L'Abergement-de-Varey", circonscription: 420)
-# portes = Location.create!(department: 30, commune: "Portes", circonscription: 420)
-# nouzilly = Location.create!(department: 37, commune: "Nouzilly", circonscription: 182)
-# lille = Location.create!(department: 59, commune: "Lille", circonscription: 92)
+# file_path = Rails.root.join("db/csv", "locations.csv")
+# options = { col_sep: ";", headers: :first_row }
+# CSV.foreach(file_path, options) do |row|
+#   department_code = row[1].to_i
+#   commune = row[6]
+#   circonscription = row[8].to_i
+#   Location.create!(department: department_code, commune: commune, circonscription: circonscription)
+# end
+
+abergement = Location.create!(department: 1, commune: "L'Abergement-de-Varey", circonscription: 420)
+portes = Location.create!(department: 30, commune: "Portes", circonscription: 420)
+nouzilly = Location.create!(department: 37, commune: "Nouzilly", circonscription: 182)
+lille = Location.create!(department: 59, commune: "Lille", circonscription: 92)
 
 puts "Finished!"
