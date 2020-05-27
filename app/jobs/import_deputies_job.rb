@@ -61,9 +61,10 @@ class ImportDeputiesJob < ApplicationJob
           deputy[:job] = data['acteur']['profession']["libelleCourant"]
           deputy[:revenue] = data['acteur']["uri_hatvp"] # todo: scrape hatvp
           deputy[:party] = data["acteur"]["mandats"]["mandat"].select{|mandat|mandat["typeOrgane"]=="PARPOL"}.empty? ? "N/A" : @parties[data["acteur"]["mandats"]["mandat"].select{|mandat|mandat["typeOrgane"]=="PARPOL"}.first["organes"]["organeRef"]]
-          deputy[:circonscription] = [data["acteur"]["mandats"]["mandat"].select{|mandat|mandat["organes"]["organeRef"]=="PO717460"}.first["election"]["lieu"]["numDepartement"], data["acteur"]["mandats"]["mandat"].select{|mandat|mandat["organes"]["organeRef"]=="PO717460"}.first["election"]["lieu"]["numCirco"]].join("000")
+          deputy[:circonscription] = data["acteur"]["mandats"]["mandat"].select{|mandat|mandat["organes"]["organeRef"]=="PO717460"}.first["election"]["lieu"]["numCirco"]
+          deputy[:department] = data["acteur"]["mandats"]["mandat"].select{|mandat|mandat["organes"]["organeRef"]=="PO717460"}.first["election"]["lieu"]["numDepartement"]
           deputies << deputy
-          print "|"
+          print "\r#{100*(index+1)/577}%"
           # p "INDEX : #{index} -------------------------------------------------------------------------" # useful for debug
         end
       end
