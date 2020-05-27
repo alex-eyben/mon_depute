@@ -1,19 +1,50 @@
+<div class="container-deputy">
+  <div class="deputy-card">
+    <div class="avatar-container">
+      <img src="https://gal.img.pmdstatic.net/fit/http.3A.2F.2Fprd2-bone-image.2Es3-website-eu-west-1.2Eamazonaws.2Ecom.2Fgal.2Fvar.2Fgal.2Fstorage.2Fimages.2Fmedia.2Fmultiupload_du_29_avril_2014.2Fnicolascage.2F2915581-1-fre-FR.2Fnicolascage.2Ejpg/480x480/quality/80/nicolas-cage-qui-va-se-souvenir-de-telles-merdes.jpg" alt="" class="avatar-bordered">
+      <h3><%= @deputy.first_name %> <%= @deputy.last_name %></h3>
+    </div>
+    <h4><%= @deputy.party %></h4>
+    <div class="deputy-card-social-container">
+      <i class="fab fa-facebook-f"><a href="#"></a></i>
+      <i class="fab fa-twitter"><a href="#"></a></i>
+    </div>
+    <div class="deputy-details-container">
+      <p>38 ans</p>
+      <p><%= @deputy.job %></p>
+    </div>
+    <div class="deputy-details-container">
+      <p>Profil: Frondeur</p>
+    </div>
+    <div class="deputy-details-container">
+      <p>Email: <%= @deputy.email %></p>
+      <p><%= @deputy.website %></p>
+    </div>
+    <div class="deputy-card-details-container">
+      <p>Revenus année 2017: <%= @deputy.revenue %>€</p>
+    </div>
+    <a href="#" class="button button-primary width-grow">Suivre</a>
+  </div>
+
+  <div class="laws">
+    <% @votes.each do |vote| %>
+      <div class="law-card">
+              <div class="law-card-details <%= vote.deputy_position.downcase %>">
+                <h3><%= vote.law.title %></h3>
+                <p><strong>Adopté le <%= vote.law.last_status_update %></strong> : 350 votes pour, 248 votes contre, 57 abstentions</p>
+                <h4><%= vote.deputy_position %></h4>
+              </div>
+              <div class="law-card-interaction-card">
+                <div class="interaction-like">
+                  <i class="far fa-thumbs-up"></i>
+                  <i class="far fa-thumbs-down"></i>
+                </div>
+                <a href="<%= vote.law.ressource_link %>" class="button button-primary width-grow">Détails</a>
+              </div>
+            </div>
+      <% end %>
+  </div>
+
+</div>
 
 
-<h2><%= @deputy.first_name %> <%= @deputy.last_name %></h2>
-
-<%= @deputy.party %>
-<br>
-<%= @deputy.birth_date %>
-<br>
-<%= @deputy.job %>
-<br>
-Email : <%= @deputy.email %>
-<br>
-<%= @deputy.website %>
-<br>
-Revenus en 2019 : <%= @deputy.revenue %>€
-<br>
-<i class="fab fa-twitter"><%= @deputy.twitter %></i>
-<br>
-<i class="fab fa-facebook-f"><%= @deputy.facebook %></i>

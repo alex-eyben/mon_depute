@@ -1,15 +1,28 @@
 class DeputiesController < ApplicationController
   def show
     @deputy = Deputy.find(params[:id])
+    @votes = @deputy.votes
   end
 
   def results
+    # get data from a geocoder search
     query = params[:query]
-    result = Geocoder.search(query)
-    departement = result.first.data["address"]["county"]
-    city = result.first.data["address"]["city"]
-    location = Location.where(commune: city).first
-    circonscription = location.circonscription
-    @deputy = Deputy.where(circonscription: circonscription).first
+    result = Geocoder.search(query) 
+    
+    # get the circonscription number
+    city_searched = result.first.data["address"]["city"]
+    department = result.first.data["address"]["postcode"][0..1]
+    if department.first == "0"
+      searched_department = department[1]
+    else
+      searched_department = department
+    end
+    commune = Location.where(commune: city_searched, department: searched_department).first
+    circonscription = commune.circonscription
+
+    # get the deputy
+    department = result.first.data["address"]["postcode"][0..1].to_i
+    @deputy = Deputy.where(circonscription: circonscription, department: department).first
+    redirect_to deputy_path(@deputy)
   end
 end
