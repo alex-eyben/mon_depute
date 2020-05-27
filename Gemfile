@@ -35,7 +35,7 @@ gem 'font-awesome-sass'
 gem 'simple_form'
 gem 'geocoder'
 
-gem 'zip'
+gem 'rubyzip'
 
 group :development, :test do  gem 'pry-byebug'
   gem 'pry-rails'
