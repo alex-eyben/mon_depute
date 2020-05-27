@@ -25,13 +25,15 @@ deputies = []
   deputies << deputy
 end
 
-# we can use following method to create attributes based on actual deputies. For the moment we're limited to 25 as method breaks on the 26th for insane reasons. WIP
-# ImportDeputiesJob.perform_now(25)
+# we can use following method to create attributes based on actual deputies.
+# ImportDeputiesJob.perform_now
+# We can pass a number in arg to limit number of deputies, ie :
+# ImportDeputiesJob.perform_now(10)
 # The method returns an array we can iterate on instead of on deputies
-# to try, un comment following lines and comment lines 17 to 26
+# to try, un-comment following lines and comment lines 17 to 26
 
 # deputies = []
-# ImportDeputiesJob.perform_now(25).each do |attributes|
+# ImportDeputiesJob.perform_now.each do |attributes|
 #   deputy = Deputy.create!(attributes)
 #   puts "Created #{deputy.last_name}"
 #   deputies << deputy
