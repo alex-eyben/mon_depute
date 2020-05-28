@@ -18,7 +18,7 @@ class GetFrondeurStatusJob < ApplicationJob
     deputy.votes.each do |deputy_vote|
       deputy_vote.law.votes.each do |other_vote_on_same_law|
         other_vote_on_same_law
-
+      end
     end
   end
 end
