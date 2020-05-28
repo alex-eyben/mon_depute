@@ -9,8 +9,8 @@
 }
 
 .navbar-lewagon .navbar-brand i {
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   background-color: $deep-green;
   color: white;
   border-radius: 50%;
@@ -21,5 +21,9 @@
 
 .dropdown-item {
   color: #2B7178;
+}
 
+#navbarDropdown {
+  width: 50px;
+  height: 50px;
 }
