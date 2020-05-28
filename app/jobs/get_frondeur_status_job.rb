@@ -3,7 +3,7 @@ class GetFrondeurStatusJob < ApplicationJob
 
   def perform(deputies)
     # Do something later
-    deputies.map{|deputy| deputy = is_frondeur?(deputy)}
+    "moyenne de fronde : #{deputies.map{|deputy| deputy = is_frondeur?(deputy)}.sum/deputies.size}%"
     # is_frondeur?(deputy)
   end
 
@@ -41,8 +41,9 @@ class GetFrondeurStatusJob < ApplicationJob
         (position.law.positions.where(deputy_position: "Pour").select{|position|position.deputy.party == deputy.party}.size.fdiv(total_number_of_same_party_deputies)*100).round(0)
       end
     end
-    (fronding_percentage_on_each_vote.compact.sum / fronding_percentage_on_each_vote.compact.size)
-
+    deputy.update(fronding: (fronding_percentage_on_each_vote.compact.sum / fronding_percentage_on_each_vote.compact.size))
+    deputy.save
+    deputy.fronding
     # Law.all.each do |law|
     #   number_of_same_party_same_position_on_one_law = law.positions.where(deputy_position: deputy.positions.where(law: law).take.deputy_position ).select{|position| position.deputy.party == deputy.party}.size
     #   number_of_identical_votes_of_same_party_deputies_for_each_law << number_of_same_party_same_position_on_one_law
