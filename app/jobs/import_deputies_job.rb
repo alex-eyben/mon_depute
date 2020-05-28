@@ -61,6 +61,7 @@ class ImportDeputiesJob < ApplicationJob
           deputy[:party] = data["acteur"]["mandats"]["mandat"].select{|mandat|mandat["typeOrgane"]=="PARPOL"}.empty? ? "N/A" : @parties[data["acteur"]["mandats"]["mandat"].select{|mandat|mandat["typeOrgane"]=="PARPOL"}.first["organes"]["organeRef"]]
           deputy[:circonscription] = data["acteur"]["mandats"]["mandat"].select{|mandat|mandat["organes"]["organeRef"]=="PO717460"}.first["election"]["lieu"]["numCirco"]
           deputy[:department] = data["acteur"]["mandats"]["mandat"].select{|mandat|mandat["organes"]["organeRef"]=="PO717460"}.first["election"]["lieu"]["numDepartement"]
+          deputy[:img] = "http://www2.assemblee-nationale.fr/static/tribun/15/photos/#{data['acteur']['uid']['#text'][2..-1]}.jpg"
           deputies << deputy
           print "\r#{100*(index+1)/577}%"
           # p "INDEX : #{index} -------------------------------------------------------------------------" # useful for debug
