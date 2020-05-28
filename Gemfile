@@ -37,6 +37,7 @@ gem 'geocoder'
 gem 'acts-as-taggable-on', '~> 6.0'
 
 gem 'rubyzip'
+gem 'acts_as_votable'
 
 group :development, :test do  gem 'pry-byebug'
   gem 'pry-rails'
