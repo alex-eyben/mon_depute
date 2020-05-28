@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 2020_05_27_210901) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "department"
     t.string "uid"
-    t.index ["uid"], name: "index_deputies_on_uid"
+    t.index ["uid"], name: "index_deputies_on_uid", unique: true
   end
 
   create_table "laws", force: :cascade do |t|

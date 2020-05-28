@@ -39,6 +39,7 @@
   border-radius: 50%;
   margin: 10px;
   padding: 10px;
+  width: 35px;
 }
 
 .laws {
@@ -57,10 +58,13 @@
   box-shadow:  4px 4px 10px #e4e4e4,
              -4px -4px 10px #ffffff;
   padding: 15px 30px;
-  margin-top: 30px;
   margin-bottom: 30px;
   margin-left: 30px;
-  width: 70%;
+  width: 90%;
+}
+
+.law-card-details {
+  width: 80%;
 }
 
 .law-card-details.contre h4 {
@@ -71,7 +75,7 @@
   color: $light-green;
 }
 
-.law-card-details.abstenu h4 {
+.law-card-details.abstention h4 {
   color: $gray;
 }
 
