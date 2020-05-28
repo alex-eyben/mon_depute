@@ -19,22 +19,26 @@ class ImportVotesJob < ApplicationJob
           puts "found one!"
           puts JSON.pretty_generate(data["scrutin"]["numero"])
           puts JSON.pretty_generate(data["scrutin"]["dateScrutin"])
-          puts "contres : "
-          puts JSON.pretty_generate(data["scrutin"]["ventilationVotes"]["organe"]["groupes"]["groupe"].map{|groupe| groupe = groupe["vote"]}.map{|vote|vote = vote["decompteNominatif"]}.map{|vote| vote = vote["contres"]}.map{|vote| vote = vote["votant"] unless vote.nil?}.flatten.compact.map{|acteur| acteur = acteur["acteurRef"]})
+          puts "creating contres..."
+          # puts JSON.pretty_generate(data["scrutin"]["ventilationVotes"]["organe"]["groupes"]["groupe"].map{|groupe| groupe = groupe["vote"]}.map{|vote|vote = vote["decompteNominatif"]}.map{|vote| vote = vote["contres"]}.map{|vote| vote = vote["votant"] unless vote.nil?}.flatten.compact.map{|acteur| acteur = acteur["acteurRef"]})
           deputies_contres = data["scrutin"]["ventilationVotes"]["organe"]["groupes"]["groupe"].map{|groupe| groupe = groupe["vote"]}.map{|vote|vote = vote["decompteNominatif"]}.map{|vote| vote = vote["contres"]}.map{|vote| vote = vote["votant"] unless vote.nil?}.flatten.compact.map{|acteur| acteur = acteur["acteurRef"]}
-          deputies_contres.each{|deputy_contre| Vote.create!(deputy_position: "Contre", deputy: Deputy.where(uid: deputy_contre).first, law: Law.where(scrutin_id: data["scrutin"]["numero"]).first )}
-          puts "pours : "
-          puts JSON.pretty_generate(data["scrutin"]["ventilationVotes"]["organe"]["groupes"]["groupe"].map{|groupe| groupe = groupe["vote"]}.map{|vote|vote = vote["decompteNominatif"]}.map{|vote| vote = vote["pours"]}.map{|vote| vote = vote["votant"] unless vote.nil?}.flatten.compact.map{|acteur| acteur = acteur["acteurRef"]})
-          # deputies_pours = data["scrutin"]["ventilationVotes"]["organe"]["groupes"]["groupe"].map{|groupe| groupe = groupe["vote"]}.map{|vote|vote = vote["decompteNominatif"]}.map{|vote| vote = vote["pours"]}.map{|vote| vote = vote["votant"] unless vote.nil?}.flatten.compact.map{|acteur| acteur = acteur["acteurRef"]}
-          # deputies_pours.each{|deputy_pour| Vote.create!(deputy_position: "Pour", deputy: Deputy.where(uid: deputy_pour).first, law: Law.where(scrutin_id: data["scrutin"]["numero"]).first )}
-          puts "non votants : "
-          puts JSON.pretty_generate(data["scrutin"]["ventilationVotes"]["organe"]["groupes"]["groupe"].map{|groupe| groupe = groupe["vote"]}.map{|vote|vote = vote["decompteNominatif"]}.map{|vote| vote = vote["nonVotants"]}.map{|vote| vote = vote["votant"] unless vote.nil?}.flatten.compact.map{|acteur| acteur = acteur["acteurRef"]})
-          # deputies_nonVotants = data["scrutin"]["ventilationVotes"]["organe"]["groupes"]["groupe"].map{|groupe| groupe = groupe["vote"]}.map{|vote|vote = vote["decompteNominatif"]}.map{|vote| vote = vote["nonVotants"]}.map{|vote| vote = vote["votant"] unless vote.nil?}.flatten.compact.map{|acteur| acteur = acteur["acteurRef"]}
-          # deputies_nonVotants.each{|deputy_nonVotant| Vote.create!(deputy_position: "Non votant", deputy: Deputy.where(uid: deputy_nonVotant).first, law: Law.where(scrutin_id: data["scrutin"]["numero"]).first )}
-          puts "abstentions : "
-          puts JSON.pretty_generate(data["scrutin"]["ventilationVotes"]["organe"]["groupes"]["groupe"].map{|groupe| groupe = groupe["vote"]}.map{|vote|vote = vote["decompteNominatif"]}.map{|vote| vote = vote["abstentions"]}.map{|vote| vote = vote["votant"] unless vote.nil?}.flatten.compact.map{|acteur| acteur = acteur["acteurRef"]})
-          puts "non votants volontaires : "
-          puts JSON.pretty_generate(data["scrutin"]["ventilationVotes"]["organe"]["groupes"]["groupe"].map{|groupe| groupe = groupe["vote"]}.map{|vote|vote = vote["decompteNominatif"]}.map{|vote| vote = vote["nonVotantsVolontaires"]}.map{|vote| vote = vote["votant"] unless vote.nil?}.flatten.compact.map{|acteur| acteur = acteur["acteurRef"]})
+          deputies_contres.each{|deputy_contre| Vote.create!(deputy_position: "Contre", deputy: Deputy.where(uid: deputy_contre).first, law: Law.where(scrutin_id: data["scrutin"]["numero"]).first ) unless Deputy.where(uid: deputy_contre).empty?}
+          puts "creating pours..."
+          # puts JSON.pretty_generate(data["scrutin"]["ventilationVotes"]["organe"]["groupes"]["groupe"].map{|groupe| groupe = groupe["vote"]}.map{|vote|vote = vote["decompteNominatif"]}.map{|vote| vote = vote["pours"]}.map{|vote| vote = vote["votant"] unless vote.nil?}.flatten.compact.map{|acteur| acteur = acteur["acteurRef"]})
+          deputies_pours = data["scrutin"]["ventilationVotes"]["organe"]["groupes"]["groupe"].map{|groupe| groupe = groupe["vote"]}.map{|vote|vote = vote["decompteNominatif"]}.map{|vote| vote = vote["pours"]}.map{|vote| vote = vote["votant"] unless vote.nil?}.flatten.compact.map{|acteur| acteur = acteur["acteurRef"]}
+          deputies_pours.each{|deputy_pour| Vote.create!(deputy_position: "Pour", deputy: Deputy.where(uid: deputy_pour).first, law: Law.where(scrutin_id: data["scrutin"]["numero"]).first )  unless Deputy.where(uid: deputy_pour).empty?}
+          puts "creating non votants..."
+          # puts JSON.pretty_generate(data["scrutin"]["ventilationVotes"]["organe"]["groupes"]["groupe"].map{|groupe| groupe = groupe["vote"]}.map{|vote|vote = vote["decompteNominatif"]}.map{|vote| vote = vote["nonVotants"]}.map{|vote| vote = vote["votant"] unless vote.nil?}.flatten.compact.map{|acteur| acteur = acteur["acteurRef"]})
+          deputies_nonVotants = data["scrutin"]["ventilationVotes"]["organe"]["groupes"]["groupe"].map{|groupe| groupe = groupe["vote"]}.map{|vote|vote = vote["decompteNominatif"]}.map{|vote| vote = vote["nonVotants"]}.map{|vote| vote = vote["votant"] unless vote.nil?}.flatten.compact.map{|acteur| acteur = acteur["acteurRef"]}
+          deputies_nonVotants.each{|deputy_nonVotant| Vote.create!(deputy_position: "Non votant", deputy: Deputy.where(uid: deputy_nonVotant).first, law: Law.where(scrutin_id: data["scrutin"]["numero"]).first ) unless Deputy.where(uid: deputy_nonVotant).empty?}
+          puts "creating abstentions..."
+          # puts JSON.pretty_generate(data["scrutin"]["ventilationVotes"]["organe"]["groupes"]["groupe"].map{|groupe| groupe = groupe["vote"]}.map{|vote|vote = vote["decompteNominatif"]}.map{|vote| vote = vote["abstentions"]}.map{|vote| vote = vote["votant"] unless vote.nil?}.flatten.compact.map{|acteur| acteur = acteur["acteurRef"]})
+          deputies_abstentions = data["scrutin"]["ventilationVotes"]["organe"]["groupes"]["groupe"].map{|groupe| groupe = groupe["vote"]}.map{|vote|vote = vote["decompteNominatif"]}.map{|vote| vote = vote["abstentions"]}.map{|vote| vote = vote["votant"] unless vote.nil?}.flatten.compact.map{|acteur| acteur = acteur["acteurRef"]}
+          deputies_abstentions.each{|deputy_abstention| Vote.create!(deputy_position: "Abstention", deputy: Deputy.where(uid: deputy_abstention).first, law: Law.where(scrutin_id: data["scrutin"]["numero"]).first ) unless Deputy.where(uid: deputy_abstention).empty?}
+          puts "creating non votants volontaires..."
+          # puts JSON.pretty_generate(data["scrutin"]["ventilationVotes"]["organe"]["groupes"]["groupe"].map{|groupe| groupe = groupe["vote"]}.map{|vote|vote = vote["decompteNominatif"]}.map{|vote| vote = vote["nonVotantsVolontaires"]}.map{|vote| vote = vote["votant"] unless vote.nil?}.flatten.compact.map{|acteur| acteur = acteur["acteurRef"]})
+          deputies_nonVotantsVolontaires = data["scrutin"]["ventilationVotes"]["organe"]["groupes"]["groupe"].map{|groupe| groupe = groupe["vote"]}.map{|vote|vote = vote["decompteNominatif"]}.map{|vote| vote = vote["nonVotantsVolontaires"]}.map{|vote| vote = vote["votant"] unless vote.nil?}.flatten.compact.map{|acteur| acteur = acteur["acteurRef"]}
+          deputies_nonVotantsVolontaires.each{|deputy_nonVotantVolontaire| Vote.create!(deputy_position: "Non votant volontaire", deputy: Deputy.where(uid: deputy_nonVotantVolontaire).first, law: Law.where(scrutin_id: data["scrutin"]["numero"]).first ) unless Deputy.where(uid: deputy_nonVotantVolontaire).empty?}
         end
         print "\r#{100*(i+1)/(zip_file_size > quantity ? quantity : zip_file_size)}%     "
         # puts JSON.pretty_generate(data)
