@@ -1,5 +1,5 @@
-class VotesController < ApplicationController
+class PositionsController < ApplicationController
   # def show
-  #   @vote = Vote.find(params[:id])
+  #   @position = Position.find(params[:id])
   # end
 end
