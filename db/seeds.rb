@@ -162,7 +162,7 @@ end
 
 def creating_votes_full
   puts "Creating votes..."
-  ImportVotesJob.perform_now(1000,Law.all.map(&:scrutin_id))
+  ImportVotesJob.perform_now(10000,Law.all.map(&:scrutin_id))
   puts "votes done"
 end
 
@@ -215,6 +215,7 @@ end
 
 def seed(full_or_light)
   puts "Let's go!"
+  puts full_or_light + " version!"
   cleaning
   creating_users
   creating_deputies(full_or_light)
@@ -224,4 +225,11 @@ def seed(full_or_light)
   puts "Finished!"
 end
 
-seed("full") # change to "full" to seed with real infos (takes longer and calls assemblee nationale website)
+puts "Full seed or light seed ? (type 'full' or 'light')"
+print "> "
+full_or_light = STDIN.gets.chomp
+if full_or_light == 'light' || full_or_light == 'full'
+  seed(full_or_light)
+else
+  puts "operation cancelled -- type 'full' or 'light' next time... So long! "
+end
