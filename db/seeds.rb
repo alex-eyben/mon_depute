@@ -221,7 +221,7 @@ def seed(full_or_light)
   creating_deputies(full_or_light)
   creating_laws
   creating_votes(full_or_light)
-  creating_locations("light")
+  creating_locations("full")
   puts "Finished!"
 end
 
