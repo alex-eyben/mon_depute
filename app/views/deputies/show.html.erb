@@ -6,24 +6,24 @@
     </div>
     <h4><%= @deputy.party %></h4>
     <div class="deputy-card-social-container">
-      <i class="fab fa-facebook-f"><a href="#"></a></i>
-      <i class="fab fa-twitter"><a href="#"></a></i>
+      <a href="https://www.facebook.com/<%= @deputy.facebook %>" target="blank"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://twitter.com/<%= @deputy.twitter %>" target="blank"><i class="fab fa-twitter"></i></a>
     </div>
     <div class="deputy-details-container">
       <p>38 ans</p>
       <p><%= @deputy.job %></p>
     </div>
-    <div class="deputy-details-container">
+    <!-- <div class="deputy-details-container">
       <p>Profil: Frondeur</p>
-    </div>
+    </div> -->
     <div class="deputy-details-container">
       <p>Email: <%= @deputy.email %></p>
-      <p><%= @deputy.website %></p>
+      <a href="<%= @deputy.website %>%">Site web</a>
     </div>
     <div class="deputy-card-details-container">
-      <a href="<%= @deputy.revenue %>">Consulter sa déclaration de revenus</a>
+      <a href="<%= @deputy.revenue %>" target="blank">Consulter sa déclaration de revenus</a>
     </div>
-    <a href="#" class="button button-primary width-grow">Suivre</a>
+    <a href="#" class="button button-primary bottom">Suivre</a>
   </div>
 
   <div class="laws">
@@ -40,7 +40,32 @@
                   <i class="far fa-thumbs-up"></i>
                   <i class="far fa-thumbs-down"></i>
                 </div>
-                <a href="<%= vote.law.ressource_link %>" class="button button-primary width-grow">Détails</a>
+
+                <button type="button" class="btn btn-primary width-grow" data-toggle="modal" data-target="#modal-<%= vote.law.id %>">
+                  Details
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="modal-<%= vote.law.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title" id="exampleModalLabel"><%= vote.law.title %></h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <p> <%= vote.law.content %></p>
+                      </div>
+                      <div class="modal-footer d-flex justify-content-center">
+                        <a href="<%= vote.law.ressource_link %>" target="blank" class="button button-primary">Voir plus sur Vie-publique.fr</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
               </div>
             </div>
       <% end %>
