@@ -155,9 +155,9 @@ end
 def creating_votes_light
   puts "Creating votes..."
 
-  contre = Vote.create!(deputy_position: "Contre", deputy: @deputies.sample, law: @laws.sample )
-  pour = Vote.create!(deputy_position: "Pour", deputy: @deputies.sample, law: @laws.sample )
-  abstenu = Vote.create!(deputy_position: "Abstenu", deputy: @deputies.sample, law: @laws.sample )
+  contre = Vote.create!(deputy_position: "Contre", deputy: @deputies.first, law: @laws.sample )
+  pour = Vote.create!(deputy_position: "Pour", deputy: @deputies.first, law: @laws.sample )
+  abstenu = Vote.create!(deputy_position: "Abstenu", deputy: @deputies.first, law: @laws.sample )
 end
 
 def creating_votes_full
@@ -221,7 +221,7 @@ def seed(full_or_light)
   creating_deputies(full_or_light)
   creating_laws
   creating_votes(full_or_light)
-  creating_locations("light")
+  creating_locations("full")
   puts "Finished!"
 end
 
