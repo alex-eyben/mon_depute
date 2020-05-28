@@ -13,16 +13,38 @@
   border-radius: 3px;
   box-shadow:  4px 4px 10px #e4e4e4,
              -4px -4px 10px #ffffff;
-  padding: 30px;
   width: 35%;
   text-align: center;
-  height: 100%;
-  position: relative;
+}
+
+.deputy-card-container {
+  padding: 20px;
+}
+
+.deputy-card-avatar-container {
+  display: flex;
+  img {
+    flex-grow: 1;
+  }
+}
+
+.deputy-card-avatar-container-details {
+  margin-left: 20px;
+  text-align: left;
+  h3 {
+    font-size: 1.3rem;
+  }
+  h4 {
+    font-size: 1.2rem;
+  }
+}
+
+.deputy-card-details-container {
+  margin-bottom: 10px;
 }
 
 .deputy-details-container {
   margin-top: 10px;
-  margin-bottom: 10px;
 }
 
 .deputy-details-container p {
@@ -33,7 +55,8 @@
   margin-bottom: 10px;
 }
 
-.deputy-card-social-container .fab {
+.deputy-card-social-container .fab,
+.deputy-card-social-container .far {
   background-color: $deep-green;
   color: $white;
   border-radius: 50%;
@@ -61,6 +84,12 @@
   margin-bottom: 30px;
   margin-left: 30px;
   width: 90%;
+  h3 {
+    font-size: 1.4rem;
+  }
+  h4 {
+    font-size: 1.3rem;
+  }
 }
 
 .law-card-details {
@@ -108,9 +137,5 @@
 .width-grow {
   width: 100%;
   display:block;
-}
-
-.bottom {
-  position: absolute;
-  bottom: 30px;
+  border-radius: 0px 0px 2px 2px;
 }

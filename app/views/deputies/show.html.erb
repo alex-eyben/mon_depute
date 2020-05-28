@@ -1,29 +1,28 @@
 <div class="container-deputy">
   <div class="deputy-card">
-    <div class="deputy-card-container">
-    <div class="deputy-card-avatar-container">
-        <img src="https://gal.img.pmdstatic.net/fit/http.3A.2F.2Fprd2-bone-image.2Es3-website-eu-west-1.2Eamazonaws.2Ecom.2Fgal.2Fvar.2Fgal.2Fstorage.2Fimages.2Fmedia.2Fmultiupload_du_29_avril_2014.2Fnicolascage.2F2915581-1-fre-FR.2Fnicolascage.2Ejpg/480x480/quality/80/nicolas-cage-qui-va-se-souvenir-de-telles-merdes.jpg" alt="" class="avatar-bordered">
-        <div class="deputy-card-avatar-container-details">
-          <h3><%= @deputy.first_name %> <%= @deputy.last_name %></h3>
-          <h4><%= @deputy.party %></h4>
-          <p> Département: <%= @deputy.department %></p>
+     <div class="deputy-card-container">
+        <div class="deputy-card-avatar-container">
+          <img src="https://gal.img.pmdstatic.net/fit/http.3A.2F.2Fprd2-bone-image.2Es3-website-eu-west-1.2Eamazonaws.2Ecom.2Fgal.2Fvar.2Fgal.2Fstorage.2Fimages.2Fmedia.2Fmultiupload_du_29_avril_2014.2Fnicolascage.2F2915581-1-fre-FR.2Fnicolascage.2Ejpg/480x480/quality/80/nicolas-cage-qui-va-se-souvenir-de-telles-merdes.jpg" alt="" class="avatar-bordered">
+          <div class="deputy-card-avatar-container-details">
+            <h3><%= @deputy.first_name %> <%= @deputy.last_name %></h3>
+            <h4><%= @deputy.party %></h4>
+            <p> Département: <%= @deputy.department %></p>
+          </div>
         </div>
-      </div>
-      <div class="deputy-card-social-container">
-        <a href="https://www.facebook.com/<%= @deputy.facebook %>" target="blank"><i class="fab fa-facebook-f"></i></a>
-        <a href="https://twitter.com/<%= @deputy.twitter %>" target="blank"><i class="fab fa-twitter"></i></a>
-        <a href="mailto:<%= @deputy.email %>" target="blank"><i class="far fa-envelope"></i></a>
-        <a href="<%= @deputy.website %>" target="blank"><i class="fab fa-wordpress-simple"></i></a>
-        
-      </div>
-      <!-- <div class="deputy-details-container">
-        <p>Profil: Frondeur</p>
-      </div> -->
-      <div class="deputy-card-details-container">
-        <a href="<%= @deputy.revenue %>" target="blank">Consulter sa déclaration de revenus</a>
-      </div>
-    </div>
-    <a href="#" class="button button-primary bottom width-grow">Suivre</a>
+        <div class="deputy-card-social-container">
+          <a href="https://www.facebook.com/<%= @deputy.facebook %>" target="blank"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://twitter.com/<%= @deputy.twitter %>" target="blank"><i class="fab fa-twitter"></i></a>
+          <a href="mailto:<%= @deputy.email %>" target="blank"><i class="far fa-envelope"></i></a>
+          <a href="<%= @deputy.website %>" target="blank"><i class="fab fa-wordpress-simple"></i></a>
+        </div>
+        <!-- <div class="deputy-details-container">
+          <p>Profil: Frondeur</p>
+        </div> -->
+        <div class="deputy-card-details-container">
+          <a href="<%= @deputy.revenue %>" target="blank">Consulter sa déclaration de revenus</a>
+        </div>
+     </div>
+   <a href="#" class="button button-primary width-grow">Suivre</a>
   </div>
 
   <div class="laws">
