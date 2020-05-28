@@ -24,3 +24,18 @@
   text-decoration: none;
   color:white;
 }
+
+.button-primary-empty {
+  padding: 5px 15px;
+  border-radius: 2px;
+  color:$deep-green;
+  font-weight: 500;
+  transition: 0.2s;
+  background-color: $white;
+  border: 1px solid $deep-green;
+}
+
+.button-primary-empty:hover {
+  color:$white;
+  background-color: $deep-green;
+}
