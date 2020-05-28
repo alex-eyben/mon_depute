@@ -42,7 +42,7 @@ class ImportDeputiesJob < ApplicationJob
           # puts JSON.pretty_generate(data["acteur"]) # I use this to display json Nicely so I'm able to find routes
           deputy = {}
           ## p data["acteur"]["uid"]["@xsi:type"]
-          ## p data["acteur"]["uid"]["#text"] # if we want to add uid to deputy table we can get it here
+          deputy[:uid] = data["acteur"]["uid"]["#text"] # if we want to add uid to deputy table we can get it here
           deputy[:first_name] = data["acteur"]["etatCivil"]["ident"]["prenom"]
           deputy[:last_name] = data["acteur"]["etatCivil"]["ident"]["nom"]
           deputy[:birth_date] = data["acteur"]["etatCivil"]["infoNaissance"]["dateNais"].to_date
