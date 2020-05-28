@@ -13,43 +13,11 @@
   border-radius: 3px;
   box-shadow:  4px 4px 10px #e4e4e4,
              -4px -4px 10px #ffffff;
-
-  width: 40%;
+  padding: 30px;
+  width: 35%;
   text-align: center;
-}
-
-.deputy-card-container {
-  padding: 30px 30px 0 30px;
-}
-
-.deputy-card-avatar-container {
-  display: flex;
-  justify-content: center;
-}
-
-.deputy-card-avatar-container-details {
-  text-align: left;
-  padding-left: 20px;
-  h3 {
-    font-size: 1.4rem;
-    margin-top: 0;
-    margin-bottom: 0.5rem;
-  }
-  h4 {
-    font-size: 1.2rem;
-    margin-bottom: 0.1rem;
-  }
-}
-
-.deputy-card-avatar-container .avatar-bordered {
-  width: 100px;
-  height: 100px;
-  flex-grow: 1;
-}
-
-.deputy-card-details-container{
- flex-grow: 1;
- margin-bottom: 20px;
+  height: 100%;
+  position: relative;
 }
 
 .deputy-details-container {
@@ -66,23 +34,12 @@
 }
 
 .deputy-card-social-container .fab {
-  background-color: $white;
-  color: $deep-green;
+  background-color: $deep-green;
+  color: $white;
   border-radius: 50%;
   margin: 10px;
   padding: 10px;
   width: 35px;
-  border: 1px solid $deep-green;
-}
-
-.deputy-card-social-container .far {
-  background-color: $white;
-  color: $deep-green;
-  border-radius: 50%;
-  margin: 10px;
-  padding: 10px;
-  width: 35px;
-  border: 1px solid $deep-green;
 }
 
 .laws {
@@ -108,14 +65,6 @@
 
 .law-card-details {
   width: 80%;
-}
-
-.law-card-details h3 {
-  font-size: 1.3rem;
-}
-
-.law-card-details h4 {
-  font-size: 1.2rem;
 }
 
 .law-card-details.contre h4 {
@@ -159,5 +108,9 @@
 .width-grow {
   width: 100%;
   display:block;
-  border-radius: 0;
+}
+
+.bottom {
+  position: absolute;
+  bottom: 30px;
 }
