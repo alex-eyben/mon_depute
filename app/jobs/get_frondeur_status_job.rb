@@ -13,13 +13,19 @@ class GetFrondeurStatusJob < ApplicationJob
   #   end
   # end
 
+  # def is_frondeur?(deputy)
+  #   counter = 0
+  #   deputy.votes.each do |deputy_vote|
+  #     deputy_vote.law.votes.each do |other_vote_on_same_law|
+  #       other_vote_on_same_law
+  #     end
+  #   end
+  # end
+
   def is_frondeur?(deputy)
-    counter = 0
-    deputy.votes.each do |deputy_vote|
-      deputy_vote.law.votes.each do |other_vote_on_same_law|
-        other_vote_on_same_law
-      end
-    end
+    all_pours = Law.first.positions.where(deputy_position: deputy.positions.where(law: law).take.deputy_position )
+    all_pours.select{|position| position.deputy.party == deputy.party}.size
+
   end
 end
 
