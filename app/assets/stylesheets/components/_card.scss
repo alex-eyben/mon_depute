@@ -17,6 +17,7 @@
   width: 35%;
   text-align: center;
   height: 100%;
+  position: relative;
 }
 
 .deputy-details-container {
@@ -103,4 +104,9 @@
 .width-grow {
   width: 100%;
   display:block;
+}
+
+.bottom {
+  position: absolute;
+  bottom: 30px;
 }

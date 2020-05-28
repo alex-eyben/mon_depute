@@ -6,24 +6,24 @@
     </div>
     <h4><%= @deputy.party %></h4>
     <div class="deputy-card-social-container">
-      <i class="fab fa-facebook-f"><a href="#"></a></i>
-      <i class="fab fa-twitter"><a href="#"></a></i>
+      <a href="https://www.facebook.com/<%= @deputy.facebook %>"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://twitter.com/<%= @deputy.twitter %>"><i class="fab fa-twitter"></i></a>
     </div>
     <div class="deputy-details-container">
       <p>38 ans</p>
       <p><%= @deputy.job %></p>
     </div>
-    <div class="deputy-details-container">
+    <!-- <div class="deputy-details-container">
       <p>Profil: Frondeur</p>
-    </div>
+    </div> -->
     <div class="deputy-details-container">
       <p>Email: <%= @deputy.email %></p>
-      <p><%= @deputy.website %></p>
+      <a href="<%= @deputy.website %>%">Site web</a>
     </div>
     <div class="deputy-card-details-container">
       <a href="<%= @deputy.revenue %>">Consulter sa déclaration de revenus</a>
     </div>
-    <a href="#" class="button button-primary width-grow">Suivre</a>
+    <a href="#" class="button button-primary bottom">Suivre</a>
   </div>
 
   <div class="laws">
@@ -43,12 +43,12 @@
                   Détails
                 </button> -->
 
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-<%= vote.law.id %>">
                   Details
                 </button>
 
                 <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="#modal-<%= vote.law.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
                       <div class="modal-header">
