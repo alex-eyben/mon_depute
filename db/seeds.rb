@@ -152,12 +152,28 @@ def creating_laws
   puts "laws done"
 end
 
-def creating_votes
+def creating_votes_light
   puts "Creating votes..."
 
   contre = Vote.create!(deputy_position: "Contre", deputy: @deputies.first, law: @laws.sample )
   pour = Vote.create!(deputy_position: "Pour", deputy: @deputies.first, law: @laws.sample )
   abstenu = Vote.create!(deputy_position: "Abstenu", deputy: @deputies.first, law: @laws.sample )
+end
+
+def creating_votes_full
+  puts "Creating votes..."
+  ImportVotesJob.perform_now(10000,Law.all.map(&:scrutin_id))
+  puts "votes done"
+end
+
+def creating_votes(full_or_light)
+  if full_or_light == "light"
+    creating_votes_light
+  elsif full_or_light == "full"
+    creating_votes_full
+  else
+    puts "==> Wrong argument!! Choose 'full' or 'light' ! No location created"
+  end
 end
 
 def creating_locations_light
@@ -199,13 +215,21 @@ end
 
 def seed(full_or_light)
   puts "Let's go!"
+  puts full_or_light + " version!"
   cleaning
   creating_users
-  creating_deputies("full")
+  creating_deputies(full_or_light)
   creating_laws
-  creating_votes
-  creating_locations(full_or_light)
+  creating_votes(full_or_light)
+  creating_locations("light")
   puts "Finished!"
 end
 
-seed("full") # change to "full" to seed with real infos (takes longer and calls assemblee nationale website)
+puts "Full seed or light seed ? (type 'full' or 'light')"
+print "> "
+full_or_light = STDIN.gets.chomp
+if full_or_light == 'light' || full_or_light == 'full'
+  seed(full_or_light)
+else
+  puts "operation cancelled -- type 'full' or 'light' next time... So long! "
+end
