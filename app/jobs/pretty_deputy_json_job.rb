@@ -1,7 +1,5 @@
 require 'zip'
 require 'open-uri'
-require 'pry-byebug'
-require 'json'
 
 class PrettyDeputyJsonJob < ApplicationJob
   queue_as :default

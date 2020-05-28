@@ -40,6 +40,7 @@ def creating_deputies_full
 # We can pass a number in arg to limit number of deputies, ie :
 # ImportDeputiesJob.perform_now(10)
 # The method returns an array we can iterate on instead of on deputies
+
 # to try, un-comment following lines and comment lines 19 to 28
   puts "Creating deputies..."
 
@@ -65,21 +66,22 @@ end
 def creating_laws
   puts "Creating laws..."
   avia = { title: "Loi Avia visant à lutter contre les contenus haineux sur internet",
-              content: "La proposition de loi oblige les opérateurs de plateforme en ligne et 
-              les moteurs de recherche à retirer dans un délai de 24 heures, après notification 
-              par une ou plusieurs personnes, des contenus manifestement illicites tels que les 
-              incitations à la haine, les injures à caractère raciste ou anti-religieuses. 
-              Pour les contenus terroristes ou pédopornographiques, le délai de retrait est 
+              content: "La proposition de loi oblige les opérateurs de plateforme en ligne et
+              les moteurs de recherche à retirer dans un délai de 24 heures, après notification
+              par une ou plusieurs personnes, des contenus manifestement illicites tels que les
+              incitations à la haine, les injures à caractère raciste ou anti-religieuses.
+              Pour les contenus terroristes ou pédopornographiques, le délai de retrait est
               réduit à une heure.",
               ressource_link: "https://www.vie-publique.fr/loi/268070-loi-avia-lutte-contre-les-contenus-haineux-sur-internet",
               current_status: "Adoptée",
               last_status_update: Date.today,
               start_date:  Date.today,
               scrutin_id: 2039
+
               }
   bioethique =  { title: "Projet de loi relatif à la bioéthique",
-                  content: "Le projet de loi élargit l'accès à la procréation médicalement assistée 
-                  (PMA) aux couples de femme et aux femmes célibataires. Actuellement, 
+                  content: "Le projet de loi élargit l'accès à la procréation médicalement assistée
+                  (PMA) aux couples de femme et aux femmes célibataires. Actuellement,
                   la PMA est uniquement accessible aux couples hétérosexuels sur indication médicale. ",
                   ressource_link: "https://www.vie-publique.fr/loi/268659-projet-de-loi-bioethique-pma",
                   current_status: "Adoptée",
@@ -89,13 +91,13 @@ def creating_laws
                 }
   violences =  { title: "Loi du 28 décembre 2019 visant à agir contre les violences au sein de la famille",
                   content: "Le texte vise à faire reculer les violences faites aux femmes et notamment les féminicides.
-                  La loi fixe à six jours maximum le délai de délivrance par le juge aux affaires familiales d’une 
-                  ordonnance de protection. Créée par la loi du 9 juillet 2010 relative aux 
-                  violences faites spécifiquement aux femmes, aux violences au sein des couples et aux 
-                  incidences de ces dernières sur les enfants l’ordonnance de protection permet au juge 
-                  d’attester de la réalité des violences subies et de mettre en place, sans attendre la 
-                  décision de la victime sur le dépôt d’une plainte, les mesures d’urgence : éviction du 
-                  conjoint violent, relogement 'hors de portée du conjoint en cas de départ du domicile conjugal, 
+                  La loi fixe à six jours maximum le délai de délivrance par le juge aux affaires familiales d’une
+                  ordonnance de protection. Créée par la loi du 9 juillet 2010 relative aux
+                  violences faites spécifiquement aux femmes, aux violences au sein des couples et aux
+                  incidences de ces dernières sur les enfants l’ordonnance de protection permet au juge
+                  d’attester de la réalité des violences subies et de mettre en place, sans attendre la
+                  décision de la victime sur le dépôt d’une plainte, les mesures d’urgence : éviction du
+                  conjoint violent, relogement 'hors de portée du conjoint en cas de départ du domicile conjugal,
                   interdiction pour le conjoint violent de porter une arme.'",
                   ressource_link: "https://www.vie-publique.fr/loi/271281-proposition-de-loi-action-contre-les-violences-au-sein-de-la-famille",
                   current_status: "Adoptée",
@@ -104,7 +106,7 @@ def creating_laws
                   scrutin_id: 2147
                 }
   urgence =  { title: "Etat d'urgence : loi renforçant la sécurité intérieure et la lutte contre le terrorisme",
-                  content: "La loi vise à doter l'État de nouveaux instruments de lutte contre le terrorisme 
+                  content: "La loi vise à doter l'État de nouveaux instruments de lutte contre le terrorisme
                   afin de pouvoir mettre fin au régime dérogatoire de l'état d'urgence.
                   Pour cela, la loi intègre dans le droit commun des dispositions jusque-là réservées à l'état d'urgence.",
                   ressource_link: "https://www.vie-publique.fr/loi/20775-loi-securite-interieure-et-la-lutte-contre-le-terrorisme",
@@ -114,9 +116,9 @@ def creating_laws
                   scrutin_id: 138
                 }
   climat =  { title: "Projet de loi relatif à l'énergie et au climat",
-                  content: "La loi énergie et climat du 8 novembre 2019 vise à répondre à l’urgence 
-                  écologique et climatique. Elle inscrit cette urgence dans le code de l’énergie 
-                  ainsi que l’objectif d'une neutralité carbone en 2050, en divisant les émissions 
+                  content: "La loi énergie et climat du 8 novembre 2019 vise à répondre à l’urgence
+                  écologique et climatique. Elle inscrit cette urgence dans le code de l’énergie
+                  ainsi que l’objectif d'une neutralité carbone en 2050, en divisant les émissions
                   de gaz à effet de serre par six au moins d'ici cette date.",
                   ressource_link: "https://www.vie-publique.fr/loi/23814-loi-energie-et-climat-du-8-novembre-2019",
                   current_status: "Adoptée",
@@ -125,14 +127,14 @@ def creating_laws
                   scrutin_id: 2065
                 }
   peche =  { title: "Interdiction de la pêche électrique",
-                  content: "Interdite dans de nombreux pays, la pêche électrique consiste à 
-                  capturer des poissons à l'aide d'un courant électrique. Des décharges sont envoyées 
-                  dans le sédiment afin de capturer les poissons plats (soles, limandes, carrelets, etc.). 
+                  content: "Interdite dans de nombreux pays, la pêche électrique consiste à
+                  capturer des poissons à l'aide d'un courant électrique. Des décharges sont envoyées
+                  dans le sédiment afin de capturer les poissons plats (soles, limandes, carrelets, etc.).
                   Cette méthode est critiquée pour son impact sur les poissons : ces derniers montrent souvent
-                  des brûlures, des ecchymoses et des déformations du squelette consécutives à 
-                  l'électrocution. La pêche électrique se distingue également par son caractère non 
-                  sélectif, atteignant sans distinction tous les organismes à portée de l'impulsion. 
-                  En mer du Nord, où elle est pratiquée depuis une dizaine d'années, les ressources 
+                  des brûlures, des ecchymoses et des déformations du squelette consécutives à
+                  l'électrocution. La pêche électrique se distingue également par son caractère non
+                  sélectif, atteignant sans distinction tous les organismes à portée de l'impulsion.
+                  En mer du Nord, où elle est pratiquée depuis une dizaine d'années, les ressources
                   halieutiques de la zone se raréfient, en particulier les stocks de soles et de plies.",
                   ressource_link: "https://www.vie-publique.fr/en-bref/19954-union-europeenne-protestations-contre-la-peche-electrique",
                   current_status: "Adoptée",
@@ -206,4 +208,4 @@ def seed(full_or_light)
   puts "Finished!"
 end
 
-seed("light") # change to "full" to seed with real infos (takes longer and calls assemblee nationale website)
+seed("full") # change to "full" to seed with real infos (takes longer and calls assemblee nationale website)
