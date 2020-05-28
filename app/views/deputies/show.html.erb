@@ -1,7 +1,7 @@
 <div class="container-deputy">
   <div class="deputy-card">
     <div class="avatar-container">
-      <img src="https://gal.img.pmdstatic.net/fit/http.3A.2F.2Fprd2-bone-image.2Es3-website-eu-west-1.2Eamazonaws.2Ecom.2Fgal.2Fvar.2Fgal.2Fstorage.2Fimages.2Fmedia.2Fmultiupload_du_29_avril_2014.2Fnicolascage.2F2915581-1-fre-FR.2Fnicolascage.2Ejpg/480x480/quality/80/nicolas-cage-qui-va-se-souvenir-de-telles-merdes.jpg" alt="" class="avatar-bordered">
+      <img src="<%= @deputy.img %>" alt="" class="avatar-bordered">
       <h3><%= @deputy.first_name %> <%= @deputy.last_name %></h3>
     </div>
     <h4><%= @deputy.party %></h4>
@@ -30,8 +30,13 @@
     <% @positions.each do |position| %>
       <div class="law-card">
               <div class="law-card-details <%= position.deputy_position.downcase %>">
+                <ul class="categorie-container">
+                  <% position.law.tag_list.each do |tag|%>
+                    <li class="categorie-label"> <%= tag %> </li>
+                  <% end %>
+                </ul>
                 <h3><%= position.law.title %></h3>
-                <p><strong>Adopté le <%= position.law.last_status_update %></strong> : 350 votes pour, 248 votes contre, 57 abstentions</p>
+                <p><strong>Adoptée le <%= position.law.last_status_update %></strong></p> <!-- : 350 votes pour, 248 votes contre, 57 abstentions</p> -->
                 <h4><%= position.deputy_position %></h4>
               </div>
               <div class="law-card-interaction-card">

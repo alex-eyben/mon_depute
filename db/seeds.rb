@@ -64,6 +64,8 @@ def creating_deputies(full_or_light)
 end
 
 def creating_laws
+  @laws = []
+
   puts "Creating laws..."
   avia = { title: "Loi Avia visant à lutter contre les contenus haineux sur internet",
               content: "La proposition de loi oblige les opérateurs de plateforme en ligne et
@@ -77,8 +79,12 @@ def creating_laws
               last_status_update: Date.today,
               start_date:  Date.today,
               scrutin_id: 2039
-
               }
+  aviaLaw = Law.create!(avia)
+  aviaLaw.tag_list.add("Internet", "Liberté d'expression")
+  aviaLaw.save
+  @laws << aviaLaw
+  
   bioethique =  { title: "Projet de loi relatif à la bioéthique",
                   content: "Le projet de loi élargit l'accès à la procréation médicalement assistée
                   (PMA) aux couples de femme et aux femmes célibataires. Actuellement,
@@ -89,6 +95,12 @@ def creating_laws
                   start_date:  Date.today,
                   scrutin_id: 2146
                 }
+
+  bioethiqueLaw = Law.create!(bioethique)
+  bioethiqueLaw.tag_list.add("PMA", "Santé", "Discrimination")
+  bioethiqueLaw.save
+  @laws << bioethiqueLaw
+  
   violences =  { title: "Loi du 28 décembre 2019 visant à agir contre les violences au sein de la famille",
                   content: "Le texte vise à faire reculer les violences faites aux femmes et notamment les féminicides.
                   La loi fixe à six jours maximum le délai de délivrance par le juge aux affaires familiales d’une
@@ -105,6 +117,13 @@ def creating_laws
                   start_date:  Date.today,
                   scrutin_id: 2147
                 }
+
+  violencesLaw = Law.create!(violences)
+  violencesLaw.tag_list.add("Violences faites aux femmes", "Droit Pénal")
+  violencesLaw.save
+  @laws << violencesLaw
+
+
   urgence =  { title: "Etat d'urgence : loi renforçant la sécurité intérieure et la lutte contre le terrorisme",
                   content: "La loi vise à doter l'État de nouveaux instruments de lutte contre le terrorisme
                   afin de pouvoir mettre fin au régime dérogatoire de l'état d'urgence.
@@ -115,6 +134,12 @@ def creating_laws
                   start_date:  Date.today,
                   scrutin_id: 138
                 }
+
+  urgenceLaw = Law.create!(urgence)
+  urgenceLaw.tag_list.add("Sécurité", "Terrorisme", "Libertés individuelles")
+  urgenceLaw.save
+  @laws << urgenceLaw
+
   climat =  { title: "Projet de loi relatif à l'énergie et au climat",
                   content: "La loi énergie et climat du 8 novembre 2019 vise à répondre à l’urgence
                   écologique et climatique. Elle inscrit cette urgence dans le code de l’énergie
@@ -126,6 +151,12 @@ def creating_laws
                   start_date:  Date.today,
                   scrutin_id: 2065
                 }
+
+  climatLaw = Law.create!(climat)
+  climatLaw.tag_list.add("Energie", "Climat", "Ecologie")
+  climatLaw.save
+  @laws << climatLaw
+
   peche =  { title: "Interdiction de la pêche électrique",
                   content: "Interdite dans de nombreux pays, la pêche électrique consiste à
                   capturer des poissons à l'aide d'un courant électrique. Des décharges sont envoyées
@@ -143,14 +174,11 @@ def creating_laws
                   scrutin_id: 389
                 }
 
-  @laws = []
-  [ avia, bioethique, violences, urgence, climat, peche ].each do |attributes|
-    law = Law.create!(attributes)
-    puts "Created #{law.title}"
-    law.tag_list.add("Droit Pénal", "Sécurité", "Terrorisme")
-    law.save
-    @laws << law
-  end
+  pecheLaw = Law.create!(peche)
+  pecheLaw.tag_list.add("Droit des animaux", "Ecologie")
+  pecheLaw.save
+  @laws << pecheLaw
+  
   puts "laws done"
 end
 
