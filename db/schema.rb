@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_28_094202) do
+ActiveRecord::Schema.define(version: 2020_05_28_102827) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 2020_05_28_094202) do
     t.integer "department"
     t.string "uid"
     t.string "img"
-    t.index ["uid"], name: "index_deputies_on_uid"
+    t.index ["uid"], name: "index_deputies_on_uid", unique: true
   end
 
   create_table "laws", force: :cascade do |t|
@@ -54,6 +54,16 @@ ActiveRecord::Schema.define(version: 2020_05_28_094202) do
     t.string "circonscription"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "positions", force: :cascade do |t|
+    t.string "deputy_position"
+    t.bigint "deputy_id", null: false
+    t.bigint "law_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["deputy_id"], name: "index_positions_on_deputy_id"
+    t.index ["law_id"], name: "index_positions_on_law_id"
   end
 
   create_table "taggings", id: :serial, force: :cascade do |t|
@@ -95,17 +105,7 @@ ActiveRecord::Schema.define(version: 2020_05_28_094202) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "votes", force: :cascade do |t|
-    t.string "deputy_position"
-    t.bigint "deputy_id", null: false
-    t.bigint "law_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["deputy_id"], name: "index_votes_on_deputy_id"
-    t.index ["law_id"], name: "index_votes_on_law_id"
-  end
-
+  add_foreign_key "positions", "deputies"
+  add_foreign_key "positions", "laws"
   add_foreign_key "taggings", "tags"
-  add_foreign_key "votes", "deputies"
-  add_foreign_key "votes", "laws"
 end

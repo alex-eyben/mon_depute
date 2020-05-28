@@ -1,3 +1,3 @@
 class Deputy < ApplicationRecord
-  has_many :votes
+  has_many :positions
 end

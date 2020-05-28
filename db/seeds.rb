@@ -3,7 +3,7 @@ require "csv"
 def cleaning
   puts "Cleaning database..."
   User.destroy_all
-  Vote.destroy_all
+  Position.destroy_all
   Law.destroy_all
   Deputy.destroy_all
   Location.destroy_all
@@ -157,9 +157,9 @@ end
 def creating_votes_light
   puts "Creating votes..."
 
-  contre = Vote.create!(deputy_position: "Contre", deputy: @deputies.first, law: @laws.sample )
-  pour = Vote.create!(deputy_position: "Pour", deputy: @deputies.first, law: @laws.sample )
-  abstenu = Vote.create!(deputy_position: "Abstenu", deputy: @deputies.first, law: @laws.sample )
+  contre = Position.create!(deputy_position: "Contre", deputy: @deputies.first, law: @laws.sample )
+  pour = Position.create!(deputy_position: "Pour", deputy: @deputies.first, law: @laws.sample )
+  abstenu = Position.create!(deputy_position: "Abstenu", deputy: @deputies.first, law: @laws.sample )
 end
 
 def creating_votes_full
@@ -223,7 +223,7 @@ def seed(full_or_light)
   creating_deputies(full_or_light)
   creating_laws
   creating_votes(full_or_light)
-  creating_locations("full")
+  creating_locations("light")
   puts "Finished!"
 end
 

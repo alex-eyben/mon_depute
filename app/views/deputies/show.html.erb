@@ -27,12 +27,12 @@
   </div>
 
   <div class="laws">
-    <% @votes.each do |vote| %>
+    <% @positions.each do |position| %>
       <div class="law-card">
-              <div class="law-card-details <%= vote.deputy_position.downcase %>">
-                <h3><%= vote.law.title %></h3>
-                <p><strong>Adopté le <%= vote.law.last_status_update %></strong> : 350 votes pour, 248 votes contre, 57 abstentions</p>
-                <h4><%= vote.deputy_position %></h4>
+              <div class="law-card-details <%= position.deputy_position.downcase %>">
+                <h3><%= position.law.title %></h3>
+                <p><strong>Adopté le <%= position.law.last_status_update %></strong> : 350 votes pour, 248 votes contre, 57 abstentions</p>
+                <h4><%= position.deputy_position %></h4>
               </div>
               <div class="law-card-interaction-card">
                 <div class="interaction-like">
@@ -40,25 +40,25 @@
                   <i class="far fa-thumbs-down"></i>
                 </div>
 
-                <button type="button" class="btn btn-primary width-grow" data-toggle="modal" data-target="#modal-<%= vote.law.id %>">
+                <button type="button" class="btn btn-primary width-grow" data-toggle="modal" data-target="#modal-<%= position.law.id %>">
                   Details
                 </button>
 
                 <!-- Modal -->
-                <div class="modal fade" id="modal-<%= vote.law.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="modal-<%= position.law.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h4 class="modal-title" id="exampleModalLabel"><%= vote.law.title %></h4>
+                        <h4 class="modal-title" id="exampleModalLabel"><%= position.law.title %></h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
                       </div>
                       <div class="modal-body">
-                        <p> <%= vote.law.content %></p>
+                        <p> <%= position.law.content %></p>
                       </div>
                       <div class="modal-footer d-flex justify-content-center">
-                        <a href="<%= vote.law.ressource_link %>" target="blank" class="button button-primary">Voir plus sur Vie-publique.fr</a>
+                        <a href="<%= position.law.ressource_link %>" target="blank" class="button button-primary">Voir plus sur Vie-publique.fr</a>
                       </div>
                     </div>
                   </div>
