@@ -147,6 +147,8 @@ def creating_laws
   [ avia, bioethique, violences, urgence, climat, peche ].each do |attributes|
     law = Law.create!(attributes)
     puts "Created #{law.title}"
+    law.tag_list.add("Droit Pénal", "Sécurité", "Terrorisme")
+    law.save
     @laws << law
   end
   puts "laws done"
