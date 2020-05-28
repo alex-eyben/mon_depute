@@ -4,6 +4,15 @@ class DeputiesController < ApplicationController
     @positions = @deputy.positions
   end
 
+  def like
+    @user = current_user
+    @position = Position.find(params[:position_id])
+    @deputy = Deputy.find(params[:id])
+    # @user.likes @position
+    @position.liked_by @user
+    redirect_to deputy_path(@deputy)
+  end
+
   def results
     # get data from a geocoder search
     query = params[:query]
