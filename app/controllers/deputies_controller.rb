@@ -22,7 +22,7 @@ class DeputiesController < ApplicationController
     @user = current_user
     @deputy = Deputy.find(params[:id])
     @deputy.liked_by @user
-    redirect_to root_path
+    redirect_to dashboard_path
   end
 
   def results
