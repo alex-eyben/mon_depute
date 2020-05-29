@@ -24,7 +24,9 @@
           <a href="<%= @deputy.revenue %>" target="blank">Consulter sa déclaration de revenus</a>
         </div>
      </div>
-   <a href="#" class="button button-primary width-grow">Suivre</a>
+    <%= link_to follow_deputy_path(@deputy), class: 'button button-primary width-grow' do %>
+    Suivre
+    <% end %>
   </div>
 
   <div class="laws">
@@ -48,7 +50,7 @@
         <div class="law-card-interaction-card">
           <div class="interaction-like">
             <%= link_to like_deputy_path(@deputy, position_id: position.id, like: true), remote: true do %>
-              <i class="far fa-thumbs-up"></i>
+              <i class="far fa-thumbs-up active"></i>
             <% end %>
             <%= link_to like_deputy_path(@deputy, position_id: position.id, like: false), remote: true do %>
             <i class="far fa-thumbs-down"></i>
