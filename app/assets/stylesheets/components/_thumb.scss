@@ -1,0 +1,15 @@
+.fa-thumbs-up, .fa-thumbs-down {
+  transition: 0.15s;
+}
+
+.fa-thumbs-up:hover,
+.fa-thumbs-up.active {
+  cursor: pointer;
+  color: $light-green;
+}
+
+.fa-thumbs-down:hover,
+.fa-thumbs-down.active {
+  cursor: pointer;
+  color: $red;
+}
