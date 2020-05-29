@@ -2,7 +2,7 @@
   <div class="deputy-card">
      <div class="deputy-card-container">
         <div class="deputy-card-avatar-container">
-          <img src="https://gal.img.pmdstatic.net/fit/http.3A.2F.2Fprd2-bone-image.2Es3-website-eu-west-1.2Eamazonaws.2Ecom.2Fgal.2Fvar.2Fgal.2Fstorage.2Fimages.2Fmedia.2Fmultiupload_du_29_avril_2014.2Fnicolascage.2F2915581-1-fre-FR.2Fnicolascage.2Ejpg/480x480/quality/80/nicolas-cage-qui-va-se-souvenir-de-telles-merdes.jpg" alt="" class="avatar-bordered">
+          <img src="<%= @deputy.img %>" alt="" class="avatar-bordered">
           <div class="deputy-card-avatar-container-details">
             <h3><%= @deputy.first_name %> <%= @deputy.last_name %></h3>
             <h4><%= @deputy.party %></h4>
@@ -19,6 +19,8 @@
           <p>Profil: Frondeur</p>
         </div> -->
         <div class="deputy-card-details-container">
+          <p><%= @deputy.first_name %> <%= @deputy.last_name %> a plutôt un profil <strong>Frondeur</strong> 
+          (plus de 30% de ses votes ne correspondent pas aux consignes de vote de son parti)</p>
           <a href="<%= @deputy.revenue %>" target="blank">Consulter sa déclaration de revenus</a>
         </div>
      </div>
