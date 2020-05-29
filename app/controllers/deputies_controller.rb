@@ -26,6 +26,9 @@ class DeputiesController < ApplicationController
     city_searched = result.first.data["address"]["city"]
     if city_searched == nil
       city_searched = result.first.data["address"]["town"]
+      if city_searched == nil
+        city_searched = result.first.data["address"]["village"]
+      end
     end
 
     department = result.first.data["address"]["postcode"][0..1]

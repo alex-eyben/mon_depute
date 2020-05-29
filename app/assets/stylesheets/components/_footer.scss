@@ -1,11 +1,14 @@
-.footer-links a i{
+.footer-links a {
   color: $deep-green;
+  font-size: 1.2rem;
 }
 
-.footer{
+.footer {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
+  height: 40px;
 }
 
-.footer-copyright p{
+.footer-copyright p {
   margin: 0;
+  font-size: 0.8rem;
 }
