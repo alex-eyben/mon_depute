@@ -4,13 +4,13 @@
 }
 
 .fa-thumbs-up:hover,
-.fa-thumbs-up.active {
+.fa-thumbs-up.true {
   cursor: pointer;
   color: $light-green;
 }
 
 .fa-thumbs-down:hover,
-.fa-thumbs-down.active {
+.fa-thumbs-down.true {
   cursor: pointer;
   color: $red;
 }

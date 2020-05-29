@@ -2,6 +2,7 @@ class DeputiesController < ApplicationController
   def show
     @deputy = Deputy.find(params[:id])
     @positions = @deputy.positions
+    @user = current_user
   end
 
   def like
