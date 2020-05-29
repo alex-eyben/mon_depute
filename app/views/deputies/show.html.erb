@@ -18,16 +18,16 @@
         <!-- <div class="deputy-details-container">
           <p>Profil: Frondeur</p>
         </div> -->
+       
         <div class="deputy-card-details-container">
-          <% if @deputy.fronding <= 15 %>
-            <p><%= @deputy.first_name %> <%= @deputy.last_name %> a plutôt un profil <strong>Suiveur</strong> 
-            (plus de 85% de ses votes correspondent aux consignes de son parti)</p>
-          <% elsif @deputy.fronding > 15 %>
-            <p><%= @deputy.first_name %> <%= @deputy.last_name %> a plutôt un profil <strong>Frondeur</strong> 
-            (moins de <%= 100 - @deputy.fronding %>% de ses votes correspondent aux consignes de son parti)</p>
+          <% if @deputy.fronding == nil %>
+            <p>Nous ne pouvons pas savoir si <%= @deputy.first_name %> <%= @deputy.last_name %> est un profil Frondeur ou non</p>
+          <% elsif @deputy.fronding > 15%>
+            <p><%= @deputy.first_name %> <%= @deputy.last_name %> a un profil plutôt <strong>Frondeur</strong>: seulement
+            <%= 100 - @deputy.fronding %>% de ses votes respectent les consignes de son parti  </p>
           <% else %>
-           <p>Nous ne savons pas si <%= @deputy.first_name %> <%= @deputy.last_name %> respecte les consignes
-            de vote de son parti ou non</p>  
+            <p><%= @deputy.first_name %> <%= @deputy.last_name %> a un profil plutôt <strong>Suiveur</strong>:
+            <%= 100 - @deputy.fronding %>% de ses votes respectent les consignes de son parti  </p>
           <% end %>
           <a href="<%= @deputy.revenue %>" target="blank">Consulter sa déclaration de revenus</a>
         </div>
@@ -57,11 +57,11 @@
 
         <div class="law-card-interaction-card">
           <div class="interaction-like">
-            <%= link_to like_deputy_path(@deputy, position_id: position.id, like: true), remote: true do %>
-              <i class="far fa-thumbs-up active"></i>
+            <%= link_to like_deputy_path(@deputy, position_id: position.id, like: true) do %>
+              <i class="far fa-thumbs-up <%= @user.liked? position %>"></i>
             <% end %>
-            <%= link_to like_deputy_path(@deputy, position_id: position.id, like: false), remote: true do %>
-            <i class="far fa-thumbs-down"></i>
+            <%= link_to like_deputy_path(@deputy, position_id: position.id, like: false) do %>
+              <i class="far fa-thumbs-down <%= @user.disliked? position %>"></i>
             <% end %>
           </div>
 
