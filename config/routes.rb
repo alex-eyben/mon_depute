@@ -9,6 +9,9 @@ Rails.application.routes.draw do
     collection do
       get :results
     end
+    member do
+      get :like
+      get :follow
+    end
   end
-
 end
