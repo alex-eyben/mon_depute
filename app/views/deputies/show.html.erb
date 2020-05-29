@@ -18,6 +18,7 @@
         <!-- <div class="deputy-details-container">
           <p>Profil: Frondeur</p>
         </div> -->
+       
         <div class="deputy-card-details-container">
           <% if @deputy.fronding == nil %>
             <p>Nous ne pouvons pas savoir si <%= @deputy.first_name %> <%= @deputy.last_name %> est un profil Frondeur ou non</p>
@@ -56,11 +57,11 @@
 
         <div class="law-card-interaction-card">
           <div class="interaction-like">
-            <%= link_to like_deputy_path(@deputy, position_id: position.id, like: true), remote: true do %>
-              <i class="far fa-thumbs-up <%= @user.voted_up_on? position %>"></i>
+            <%= link_to like_deputy_path(@deputy, position_id: position.id, like: true) do %>
+              <i class="far fa-thumbs-up <%= @user.liked? position %>"></i>
             <% end %>
-            <%= link_to like_deputy_path(@deputy, position_id: position.id, like: false), remote: true do %>
-            <i class="far fa-thumbs-down <%= @user.voted_down_on? position %>"></i>
+            <%= link_to like_deputy_path(@deputy, position_id: position.id, like: false) do %>
+              <i class="far fa-thumbs-down <%= @user.disliked? position %>"></i>
             <% end %>
           </div>
 
