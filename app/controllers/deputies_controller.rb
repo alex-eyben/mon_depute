@@ -9,7 +9,11 @@ class DeputiesController < ApplicationController
     @position = Position.find(params[:position_id])
     @deputy = Deputy.find(params[:id])
     # @user.likes @position
-    @position.liked_by @user
+    if params[:like]
+      @position.liked_by @user
+    else
+      @position.disliked_by @user
+    end
     redirect_to deputy_path(@deputy)
   end
 

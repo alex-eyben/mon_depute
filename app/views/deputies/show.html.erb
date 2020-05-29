@@ -37,10 +37,12 @@
 
         <div class="law-card-interaction-card">
           <div class="interaction-like">
-            <%= link_to like_deputy_path(@deputy, position_id: position.id) do %>
+            <%= link_to like_deputy_path(@deputy, position_id: position.id, like: true), remote: true do %>
               <i class="far fa-thumbs-up"></i>
             <% end %>
+            <%= link_to like_deputy_path(@deputy, position_id: position.id, like: false), remote: true do %>
             <i class="far fa-thumbs-down"></i>
+            <% end %>
           </div>
 
         <button type="button" class="btn btn-primary width-grow" data-toggle="modal" data-target="#modal-<%= position.law.id %>">
