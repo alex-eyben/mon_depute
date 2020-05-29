@@ -154,8 +154,15 @@
   bottom: 30px;
 }
 
-.dashboard-container{
- 
+.deputy-card-dashboard {
+  display:flex;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 3px;
+  box-shadow:  4px 2px 27px #e4e4e4,
+  -1px 1px 10px #E4E4F6;
+  width: 40%;
+  text-align: center;
 }
 
 .modal p {
