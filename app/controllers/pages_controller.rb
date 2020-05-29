@@ -3,4 +3,9 @@ class PagesController < ApplicationController
 
   def home
   end
+
+  def dashboard
+    @deputies = [Deputy.first, Deputy.last]
+    @user = current_user
+  end
 end
