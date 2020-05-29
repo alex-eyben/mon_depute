@@ -50,10 +50,10 @@
         <div class="law-card-interaction-card">
           <div class="interaction-like">
             <%= link_to like_deputy_path(@deputy, position_id: position.id, like: true), remote: true do %>
-              <i class="far fa-thumbs-up active"></i>
+              <i class="far fa-thumbs-up <%= @user.voted_up_on? position %>"></i>
             <% end %>
             <%= link_to like_deputy_path(@deputy, position_id: position.id, like: false), remote: true do %>
-            <i class="far fa-thumbs-down"></i>
+            <i class="far fa-thumbs-down <%= @user.voted_down_on? position %>"></i>
             <% end %>
           </div>
 
