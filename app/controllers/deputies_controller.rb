@@ -1,3 +1,5 @@
+require 'open-uri'
+
 class DeputiesController < ApplicationController
   def show
     @deputy = Deputy.find(params[:id])
@@ -29,6 +31,12 @@ class DeputiesController < ApplicationController
     # get data from a geocoder search
     query = params[:query]
     result = Geocoder.search(query)
+    zip = result.first.data["address"]["postcode"]
+    url = "https://api-adresse.data.gouv.fr/search/?q=#{query}"
+    user_serialized = open(URI.escape(url)).read
+    user = JSON.parse(user_serialized)
+
+    # adresse_gouv =
 
     # get the circonscription number
     city_searched = result.first.data["address"]["city"]
