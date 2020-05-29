@@ -19,8 +19,16 @@
           <p>Profil: Frondeur</p>
         </div> -->
         <div class="deputy-card-details-container">
-          <p><%= @deputy.first_name %> <%= @deputy.last_name %> a plutôt un profil <strong>Frondeur</strong>
-          (plus de 30% de ses votes ne correspondent pas aux consignes de vote de son parti)</p>
+          <% if @deputy.fronding <= 15 %>
+            <p><%= @deputy.first_name %> <%= @deputy.last_name %> a plutôt un profil <strong>Suiveur</strong> 
+            (plus de 85% de ses votes correspondent aux consignes de son parti)</p>
+          <% elsif @deputy.fronding > 15 %>
+            <p><%= @deputy.first_name %> <%= @deputy.last_name %> a plutôt un profil <strong>Frondeur</strong> 
+            (moins de <%= 100 - @deputy.fronding %>% de ses votes correspondent aux consignes de son parti)</p>
+          <% else %>
+           <p>Nous ne savons pas si <%= @deputy.first_name %> <%= @deputy.last_name %> respecte les consignes
+            de vote de son parti ou non</p>  
+          <% end %>
           <a href="<%= @deputy.revenue %>" target="blank">Consulter sa déclaration de revenus</a>
         </div>
      </div>

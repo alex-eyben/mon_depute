@@ -23,8 +23,14 @@
 
 .deputy-card-avatar-container {
   display: flex;
+  align-items: center;
   img {
-    flex-grow: 1;
+    flex-shrink: 0;
+    height: 100px;
+    width: 100px;
+  }
+  h3 {
+    margin-top: 0.3rem;
   }
 }
 
@@ -145,4 +151,8 @@
 
 .modal p {
   font-size: 1rem;
+}
+
+.modal h4 {
+  text-align: center;
 }
