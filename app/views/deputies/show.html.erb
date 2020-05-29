@@ -1,37 +1,47 @@
 <div class="container-deputy">
   <div class="deputy-card">
-    <div class="avatar-container">
-      <img src="https://gal.img.pmdstatic.net/fit/http.3A.2F.2Fprd2-bone-image.2Es3-website-eu-west-1.2Eamazonaws.2Ecom.2Fgal.2Fvar.2Fgal.2Fstorage.2Fimages.2Fmedia.2Fmultiupload_du_29_avril_2014.2Fnicolascage.2F2915581-1-fre-FR.2Fnicolascage.2Ejpg/480x480/quality/80/nicolas-cage-qui-va-se-souvenir-de-telles-merdes.jpg" alt="" class="avatar-bordered">
-      <h3><%= @deputy.first_name %> <%= @deputy.last_name %></h3>
-    </div>
-    <h4><%= @deputy.party %></h4>
-    <div class="deputy-card-social-container">
-      <a href="https://www.facebook.com/<%= @deputy.facebook %>" target="blank"><i class="fab fa-facebook-f"></i></a>
-      <a href="https://twitter.com/<%= @deputy.twitter %>" target="blank"><i class="fab fa-twitter"></i></a>
-    </div>
-    <div class="deputy-details-container">
-      <p>38 ans</p>
-      <p><%= @deputy.job %></p>
-    </div>
-    <!-- <div class="deputy-details-container">
-      <p>Profil: Frondeur</p>
-    </div> -->
-    <div class="deputy-details-container">
-      <p>Email: <%= @deputy.email %></p>
-      <a href="<%= @deputy.website %>%">Site web</a>
-    </div>
-    <div class="deputy-card-details-container">
-      <a href="<%= @deputy.revenue %>" target="blank">Consulter sa déclaration de revenus</a>
-    </div>
-    <a href="#" class="button button-primary bottom">Suivre</a>
+     <div class="deputy-card-container">
+        <div class="deputy-card-avatar-container">
+          <img src="<%= @deputy.img %>" alt="" class="avatar-bordered">
+          <div class="deputy-card-avatar-container-details">
+            <h3><%= @deputy.first_name %> <%= @deputy.last_name %></h3>
+            <h4><%= @deputy.party %></h4>
+            <p> Département: <%= @deputy.department %></p>
+          </div>
+        </div>
+        <div class="deputy-card-social-container">
+          <a href="https://www.facebook.com/<%= @deputy.facebook %>" target="blank"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://twitter.com/<%= @deputy.twitter %>" target="blank"><i class="fab fa-twitter"></i></a>
+          <a href="mailto:<%= @deputy.email %>" target="blank"><i class="far fa-envelope"></i></a>
+          <a href="<%= @deputy.website %>" target="blank"><i class="fab fa-wordpress-simple"></i></a>
+        </div>
+        <!-- <div class="deputy-details-container">
+          <p>Profil: Frondeur</p>
+        </div> -->
+        <div class="deputy-card-details-container">
+          <p><%= @deputy.first_name %> <%= @deputy.last_name %> a plutôt un profil <strong>Frondeur</strong> 
+          (plus de 30% de ses votes ne correspondent pas aux consignes de vote de son parti)</p>
+          <a href="<%= @deputy.revenue %>" target="blank">Consulter sa déclaration de revenus</a>
+        </div>
+     </div>
+   <a href="#" class="button button-primary width-grow">Suivre</a>
   </div>
 
   <div class="laws">
     <% @positions.each do |position| %>
       <div class="law-card">
               <div class="law-card-details <%= position.deputy_position.downcase %>">
+                <ul class="categorie-container">
+                  <% position.law.tag_list.each do |tag|%>
+                    <li class="categorie-label"> <%= tag %> </li>
+                  <% end %>
+                </ul>
                 <h3><%= position.law.title %></h3>
-                <p><strong>Adopté le <%= position.law.last_status_update %></strong> : 350 votes pour, 248 votes contre, 57 abstentions</p>
+                <p><strong>Adoptée le <%= position.law.last_status_update %></strong> 
+                  - <%= position.law.positions.where(deputy_position: "Pour").size %> votes pour, 
+                  <%= position.law.positions.where(deputy_position: "Contre").size %> votes contre, 
+                  <%= position.law.positions.where(deputy_position: "Abstention").size %> abstentions
+                </p> <!-- : 350 votes pour, 248 votes contre, 57 abstentions</p> -->
                 <h4><%= position.deputy_position %></h4>
               </div>
               <div class="law-card-interaction-card">
@@ -40,7 +50,7 @@
                   <i class="far fa-thumbs-down"></i>
                 </div>
 
-                <button type="button" class="btn btn-primary width-grow" data-toggle="modal" data-target="#modal-<%= position.law.id %>">
+                <button type="button" class="button-primary-empty width-grow" data-toggle="modal" data-target="#modal-<%= position.law.id %>">
                   Details
                 </button>
 

@@ -1,27 +1,23 @@
 class GetFrondeurStatusJob < ApplicationJob
   queue_as :default
 
-  def perform(*args)
-    # Do something later
+  def perform(deputies)
+    "moyenne de fronde : #{deputies.map{|deputy| deputy = is_frondeur?(deputy)}.sum/deputies.size}%"
+    # is_frondeur?(deputy)
   end
-
-  # def is_frondeur?(deputy)
-  #   deputy.laws.each do |law_deputy_voted_on|
-  #     law_deputy_voted_on.deputies.where(party: deputy.party).each do |same_party_deputy_on_same_law|
-
-  #     end
-  #   end
-  # end
 
   def is_frondeur?(deputy)
-    counter = 0
-    deputy.votes.each do |deputy_vote|
-      deputy_vote.law.votes.each do |other_vote_on_same_law|
-        other_vote_on_same_law
-
+    return 0 if deputy.positions.empty?
+    total_number_of_same_party_deputies = Deputy.all.where(party: deputy.party).size
+    fronding_percentage_on_each_vote = deputy.positions.map do |position|
+      if position.deputy_position == "Pour"
+        (position.law.positions.where(deputy_position: "Contre").select{|position|position.deputy.party == deputy.party}.size.fdiv(total_number_of_same_party_deputies)*100).round(0)
+      elsif position.deputy_position == "Contre"
+        (position.law.positions.where(deputy_position: "Pour").select{|position|position.deputy.party == deputy.party}.size.fdiv(total_number_of_same_party_deputies)*100).round(0)
+      end
     end
+    deputy.update(fronding: (fronding_percentage_on_each_vote.compact.sum / fronding_percentage_on_each_vote.compact.size))
+    deputy.save
+    deputy.fronding
   end
 end
-
-
-#.where(deputy_position = deputy_vote.deputy_position)

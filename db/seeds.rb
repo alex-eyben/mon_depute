@@ -64,6 +64,8 @@ def creating_deputies(full_or_light)
 end
 
 def creating_laws
+  @laws = []
+
   puts "Creating laws..."
   avia = { title: "Loi Avia visant à lutter contre les contenus haineux sur internet",
               content: "La proposition de loi oblige les opérateurs de plateforme en ligne et
@@ -74,21 +76,31 @@ def creating_laws
               réduit à une heure.",
               ressource_link: "https://www.vie-publique.fr/loi/268070-loi-avia-lutte-contre-les-contenus-haineux-sur-internet",
               current_status: "Adoptée",
-              last_status_update: Date.today,
+              last_status_update: Date.new(2020,5,13),
               start_date:  Date.today,
               scrutin_id: 2039
-
               }
+  aviaLaw = Law.create!(avia)
+  aviaLaw.tag_list.add("Internet", "Liberté d'expression")
+  aviaLaw.save
+  @laws << aviaLaw
+  
   bioethique =  { title: "Projet de loi relatif à la bioéthique",
                   content: "Le projet de loi élargit l'accès à la procréation médicalement assistée
                   (PMA) aux couples de femme et aux femmes célibataires. Actuellement,
                   la PMA est uniquement accessible aux couples hétérosexuels sur indication médicale. ",
                   ressource_link: "https://www.vie-publique.fr/loi/268659-projet-de-loi-bioethique-pma",
                   current_status: "Adoptée",
-                  last_status_update:  Date.today,
+                  last_status_update:  Date.new(2019,7,24),
                   start_date:  Date.today,
                   scrutin_id: 2146
                 }
+
+  bioethiqueLaw = Law.create!(bioethique)
+  bioethiqueLaw.tag_list.add("PMA", "Santé", "Discrimination")
+  bioethiqueLaw.save
+  @laws << bioethiqueLaw
+  
   violences =  { title: "Loi du 28 décembre 2019 visant à agir contre les violences au sein de la famille",
                   content: "Le texte vise à faire reculer les violences faites aux femmes et notamment les féminicides.
                   La loi fixe à six jours maximum le délai de délivrance par le juge aux affaires familiales d’une
@@ -101,20 +113,33 @@ def creating_laws
                   interdiction pour le conjoint violent de porter une arme.'",
                   ressource_link: "https://www.vie-publique.fr/loi/271281-proposition-de-loi-action-contre-les-violences-au-sein-de-la-famille",
                   current_status: "Adoptée",
-                  last_status_update:  Date.today,
+                  last_status_update:  Date.new(2019,12,18),
                   start_date:  Date.today,
                   scrutin_id: 2147
                 }
+
+  violencesLaw = Law.create!(violences)
+  violencesLaw.tag_list.add("Violences faites aux femmes", "Droit Pénal")
+  violencesLaw.save
+  @laws << violencesLaw
+
+
   urgence =  { title: "Etat d'urgence : loi renforçant la sécurité intérieure et la lutte contre le terrorisme",
                   content: "La loi vise à doter l'État de nouveaux instruments de lutte contre le terrorisme
                   afin de pouvoir mettre fin au régime dérogatoire de l'état d'urgence.
                   Pour cela, la loi intègre dans le droit commun des dispositions jusque-là réservées à l'état d'urgence.",
                   ressource_link: "https://www.vie-publique.fr/loi/20775-loi-securite-interieure-et-la-lutte-contre-le-terrorisme",
                   current_status: "Adoptée",
-                  last_status_update:  Date.today,
+                  last_status_update:  Date.new(2017,10,18),
                   start_date:  Date.today,
                   scrutin_id: 138
                 }
+
+  urgenceLaw = Law.create!(urgence)
+  urgenceLaw.tag_list.add("Sécurité", "Terrorisme", "Libertés individuelles")
+  urgenceLaw.save
+  @laws << urgenceLaw
+
   climat =  { title: "Projet de loi relatif à l'énergie et au climat",
                   content: "La loi énergie et climat du 8 novembre 2019 vise à répondre à l’urgence
                   écologique et climatique. Elle inscrit cette urgence dans le code de l’énergie
@@ -122,10 +147,16 @@ def creating_laws
                   de gaz à effet de serre par six au moins d'ici cette date.",
                   ressource_link: "https://www.vie-publique.fr/loi/23814-loi-energie-et-climat-du-8-novembre-2019",
                   current_status: "Adoptée",
-                  last_status_update:  Date.today,
+                  last_status_update:  Date.new(2019,9,26),
                   start_date:  Date.today,
                   scrutin_id: 2065
                 }
+
+  climatLaw = Law.create!(climat)
+  climatLaw.tag_list.add("Energie", "Climat", "Ecologie")
+  climatLaw.save
+  @laws << climatLaw
+
   peche =  { title: "Interdiction de la pêche électrique",
                   content: "Interdite dans de nombreux pays, la pêche électrique consiste à
                   capturer des poissons à l'aide d'un courant électrique. Des décharges sont envoyées
@@ -138,19 +169,16 @@ def creating_laws
                   halieutiques de la zone se raréfient, en particulier les stocks de soles et de plies.",
                   ressource_link: "https://www.vie-publique.fr/en-bref/19954-union-europeenne-protestations-contre-la-peche-electrique",
                   current_status: "Adoptée",
-                  last_status_update:  Date.today,
+                  last_status_update:  Date.new(2018,1,16),
                   start_date:  Date.today,
                   scrutin_id: 389
                 }
 
-  @laws = []
-  [ avia, bioethique, violences, urgence, climat, peche ].each do |attributes|
-    law = Law.create!(attributes)
-    puts "Created #{law.title}"
-    law.tag_list.add("Droit Pénal", "Sécurité", "Terrorisme")
-    law.save
-    @laws << law
-  end
+  pecheLaw = Law.create!(peche)
+  pecheLaw.tag_list.add("Droit des animaux", "Ecologie")
+  pecheLaw.save
+  @laws << pecheLaw
+  
   puts "laws done"
 end
 
@@ -223,7 +251,7 @@ def seed(full_or_light)
   creating_deputies(full_or_light)
   creating_laws
   creating_votes(full_or_light)
-  creating_locations("light")
+  creating_locations("full")
   puts "Finished!"
 end
 
