@@ -1,7 +1,7 @@
 class DeputiesController < ApplicationController
   def show
     @deputy = Deputy.find(params[:id])
-    @positions = @deputy.positions
+    @positions = @deputy.positions.order(:law_id)
     @user = current_user
   end
 
@@ -10,10 +10,10 @@ class DeputiesController < ApplicationController
     @position = Position.find(params[:position_id])
     @deputy = Deputy.find(params[:id])
     # @user.likes @position
-    if params[:like]
-      @position.liked_by @user
+    if params[:like] == "true"
+      @user.likes @position
     else
-      @position.disliked_by @user
+      @user.dislikes @position
     end
     redirect_to deputy_path(@deputy)
   end
