@@ -1,4 +1,12 @@
 // Specific CSS for your home-page
 .home-container {
-  height: calc(100vh - 40px - 76px);
+  height: calc(100vh);
+  background-size: cover;
+  background-position: bottom;
+}
+
+.home-container h1,
+.home-container h2{
+  color: white;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
 }
