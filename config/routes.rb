@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     end
     member do
       get :like
+      get :follow
     end
   end
 end
