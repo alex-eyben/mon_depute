@@ -35,7 +35,7 @@ class DeputiesController < ApplicationController
     url = "https://api-adresse.data.gouv.fr/search/?q=#{query}"
     user_serialized = open(URI.escape(url)).read
     user = JSON.parse(user_serialized)
-
+    citycode = user["features"][0]["properties"]["citycode"]
     # adresse_gouv =
 
     # get the circonscription number
