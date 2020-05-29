@@ -76,7 +76,7 @@ def creating_laws
               réduit à une heure.",
               ressource_link: "https://www.vie-publique.fr/loi/268070-loi-avia-lutte-contre-les-contenus-haineux-sur-internet",
               current_status: "Adoptée",
-              last_status_update: Date.today,
+              last_status_update: Date.new(2020,5,13),
               start_date:  Date.today,
               scrutin_id: 2039
               }
@@ -91,7 +91,7 @@ def creating_laws
                   la PMA est uniquement accessible aux couples hétérosexuels sur indication médicale. ",
                   ressource_link: "https://www.vie-publique.fr/loi/268659-projet-de-loi-bioethique-pma",
                   current_status: "Adoptée",
-                  last_status_update:  Date.today,
+                  last_status_update:  Date.new(2019,7,24),
                   start_date:  Date.today,
                   scrutin_id: 2146
                 }
@@ -113,7 +113,7 @@ def creating_laws
                   interdiction pour le conjoint violent de porter une arme.'",
                   ressource_link: "https://www.vie-publique.fr/loi/271281-proposition-de-loi-action-contre-les-violences-au-sein-de-la-famille",
                   current_status: "Adoptée",
-                  last_status_update:  Date.today,
+                  last_status_update:  Date.new(2019,12,18),
                   start_date:  Date.today,
                   scrutin_id: 2147
                 }
@@ -130,7 +130,7 @@ def creating_laws
                   Pour cela, la loi intègre dans le droit commun des dispositions jusque-là réservées à l'état d'urgence.",
                   ressource_link: "https://www.vie-publique.fr/loi/20775-loi-securite-interieure-et-la-lutte-contre-le-terrorisme",
                   current_status: "Adoptée",
-                  last_status_update:  Date.today,
+                  last_status_update:  Date.new(2017,10,18),
                   start_date:  Date.today,
                   scrutin_id: 138
                 }
@@ -147,7 +147,7 @@ def creating_laws
                   de gaz à effet de serre par six au moins d'ici cette date.",
                   ressource_link: "https://www.vie-publique.fr/loi/23814-loi-energie-et-climat-du-8-novembre-2019",
                   current_status: "Adoptée",
-                  last_status_update:  Date.today,
+                  last_status_update:  Date.new(2019,9,26),
                   start_date:  Date.today,
                   scrutin_id: 2065
                 }
@@ -169,7 +169,7 @@ def creating_laws
                   halieutiques de la zone se raréfient, en particulier les stocks de soles et de plies.",
                   ressource_link: "https://www.vie-publique.fr/en-bref/19954-union-europeenne-protestations-contre-la-peche-electrique",
                   current_status: "Adoptée",
-                  last_status_update:  Date.today,
+                  last_status_update:  Date.new(2018,1,16),
                   start_date:  Date.today,
                   scrutin_id: 389
                 }
