@@ -26,3 +26,6 @@ p {
   color: $gray;
   font-weight: 300;
 }
+.content-wrapper {
+  min-height: calc(100vh - 77px - 41px);
+}
