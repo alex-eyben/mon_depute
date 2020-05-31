@@ -40,7 +40,7 @@
   <div class="laws">
     <% @positions.each do |position| %>
       <div class="law-card">
-        <div class="law-card-details <%= position.deputy_position.downcase %>">
+        <div class="law-card-details">
           <ul class="categorie-container">
             <% position.law.tag_list.each do |tag|%>
               <li class="categorie-label"> <%= tag %> </li>
@@ -57,8 +57,8 @@
           </a>
         </div>
 
-        <div class="law-card-interaction-card">
-          <h4 id="<%= position.deputy_position.downcase %>"><%= position.deputy_position %></h4>
+        <div class="law-card-interaction-card <%= position.deputy_position.downcase %>">
+          <h4><%= position.deputy_position %></h4>
           <div class="interaction-like">
             <%= link_to like_deputy_path(@deputy, position_id: position.id, like: true) do %>
               <i class="far fa-thumbs-up <%= @user.liked? position %>"></i>
