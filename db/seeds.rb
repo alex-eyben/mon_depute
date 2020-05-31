@@ -1,4 +1,28 @@
 require "csv"
+# require "nokogiri"
+# require "open-uri"
+
+# html_file = open("https://www.vie-publique.fr/loi/270993-loi-du-24-decembre-2019-de-financement-de-la-securite-sociale-pour-2020")
+# document = Nokogiri::HTML(html_file)
+
+# # Get title
+# document.search("h1 span").each do |element|
+#   title = element.text.strip
+#   puts title
+# end
+
+# # get tags
+# tags = []
+# document.search(".tagsBox a").each do |element|
+#   tag = element.text.strip
+#   tags << tag
+# end
+
+# # get description
+# document.search(".chapo span").each do |element|
+#   description = element.text.strip
+#   puts description
+# end
 
 def cleaning
   puts "Cleaning database..."
