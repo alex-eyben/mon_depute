@@ -5,15 +5,16 @@
   </div>
   <div class="d-flex justify-content-center dashboard-container ">
     <% @deputies.each do |deputy| %>
-      <div class="deputy-card flex-column justify-content-between d-flex col-lg-2 col-md-6 col-sm-11 mx-3 px-0">
-        <div class="avatar-container pt-4">
-          <img src="<%= deputy.img %>" alt="" class="avatar-bordered">
-          <h3><%= deputy.first_name %> <%= deputy.last_name %></h3>
+      <%= link_to deputy_path(deputy) do %>  
+        <div class="deputy-card flex-column justify-content-between d-flex col-lg-2 col-md-6 col-sm-11 mx-3 px-0">
+          <div class="avatar-container pt-4">
+            <img src="<%= deputy.img %>" alt="" class="avatar-bordered">
+            <h3><%= deputy.first_name %> <%= deputy.last_name %></h3>
+          </div>
+          <%= link_to unfollow_deputy_path(deputy), class: 'button button-danger width-grow' do %>
+            Ne plus suivre
+          <% end %>
         </div>
-        
-        <%= link_to unfollow_deputy_path(deputy), class: 'button button-danger width-grow' do %>
-          Ne plus suivre
-        <% end %>
-      </div>
+      <% end %>
     <% end %>
   </div>
