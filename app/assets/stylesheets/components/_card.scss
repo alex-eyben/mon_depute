@@ -94,10 +94,18 @@
     font-size: 1.3rem;
   }
   h4 {
-    font-size: 1.1rem;
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
   }
   p {
     font-size: 0.8rem;
+    margin-bottom: 0.2rem;
+  }
+  a {
+    font-size: 0.8rem;
+    color: $gray;
+    opacity: 0.8;
+    text-decoration: underline;
   }
 }
 
@@ -117,18 +125,14 @@
   color: $gray;
 }
 
-.law-card p {
-  margin-bottom: 0.5rem;
-}
-
-.law-card h4 {
-  margin-bottom: 0.5rem;
-}
-
 .law-card-interaction-card {
   text-align: center;
   margin-left: 30px;
   width: 15%;
+  justify-content: space-between;
+  display:flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .interaction-like {
