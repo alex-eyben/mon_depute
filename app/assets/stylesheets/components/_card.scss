@@ -84,8 +84,8 @@
   justify-content: space-between;
   align-items: center;
   border-radius: 3px;
-  box-shadow:  4px 4px 10px #e4e4e4,
-             -4px -4px 10px #ffffff;
+  box-shadow:  2px 2px 10px #e4e4e4,
+             -2px -2px 10px #e4e4e4;
   padding: 15px 30px;
   margin-bottom: 30px;
   margin-left: 30px;
@@ -113,15 +113,15 @@
   width: 80%;
 }
 
-.law-card-details.contre h4 {
+#contre {
   color: $red;
 }
 
-.law-card-details.pour h4 {
+#pour h4 {
   color: $light-green;
 }
 
-.law-card-details.abstention h4 {
+#abstention h4 {
   color: $gray;
 }
 
@@ -142,7 +142,7 @@
 
 .interaction-like .far {
   font-size: 2rem;
-  margin-bottom: 30px;
+  margin-top: 20px;
   font-weight: 100;
   opacity: 0.9;
 }
@@ -158,8 +158,15 @@
   bottom: 30px;
 }
 
-.dashboard-container{
- 
+.deputy-card-dashboard {
+  display:flex;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 3px;
+  box-shadow:  4px 2px 27px #e4e4e4,
+  -1px 1px 10px #E4E4F6;
+  width: 40%;
+  text-align: center;
 }
 
 .modal p {
