@@ -32,9 +32,17 @@
           <a href="<%= @deputy.revenue %>" target="blank">Consulter sa déclaration de revenus</a>
         </div>
      </div>
-    <%= link_to follow_deputy_path(@deputy), class: 'button button-primary width-grow' do %>
-    Suivre
+
+    <% if @user.voted_for? @deputy%>
+      <%= link_to unfollow_deputy_path(@deputy), class: 'button button-danger width-grow' do %>
+        Ne plus suivre
+      <% end %>
+    <% else %>
+      <%= link_to follow_deputy_path(@deputy), class: 'button button-primary width-grow' do %>
+        Suivre
+      <% end %>
     <% end %>
+
   </div>
 
   <div class="laws">

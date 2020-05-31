@@ -11,7 +11,9 @@
           <h3><%= deputy.first_name %> <%= deputy.last_name %></h3>
         </div>
         
-        <a href="#" class="button button-primary width-grow">Ne plus suivre</a>
+        <%= link_to unfollow_deputy_path(deputy), class: 'button button-danger width-grow' do %>
+          Ne plus suivre
+        <% end %>
       </div>
     <% end %>
   </div>
