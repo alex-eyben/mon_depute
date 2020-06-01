@@ -69,7 +69,9 @@ class CreateLawsJob < ApplicationJob
     tags = []
     nokogiriDocument(link).search(".tagsBox a").each do |element|
       tag = element.text.strip
-      tags << tag
+      if (tag != "Justice - Droits fondamentaux" && tag != "Loi")
+        tags << tag
+      end
     end
     return tags
   end
