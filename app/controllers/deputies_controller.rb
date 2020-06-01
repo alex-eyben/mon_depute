@@ -9,10 +9,25 @@ class DeputiesController < ApplicationController
     @tag = params[:tag]
     if @tag
       @positions = @deputy.positions.select { |position| position.law.tag_list.include? params[:tag] }
+      @participationRate = getParticipationRateFiltered(@deputy, @tag)
     else
       @positions = @deputy.positions.order(:law_id)
+      @participationRate = getParticipationRate(@deputy)
     end
     @user = current_user
+  end
+
+  def getParticipationRate(deputy)
+    positionsCount = deputy.positions.count
+    absentCount = deputy.positions.select { |position| position.votant == false }
+    (1 - (absentCount/positionsCount)) * 100
+  end
+
+  def getParticipationRateFiltered(deputy, tag)
+    positions = deputy.positions.select { |position| position.law.tag_list.include? tag }
+    positionsCount = positions.count
+    absentCount = positions.select { |position| position.votant == false }
+    (1 - (absentCount/positionsCount)) * 100
   end
 
   def like
