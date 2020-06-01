@@ -51,6 +51,7 @@ class ImportPositionsJob < ApplicationJob
         first_position = key
       end
     end
+    first_position
   end
 
   def get_groupes(data)
