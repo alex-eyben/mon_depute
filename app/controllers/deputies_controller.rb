@@ -6,7 +6,12 @@ class DeputiesController < ApplicationController
 
   def show
     @deputy = Deputy.find(params[:id])
-    @positions = @deputy.positions.order(:law_id)
+
+    if params[:tag]
+      @positions = @deputy.positions.select { |position| position.law.tag_list.include? params[:tag] }
+    else
+      @positions = @deputy.positions.order(:law_id)
+    end
     @user = current_user
   end
 
