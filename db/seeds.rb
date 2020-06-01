@@ -1,4 +1,4 @@
-require "csv"
+# require "csv"
 
 def cleaning
   puts "Cleaning database..."
@@ -106,7 +106,7 @@ def creating_laws
   violencesLaw.tag_list.add("Violences faites aux femmes", "Droit Pénal")
   violencesLaw.save
   @laws << violencesLaw
-  
+
   climat =  { title: "Projet de loi relatif à l'énergie et au climat",
                   content: "La loi énergie et climat du 8 novembre 2019 vise à répondre à l’urgence
                   écologique et climatique. Elle inscrit cette urgence dans le code de l’énergie
@@ -177,7 +177,7 @@ def creating_laws
   urgenceLaw.tag_list.add("Sécurité", "Terrorisme", "Libertés individuelles")
   urgenceLaw.save
   @laws << urgenceLaw
-  
+
   puts "laws done"
 end
 
@@ -205,42 +205,42 @@ def creating_votes(full_or_light)
   end
 end
 
-def creating_locations_light
-  puts "Creating locations light..."
+# def creating_locations_light
+#   puts "Creating locations light..."
 
-  abergement = Location.create!(department: 1, commune: "L'Abergement-de-Varey", circonscription: 420)
-  portes = Location.create!(department: 30, commune: "Portes", circonscription: 420)
-  nouzilly = Location.create!(department: 37, commune: "Nouzilly", circonscription: 182)
-  lille = Location.create!(department: 59, commune: "Lille", circonscription: 92)
-  puts "locations done"
-end
+#   abergement = Location.create!(department: 1, commune: "L'Abergement-de-Varey", circonscription: 420)
+#   portes = Location.create!(department: 30, commune: "Portes", circonscription: 420)
+#   nouzilly = Location.create!(department: 37, commune: "Nouzilly", circonscription: 182)
+#   lille = Location.create!(department: 59, commune: "Lille", circonscription: 92)
+#   puts "locations done"
+# end
 
-def creating_locations_full
-  # Location from CSV, uncomment to create 37k locations
-  puts "Creating locations full..."
-  print "loading"
-  file_path = Rails.root.join("db/csv", "locations.csv")
-  options = { col_sep: ";", headers: :first_row }
-  CSV.foreach(file_path, options).with_index do |row, i|
-    department_code = row[1].to_i
-    commune = row[6]
-    circonscription = row[8].to_i
-    Location.create!(department: department_code, commune: commune, circonscription: circonscription)
-    print "\r#{100*i/37500}%     " # display a percentage on the CLI
-  end
-  puts " ===> \\o/"
-  puts "locations done"
-end
+# def creating_locations_full
+#   # Location from CSV, uncomment to create 37k locations
+#   puts "Creating locations full..."
+#   print "loading"
+#   file_path = Rails.root.join("db/csv", "locations.csv")
+#   options = { col_sep: ";", headers: :first_row }
+#   CSV.foreach(file_path, options).with_index do |row, i|
+#     department_code = row[1].to_i
+#     commune = row[6]
+#     circonscription = row[8].to_i
+#     Location.create!(department: department_code, commune: commune, circonscription: circonscription)
+#     print "\r#{100*i/37500}%     " # display a percentage on the CLI
+#   end
+#   puts " ===> \\o/"
+#   puts "locations done"
+# end
 
-def creating_locations(full_or_light)
-  if full_or_light == "light"
-    creating_locations_light
-  elsif full_or_light == "full"
-    creating_locations_full
-  else
-    puts "==> Wrong argument!! Choose 'full' or 'light' ! No location created"
-  end
-end
+# def creating_locations(full_or_light)
+#   if full_or_light == "light"
+#     creating_locations_light
+#   elsif full_or_light == "full"
+#     creating_locations_full
+#   else
+#     puts "==> Wrong argument!! Choose 'full' or 'light' ! No location created"
+#   end
+# end
 
 def seed(full_or_light)
   puts "Let's go!"
@@ -250,7 +250,7 @@ def seed(full_or_light)
   creating_deputies(full_or_light)
   creating_laws
   creating_votes(full_or_light)
-  creating_locations("full")
+  # creating_locations("full")
   puts "Finished!"
 end
 
