@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_29_091041) do
+ActiveRecord::Schema.define(version: 2020_06_01_115052) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,12 @@ ActiveRecord::Schema.define(version: 2020_05_29_091041) do
     t.integer "cached_weighted_score", default: 0
     t.integer "cached_weighted_total", default: 0
     t.float "cached_weighted_average", default: 0.0
+    t.date "date"
+    t.string "maj_position"
+    t.string "vote_position_cause"
+    t.string "deputy_group_position"
+    t.string "majority"
+    t.boolean "votant"
     t.index ["deputy_id"], name: "index_positions_on_deputy_id"
     t.index ["law_id"], name: "index_positions_on_law_id"
   end
