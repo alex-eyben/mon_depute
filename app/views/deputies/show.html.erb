@@ -40,7 +40,7 @@
   <div class="laws">
     <% @positions.each do |position| %>
       <div class="law-card">
-        <div class="law-card-details <%= position.deputy_position.downcase %>">
+        <div class="law-card-details">
           <ul class="categorie-container">
             <% position.law.tag_list.each do |tag|%>
               <li class="categorie-label"> <%= tag %> </li>
@@ -51,11 +51,14 @@
             - <%= position.law.positions.where(deputy_position: "Pour").size %> votes pour,
             <%= position.law.positions.where(deputy_position: "Contre").size %> votes contre,
             <%= position.law.positions.where(deputy_position: "Abstention").size %> abstentions
-          </p> <!-- : 350 votes pour, 248 votes contre, 57 abstentions</p> -->
-          <h4><%= position.deputy_position %></h4>
+          </p>
+          <a href="" data-toggle="modal" data-target="#modal-<%= position.law.id %>">
+            Plus d'informations
+          </a>
         </div>
 
-        <div class="law-card-interaction-card">
+        <div class="law-card-interaction-card <%= position.deputy_position.downcase %>">
+          <h4><%= position.deputy_position %></h4>
           <div class="interaction-like">
             <%= link_to like_deputy_path(@deputy, position_id: position.id, like: true) do %>
               <i class="far fa-thumbs-up <%= @user.liked? position %>"></i>
@@ -64,10 +67,8 @@
               <i class="far fa-thumbs-down <%= @user.disliked? position %>"></i>
             <% end %>
           </div>
+        
 
-        <button type="button" class="btn btn-primary width-grow" data-toggle="modal" data-target="#modal-<%= position.law.id %>">
-          Details
-        </button>
 
         <!-- Modal -->
         <div class="modal fade" id="modal-<%= position.law.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
