@@ -55,15 +55,14 @@
   <div class="laws">
     <div class="laws-top">
       <% if @tag %>
-        
-        <h3><%= @deputy.first_name %> <%= @deputy.last_name %> a participé à 
+        <h3><%= @deputy.first_name %> <%= @deputy.last_name %> était présent à 
           <%= @participationRate %>% des votes que nous avons identifiés sur le 
           sujet 
         <%= link_to deputy_path(@deputy) do %>
           <span class="categorie-label-top"><%= @tag %> <i class="fas fa-times"></i></span></h3>
         <% end %>
       <% else %>
-        <h3><%= @deputy.first_name %> <%= @deputy.last_name %> a participé à 
+        <h3><%= @deputy.first_name %> <%= @deputy.last_name %> était présent à 
           <%= @participationRate %>% des votes que nous avons identifiés</h3>
       <% end %>
     </div>
@@ -82,9 +81,9 @@
           </ul>
           <h3><%= position.law.title %></h3>
           <p><strong>Adoptée le <%= position.law.last_status_update %></strong>
-            - <%= position.law.positions.where(deputy_position: "Pour").size %> votes pour,
-            <%= position.law.positions.where(deputy_position: "Contre").size %> votes contre,
-            <%= position.law.positions.where(deputy_position: "Abstention").size %> abstentions
+            - <%= position.law.positions.where(deputy_position: "pour").size %> votes pour,
+            <%= position.law.positions.where(deputy_position: "contre").size %> votes contre,
+            <%= position.law.positions.where(deputy_position: "abstention").size %> abstentions
           </p>
           <a href="" data-toggle="modal" data-target="#modal-<%= position.law.id %>">
             Plus d'informations
