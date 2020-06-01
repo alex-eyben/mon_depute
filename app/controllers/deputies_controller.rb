@@ -19,14 +19,16 @@ class DeputiesController < ApplicationController
 
   def getParticipationRate(deputy)
     positionsCount = deputy.positions.count
-    absentCount = deputy.positions.select { |position| position.votant == false }
+    absentVotes = deputy.positions.select { |position| position.votant == false }
+    absentCount = absentVotes.count
     (1 - (absentCount/positionsCount)) * 100
   end
 
   def getParticipationRateFiltered(deputy, tag)
     positions = deputy.positions.select { |position| position.law.tag_list.include? tag }
     positionsCount = positions.count
-    absentCount = positions.select { |position| position.votant == false }
+    absentVotes = positions.select { |position| position.votant == false }
+    absentCount = absentVotes.count
     (1 - (absentCount/positionsCount)) * 100
   end
 

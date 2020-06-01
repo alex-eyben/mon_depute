@@ -62,6 +62,9 @@
        <li class="categorie-label-top">Tous les sujets</li>
     <% end %>
     <% @positions.each do |position| %>
+      <% if position.deputy_position == nil %>
+        <% position.deputy_position = "Absent" %>
+      <% end %>
       <div class="law-card">
         <div class="law-card-details">
           <ul class="categorie-container">
@@ -84,7 +87,7 @@
 
         <% if user_signed_in? %>
           <div class="law-card-interaction-card <%= position.deputy_position.downcase %>">
-            <h4><%= position.deputy_position %></h4>
+            <h4><%= position.deputy_position.capitalize %></h4>
             <div class="interaction-like">
               <%= link_to like_deputy_path(@deputy, position_id: position.id, like: true) do %>
                 <i class="far fa-thumbs-up <%= @user.liked? position %>"></i>
@@ -95,7 +98,7 @@
             </div>
         <% else %>
           <div class="law-card-interaction-card <%= position.deputy_position.downcase %>">
-            <h4><%= position.deputy_position %></h4>
+            <h4><%= position.deputy_position.capitalize %></h4>
             <div class="interaction-like">
               <%= link_to like_deputy_path(@deputy, position_id: position.id, like: true) do %>
                 <i class="far fa-thumbs-up"></i>
@@ -105,10 +108,7 @@
               <% end %>
             </div>
         <% end %>
-        
-        
-
-
+      
         <!-- Modal -->
         <div class="modal fade" id="modal-<%= position.law.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
