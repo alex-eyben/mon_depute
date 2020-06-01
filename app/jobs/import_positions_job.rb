@@ -4,34 +4,33 @@ require 'open-uri'
 class ImportPositionsJob < ApplicationJob
   queue_as :default
 
-  def perform(quantity = 1000, scrutin_id_array = [2039]) #"2039", "138", "2065"
+  def perform(quantity = 1000, scrutin_id_array = [2039, 2065, 138]) #"2039", "138", "2065"
     @url = "http://data.assemblee-nationale.fr/static/openData/repository/15/loi/scrutins/Scrutins_XV.json.zip"
-    # parse_json(@url, quantity, scrutin_id_array)
     file = open(@url)
     attr = {file: file, quantity: quantity, scrutins: scrutin_id_array}
     create_positions(attr)
   end
 
   def create_positions(attr)
-    display_scrutin(attr)
-  end
-
-  def display_scrutin(attr)
     # attr[scrutins][0]
     Zip::File.open(attr[:file]) do |zip_file|
+      zip_file_size = zip_file.size
       zip_file.first(attr[:quantity]).each_with_index do |entry, i|
         data = JSON.parse(entry.get_input_stream.read)
         current_scrutin = get_scrutin_num(data)
         if attr[:scrutins].map{|scrutin_id|scrutin_id = scrutin_id.to_s}.include?(current_scrutin)
-          puts JSON.pretty_generate(data)
-          puts get_scrutin_date(data)
+          # puts JSON.pretty_generate(data)
+          # puts get_scrutin_date(data)
           @scrutin_maj_position = get_scrutin_maj_position(data)
           groupes_array = get_groupes(data)
-          puts JSON.pretty_generate(groupes_array)
-          puts create_deputies_positions(groupes_array, current_scrutin)
+          # puts JSON.pretty_generate(groupes_array)
+          create_deputies_positions(groupes_array, current_scrutin)
           set_absent_to_others(current_scrutin)
         end
+        print "\r#{100*(i+1)/(zip_file_size > attr[:quantity] ? attr[:quantity] : zip_file_size)}%     "
       end
+      puts " =========> Done! :)"
+      "\o/"
     end
   end
 
@@ -61,13 +60,8 @@ class ImportPositionsJob < ApplicationJob
   def create_deputies_positions(groupes_array, current_scrutin)
     groupes_array.each do |groupe|
       groupe['vote']['decompteNominatif'].each_key do |key|
-        puts "coucou"
-        # puts key
         unless groupe['vote']['decompteNominatif'][key].nil?
-          puts "pas nil"
-          puts key
           [groupe['vote']['decompteNominatif'][key]['votant']].flatten.each do |votant|
-            puts votant
             vote_position_cause = votant['causePositionVote'] if key == "nonVotants"
             deputy_group_position = groupe["vote"]["positionMajoritaire"]
             Position.create!( deputy_position: key[0..-2],
@@ -80,8 +74,6 @@ class ImportPositionsJob < ApplicationJob
                             ) unless Deputy.where(uid: votant['acteurRef']).empty?
             puts "position for #{Position.last.deputy.last_name} / #{Position.last.law.title} created"
           end
-          # else
-          #   position = Position.create!(deputy_position: key[0..-2], deputy: Deputy.where(uid: key['votant']['acteurRef']).take, law: Law.where(scrutin_id: current_scrutin).take )
         end
       end
     end
