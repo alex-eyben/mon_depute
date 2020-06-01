@@ -10,6 +10,21 @@
   font-size: 0.8rem;
 }
 
+.categorie-label-top {
+  padding: 5px 10px;
+  color:white;
+  background-color: $gray;
+  opacity: 0.9;
+  margin-right: 5px;
+  margin-top: 5px;
+  display: inline-block;
+  align-items: center;
+  border-radius: 2px;
+  font-size: 0.8rem;
+  margin-left: 30px;
+  margin-bottom: 10px;
+}
+
 .categorie-container {
   list-style: none;
   padding: 0;

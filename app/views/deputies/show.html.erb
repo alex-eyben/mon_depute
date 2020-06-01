@@ -53,6 +53,13 @@
   </div>
 
   <div class="laws">
+    <% if @tag %>
+      <%= link_to deputy_path(@deputy) do %>
+       <li class="categorie-label-top"><%= @tag %> <i class="fas fa-times"></i></li>
+      <% end %>
+    <% else %>
+       <li class="categorie-label-top">Tous les sujets</li>
+    <% end %>
     <% @positions.each do |position| %>
       <div class="law-card">
         <div class="law-card-details">
