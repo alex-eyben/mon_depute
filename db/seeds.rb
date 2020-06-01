@@ -68,25 +68,25 @@ def creating_laws
   puts "laws done"
 end
 
-def creating_votes_light
-  puts "Creating votes..."
+def creating_positions_light
+  puts "Creating positions..."
 
   contre = Position.create!(deputy_position: "Contre", deputy: @deputies.first, law: @laws.sample )
   pour = Position.create!(deputy_position: "Pour", deputy: @deputies.first, law: @laws.sample )
   abstenu = Position.create!(deputy_position: "Abstenu", deputy: @deputies.first, law: @laws.sample )
 end
 
-def creating_votes_full
-  puts "Creating votes..."
-  ImportVotesJob.perform_now(10000,Law.all.map(&:scrutin_id))
-  puts "votes done"
+def creating_positions_full
+  puts "Creating positions..."
+  ImportPositionsJob.perform_now(10000,Law.all.map(&:scrutin_id))
+  puts "positions done"
 end
 
-def creating_votes(full_or_light)
+def creating_positions(full_or_light)
   if full_or_light == "light"
-    creating_votes_light
+    creating_positions_light
   elsif full_or_light == "full"
-    creating_votes_full
+    creating_positions_full
   else
     puts "==> Wrong argument!! Choose 'full' or 'light' ! No location created"
   end
@@ -136,7 +136,7 @@ def seed(full_or_light)
   creating_users
   creating_deputies(full_or_light)
   creating_laws
-  creating_votes(full_or_light)
+  creating_positions(full_or_light)
   # creating_locations("full")
   puts "Finished!"
 end
