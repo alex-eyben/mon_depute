@@ -4,6 +4,8 @@ require "open-uri"
 class CreateLawsJob < ApplicationJob
   queue_as :default
 
+  laws = [['https://vie-publique.fr/loi/268070-loi-avia-lutte-contre-les-contenus-haineux-sur-internet',2039,'Adoptée',2019,7,9],
+  ['https://www.vie-publique.fr/loi/20774-moralisation-de-la-vie-publique-loi-retablissant-la-confiance-dans-lac',119,'Adoptée',2017,8,9]]
   def perform(laws)
     # Do something later
     laws.each do |law|
@@ -60,6 +62,3 @@ class CreateLawsJob < ApplicationJob
   end
 
 end
-
-laws = [['https://vie-publique.fr/loi/268070-loi-avia-lutte-contre-les-contenus-haineux-sur-internet',2039,'Adoptée',2019,7,9],
-['https://www.vie-publique.fr/loi/20774-moralisation-de-la-vie-publique-loi-retablissant-la-confiance-dans-lac',119,'Adoptée',2017,8,9]]

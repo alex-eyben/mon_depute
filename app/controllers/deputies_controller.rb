@@ -1,3 +1,6 @@
+require 'open-uri'
+require 'csv'
+
 class DeputiesController < ApplicationController
   def show
     @deputy = Deputy.find(params[:id])
@@ -22,43 +25,35 @@ class DeputiesController < ApplicationController
     @user = current_user
     @deputy = Deputy.find(params[:id])
     @deputy.liked_by @user
-    redirect_to dashboard_path
+    redirect_to deputy_path(@deputy)
+  end
+
+  def unfollow
+    @user = current_user
+    @deputy = Deputy.find(params[:id])
+    @deputy.unliked_by @user
+    redirect_to request.referrer
   end
 
   def results
-    # get data from a geocoder search
     query = params[:query]
-    result = Geocoder.search(query)
+    url = "https://api-adresse.data.gouv.fr/search/?q=#{URI.escape(query)}"
+    citycode = JSON.parse(open(url).read)["features"][0]["properties"]["citycode"]
 
-    # get the circonscription number
-    if result.empty?
-      render 'pages/home'
-    else
-      city_searched = result.first.data["address"]["city"]
-      if city_searched == nil
-        city_searched = result.first.data["address"]["town"]
-        if city_searched == nil
-          city_searched = result.first.data["address"]["village"]
+    file_path = Rails.root.join("db/csv", "circonscriptions.csv")
+    options = { col_sep: ";", headers: :first_row }
+    circo = ""
+    dep = ""
+    CSV.foreach(file_path, options).with_index do |row, i|
+      unless row[3].nil?
+        if row[3].include?(citycode)
+          dep = row[1]
+          circo = row[2]
         end
-      end
-
-      if result.first.data["address"]["country"] == "France" && !result.first.data["address"]["postcode"].nil?
-        department = result.first.data["address"]["postcode"][0..1]
-        if department.first == "0"
-          searched_department = department[1]
-        else
-          searched_department = department
-        end
-        commune = Location.where(commune: city_searched, department: searched_department).first
-        circonscription = commune.circonscription
-
-        # get the deputy
-        department = result.first.data["address"]["postcode"][0..1].to_i
-        @deputy = Deputy.where(circonscription: circonscription, department: department).first
-        redirect_to deputy_path(@deputy)
-      else
-        render 'pages/home'
       end
     end
+    @deputy = Deputy.where(circonscription: circo.to_i, department: dep.to_i).first
+    redirect_to root_path and return if @deputy.nil?
+    redirect_to deputy_path(@deputy)
   end
 end
