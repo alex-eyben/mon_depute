@@ -51,7 +51,7 @@
         <div class="law-card-details">
           <ul class="categorie-container">
             <% position.law.tag_list.each do |tag|%>
-              <%= link_to deputy_path(@deputy, tag_id: tag.ids.first) do %>
+              <%= link_to deputy_path(@deputy, tag: tag) do %>
                 <li class="categorie-label"><%= tag %></li>
               <% end %>
             <% end %>
