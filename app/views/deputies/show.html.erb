@@ -1,3 +1,21 @@
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId            : '2642641032621465',
+      autoLogAppEvents : true,
+      xfbml            : true,
+      version          : 'v7.0'
+    });
+    FB.ui({
+      method: 'share',
+      href: "https://www.mondepute.info/deputies/<%= @deputy.id %>",
+    }, function(response){});
+  };
+</script>
+
+<script async defer src="https://connect.facebook.net/fr_FR/sdk.js"></script>
+
+
 <div class="container-deputy">
   <div class="deputy-card">
      <div class="deputy-card-container">
@@ -18,7 +36,7 @@
         <!-- <div class="deputy-details-container">
           <p>Profil: Frondeur</p>
         </div> -->
-       
+
         <div class="deputy-card-details-container">
           <% if @deputy.fronding == nil %>
             <p>Nous ne pouvons pas savoir si <%= @deputy.first_name %> <%= @deputy.last_name %> est un profil Frondeur ou non</p>
@@ -33,7 +51,7 @@
         </div>
      </div>
 
-    <% if @user.voted_for? @deputy%>
+    <% if @user.voted_for? @deputy %>
       <%= link_to unfollow_deputy_path(@deputy), class: 'button button-danger width-grow' do %>
         Ne plus suivre
       <% end %>
@@ -75,8 +93,6 @@
               <i class="far fa-thumbs-down <%= @user.disliked? position %>"></i>
             <% end %>
           </div>
-        
-
 
         <!-- Modal -->
         <div class="modal fade" id="modal-<%= position.law.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

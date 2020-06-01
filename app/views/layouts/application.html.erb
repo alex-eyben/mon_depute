@@ -14,22 +14,6 @@
   </head>
 
   <body>
-    <script>
-      window.fbAsyncInit = function() {
-        FB.init({
-          appId            : '2642641032621465',
-          autoLogAppEvents : true,
-          xfbml            : true,
-          version          : 'v7.0'
-        });
-        FB.ui({
-          method: 'feed',
-          href: 'https://developers.facebook.com/docs/'
-        }, function(response){});
-      };
-    </script>
-    <script async defer src="https://connect.facebook.net/fr_FR/sdk.js"></script>
-
     <%= render 'shared/navbar' %>
     <%= render 'shared/flashes' %>
     <div class="content-wrapper">

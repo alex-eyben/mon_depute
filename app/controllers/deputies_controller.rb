@@ -18,6 +18,7 @@ class DeputiesController < ApplicationController
     else
       @user.dislikes @position
     end
+    flash[:notice] = "Merci d'avoir voté !"
     redirect_to deputy_path(@deputy)
   end
 
