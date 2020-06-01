@@ -21,7 +21,7 @@ class DeputiesController < ApplicationController
     positionsCount = deputy.positions.count
     absentVotes = deputy.positions.select { |position| position.votant == false }
     absentCount = absentVotes.count
-    (1 - (absentCount/positionsCount)) * 100
+    ((1 - absentCount.fdiv(positionsCount)) * 100).truncate
   end
 
   def getParticipationRateFiltered(deputy, tag)
@@ -29,7 +29,7 @@ class DeputiesController < ApplicationController
     positionsCount = positions.count
     absentVotes = positions.select { |position| position.votant == false }
     absentCount = absentVotes.count
-    (1 - (absentCount/positionsCount)) * 100
+    ((1 - absentCount.fdiv(positionsCount)) * 100).truncate
   end
 
   def like

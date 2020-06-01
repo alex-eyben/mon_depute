@@ -53,14 +53,20 @@
   </div>
 
   <div class="laws">
-  <%= @participationRate %>
-    <% if @tag %>
-      <%= link_to deputy_path(@deputy) do %>
-       <li class="categorie-label-top"><%= @tag %> <i class="fas fa-times"></i></li>
+    <div class="laws-top">
+      <% if @tag %>
+        
+        <h3><%= @deputy.first_name %> <%= @deputy.last_name %> a participé à 
+          <%= @participationRate %>% des votes que nous avons identifiés sur le 
+          sujet 
+        <%= link_to deputy_path(@deputy) do %>
+          <span class="categorie-label-top"><%= @tag %> <i class="fas fa-times"></i></span></h3>
+        <% end %>
+      <% else %>
+        <h3><%= @deputy.first_name %> <%= @deputy.last_name %> a participé à 
+          <%= @participationRate %>% des votes que nous avons identifiés</h3>
       <% end %>
-    <% else %>
-       <li class="categorie-label-top">Tous les sujets</li>
-    <% end %>
+    </div>
     <% @positions.each do |position| %>
       <% if position.deputy_position == nil %>
         <% position.deputy_position = "Absent" %>
