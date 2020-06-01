@@ -64,6 +64,7 @@ def creating_deputies(full_or_light)
 end
 
 def creating_laws
+  puts "Creating laws..."
   CreateLawsJob.perform_now
   puts "laws done"
 end
