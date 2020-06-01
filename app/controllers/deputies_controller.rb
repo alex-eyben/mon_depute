@@ -25,7 +25,14 @@ class DeputiesController < ApplicationController
     @user = current_user
     @deputy = Deputy.find(params[:id])
     @deputy.liked_by @user
-    redirect_to dashboard_path
+    redirect_to deputy_path(@deputy)
+  end
+
+  def unfollow
+    @user = current_user
+    @deputy = Deputy.find(params[:id])
+    @deputy.unliked_by @user
+    redirect_to request.referrer
   end
 
   def results
