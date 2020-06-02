@@ -8,6 +8,7 @@ const initSweetalert = (options = {}) => {
        button: "Partager",
     }).then((value) => {
       if (value) {
+        console.log("hey")
         FB.ui({
           method: 'share',
           href: window.location.href,
