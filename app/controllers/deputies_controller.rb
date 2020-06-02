@@ -16,6 +16,15 @@ class DeputiesController < ApplicationController
     end
     @user = current_user
     @frondingRate = (100 - @deputy.fronding).fdiv(100)
+    @topTags = getTopTags(5)
+  end
+
+  def getTopTags(number)
+    topTags = []
+    ActsAsTaggableOn::Tag.most_used(number).each do |tag|
+      topTags << tag.name
+    end
+    return topTags
   end
 
   def getParticipationRate(deputy)

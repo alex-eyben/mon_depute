@@ -1,13 +1,20 @@
 .categorie-label {
   padding: 5px 10px;
-  color:white;
-  background-color: $tag;
+  color: $tag;
+  background-color: white;
+  border: 1px solid $tag;
   opacity: 0.9;
   margin-right: 5px;
   margin-top: 5px;
   display: inline-block;
   border-radius: 2px;
   font-size: 0.8rem;
+  transition: 0.3s;
+}
+
+.categorie-label:hover {
+  color: white;
+  background-color: $tag;
 }
 
 .categorie-label-top {
@@ -26,4 +33,12 @@
   list-style: none;
   padding: 0;
   margin-top: 10px;
+}
+
+.categorie-container.top {
+  margin-top: 0;
+  width: 80%;
+  p {
+    font-size: 0.9rem;
+  }
 }
