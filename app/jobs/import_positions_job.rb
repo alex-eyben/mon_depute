@@ -12,6 +12,7 @@ class ImportPositionsJob < ApplicationJob
     attr = {file: file, quantity: quantity, scrutins: scrutin_id_array}
     create_positions(attr)
     GetFrondeurStatusJob.perform_now(Deputy.all)
+    GetPresenceScoreJob.perform_now(Deputy.all)
     puts "-------computed!"
   end
 
