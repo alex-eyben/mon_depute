@@ -46,7 +46,7 @@ class DeputiesController < ApplicationController
   end
 
   def follow
-  
+
     @user = current_user
     @deputy = Deputy.find(params[:id])
     @deputy.liked_by @user
@@ -54,7 +54,7 @@ class DeputiesController < ApplicationController
   end
 
   def unfollow
-    
+
     @user = current_user
     @deputy = Deputy.find(params[:id])
     @deputy.unliked_by @user
@@ -64,6 +64,8 @@ class DeputiesController < ApplicationController
   def results
     query = params[:query]
     url = "https://api-adresse.data.gouv.fr/search/?q=#{URI.escape(query)}"
+    redirect_to root_path and return if JSON.parse(open(url).read)["features"].empty?
+
     citycode = JSON.parse(open(url).read)["features"][0]["properties"]["citycode"]
 
     file_path = Rails.root.join("db/csv", "circonscriptions.csv")
