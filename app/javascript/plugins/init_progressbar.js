@@ -13,7 +13,6 @@ const initProgressbar = () => {
         if (filteredContainer) { filteredContainer.innerHTML = "" };
 
         const attendanceRate = document.querySelector(".participation-rate").innerText
-
         const attendance = new ProgressBar.Line(presence, {
             strokeWidth: 4,
             easing: 'easeInOut',
