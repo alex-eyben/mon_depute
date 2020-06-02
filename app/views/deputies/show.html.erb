@@ -40,8 +40,13 @@
           <a href="mailto:<%= @deputy.email %>" target="blank"><i class="far fa-envelope"></i></a>
           <a href="<%= @deputy.website %>" target="blank"><i class="fab fa-wordpress-simple"></i></a>
         </div>
-        <div class="deputy-details-container">
-          <a href="<%= @deputy.revenue %>" target="blank">Consulter sa déclaration de revenus</a>
+        <div class="deputy-details-container revenue">
+          <h3><%= @yearlyRevenue %>k€</h3>
+          <p>Moyenne des revenus annuels sur les trois dernières années connues.
+          <a href="<%= @deputy.revenue %>" target="blank">Consulter sa déclaration de revenus</a></p>
+          <span>
+            
+          </span>
         </div>
        
         <div class="deputy-card-chart-container">
@@ -63,6 +68,10 @@
         <%= link_to follow_deputy_path(@deputy), class: 'button button-primary width-grow' do %>
           Suivre
         <% end %>
+      <% end %>
+    <% else %>
+      <%= link_to follow_deputy_path(@deputy), class: 'button button-primary width-grow' do %>
+        Suivre
       <% end %>
     <% end %>
   </div>
