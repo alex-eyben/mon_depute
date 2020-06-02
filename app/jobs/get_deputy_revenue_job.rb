@@ -11,6 +11,8 @@ class GetDeputyRevenueJob < ApplicationJob
   end
 
   def get_xml_version(url)
+    return "" unless url.class == String
+
     html_file = open(url).read
     html_doc = Nokogiri::HTML(html_file)
 
@@ -21,7 +23,10 @@ class GetDeputyRevenueJob < ApplicationJob
   end
 
   def deputy_revenue(url)
-    file      = open(url).read
+    puts url
+    return -1 if url.empty?
+
+    file      = open(url.to_s).read
     document  = Nokogiri::XML(file)
     most_recent_year = 0
     revenue_of_most_recent_year = 0
