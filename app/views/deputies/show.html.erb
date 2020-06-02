@@ -51,48 +51,80 @@
         </div>
      </div>
 
-    <% if @user.voted_for? @deputy %>
-      <%= link_to unfollow_deputy_path(@deputy), class: 'button button-danger width-grow' do %>
-        Ne plus suivre
-      <% end %>
-    <% else %>
-      <%= link_to follow_deputy_path(@deputy), class: 'button button-primary width-grow' do %>
-        Suivre
+    <% if user_signed_in? %>
+      <% if @user.voted_for? @deputy%>
+        <%= link_to unfollow_deputy_path(@deputy), class: 'button button-danger width-grow' do %>
+          Ne plus suivre
+        <% end %>
+      <% else %>
+        <%= link_to follow_deputy_path(@deputy), class: 'button button-primary width-grow' do %>
+          Suivre
+        <% end %>
       <% end %>
     <% end %>
-
   </div>
 
   <div class="laws">
+    <div class="laws-top">
+      <% if @tag %>
+        <h3><%= @deputy.first_name %> <%= @deputy.last_name %> a voté sur
+          <%= @participationRate %>% des votes que nous avons identifiés sur le
+          sujet
+        <%= link_to deputy_path(@deputy) do %>
+          <span class="categorie-label-top"><%= @tag %> <i class="fas fa-times"></i></span></h3>
+        <% end %>
+      <% else %>
+        <h3><%= @deputy.first_name %> <%= @deputy.last_name %> était présent à
+          <%= @participationRate %>% des votes que nous avons identifiés</h3>
+      <% end %>
+    </div>
     <% @positions.each do |position| %>
+      <% if position.deputy_position == nil %>
+        <% position.deputy_position = "Absent" %>
+      <% end %>
       <div class="law-card">
         <div class="law-card-details">
           <ul class="categorie-container">
             <% position.law.tag_list.each do |tag|%>
-              <li class="categorie-label"> <%= tag %> </li>
+              <%= link_to deputy_path(@deputy, tag: tag) do %>
+                <li class="categorie-label"><%= tag %></li>
+              <% end %>
             <% end %>
           </ul>
           <h3><%= position.law.title %></h3>
           <p><strong>Adoptée le <%= position.law.last_status_update %></strong>
-            - <%= position.law.positions.where(deputy_position: "Pour").size %> votes pour,
-            <%= position.law.positions.where(deputy_position: "Contre").size %> votes contre,
-            <%= position.law.positions.where(deputy_position: "Abstention").size %> abstentions
+            - <%= position.law.positions.where(deputy_position: "pour").size %> votes pour,
+            <%= position.law.positions.where(deputy_position: "contre").size %> votes contre,
+            <%= position.law.positions.where(deputy_position: "abstention").size %> abstentions
           </p>
-          <a href="" data-toggle="modal" data-target="#modal-<%= position.law.id %>">
+          <a href="" class="more-info" data-toggle="modal" data-target="#modal-<%= position.law.id %>">
             Plus d'informations
           </a>
         </div>
 
-        <div class="law-card-interaction-card <%= position.deputy_position.downcase %>">
-          <h4><%= position.deputy_position %></h4>
-          <div class="interaction-like">
-            <%= link_to like_deputy_path(@deputy, position_id: position.id, like: true) do %>
-              <i class="far fa-thumbs-up <%= @user.liked? position %>"></i>
-            <% end %>
-            <%= link_to like_deputy_path(@deputy, position_id: position.id, like: false) do %>
-              <i class="far fa-thumbs-down <%= @user.disliked? position %>"></i>
-            <% end %>
-          </div>
+        <% if user_signed_in? %>
+          <div class="law-card-interaction-card <%= position.deputy_position.downcase %>">
+            <h4><%= position.deputy_position.capitalize %></h4>
+            <div class="interaction-like">
+              <%= link_to like_deputy_path(@deputy, position_id: position.id, like: true) do %>
+                <i class="far fa-thumbs-up <%= @user.liked? position %>"></i>
+              <% end %>
+              <%= link_to like_deputy_path(@deputy, position_id: position.id, like: false) do %>
+                <i class="far fa-thumbs-down <%= @user.disliked? position %>"></i>
+              <% end %>
+            </div>
+        <% else %>
+          <div class="law-card-interaction-card <%= position.deputy_position.downcase %>">
+            <h4><%= position.deputy_position.capitalize %></h4>
+            <div class="interaction-like">
+              <%= link_to like_deputy_path(@deputy, position_id: position.id, like: true) do %>
+                <i class="far fa-thumbs-up"></i>
+              <% end %>
+              <%= link_to like_deputy_path(@deputy, position_id: position.id, like: false) do %>
+                <i class="far fa-thumbs-down"></i>
+              <% end %>
+            </div>
+        <% end %>
 
         <!-- Modal -->
         <div class="modal fade" id="modal-<%= position.law.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

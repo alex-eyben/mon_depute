@@ -2,10 +2,34 @@ require 'open-uri'
 require 'csv'
 
 class DeputiesController < ApplicationController
+  skip_before_action :authenticate_user!, only:  [ :results, :show]
+
   def show
     @deputy = Deputy.find(params[:id])
-    @positions = @deputy.positions.order(:law_id)
+    @tag = params[:tag]
+    if @tag
+      @positions = @deputy.positions.select { |position| position.law.tag_list.include? params[:tag] }
+      @participationRate = getParticipationRateFiltered(@deputy, @tag)
+    else
+      @positions = @deputy.positions.order(:law_id)
+      @participationRate = getParticipationRate(@deputy)
+    end
     @user = current_user
+  end
+
+  def getParticipationRate(deputy)
+    positionsCount = deputy.positions.count
+    absentVotes = deputy.positions.select { |position| position.votant == false }
+    absentCount = absentVotes.count
+    ((1 - absentCount.fdiv(positionsCount)) * 100).truncate
+  end
+
+  def getParticipationRateFiltered(deputy, tag)
+    positions = deputy.positions.select { |position| position.law.tag_list.include? tag }
+    positionsCount = positions.count
+    absentVotes = positions.select { |position| position.votant == false }
+    absentCount = absentVotes.count
+    ((1 - absentCount.fdiv(positionsCount)) * 100).truncate
   end
 
   def like
@@ -23,6 +47,7 @@ class DeputiesController < ApplicationController
   end
 
   def follow
+  
     @user = current_user
     @deputy = Deputy.find(params[:id])
     @deputy.liked_by @user
@@ -30,6 +55,7 @@ class DeputiesController < ApplicationController
   end
 
   def unfollow
+    
     @user = current_user
     @deputy = Deputy.find(params[:id])
     @deputy.unliked_by @user

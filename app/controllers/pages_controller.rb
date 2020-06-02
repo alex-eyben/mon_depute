@@ -5,6 +5,7 @@ class PagesController < ApplicationController
   end
 
   def dashboard
+    before_action :authenticate_user!
     @user = current_user
     deputy_array = @user.votes.for_type(Deputy)
     ids = []
