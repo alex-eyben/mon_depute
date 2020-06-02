@@ -41,12 +41,15 @@
           <a href="<%= @deputy.website %>" target="blank"><i class="fab fa-wordpress-simple"></i></a>
         </div>
         <div class="deputy-details-container revenue">
-          <h3><%= @yearlyRevenue %>k€</h3>
-          <p>Moyenne des revenus annuels sur les trois dernières années connues.
-          <a href="<%= @deputy.revenue %>" target="blank">Consulter sa déclaration de revenus</a></p>
-          <span>
-            
-          </span>
+          <% if @yearlyRevenue%>
+            <h3><%= @yearlyRevenue %>k€</h3>
+            <p>Moyenne des revenus annuels sur les trois dernières années connues.
+            <a href="<%= @deputy.revenue %>" target="blank">Consulter sa déclaration de revenus</a></p>
+          <% else %>
+            <h3>?k€</h3>
+            <p>Nous n'avons pas réussi à calculer ses revenus.
+            <a href="<%= @deputy.revenue %>" target="blank">Consulter sa déclaration de revenus</a></p>
+          <% end %>
         </div>
        
         <div class="deputy-card-chart-container">
@@ -123,15 +126,25 @@
               <% end %>
             <% end %>
           </ul>
-          <h3><%= position.law.title %></h3>
+          <% if position.law.title.length > 110 %>
+            <h3><%= position.law.title.truncate(110, separator: ' ') %></h3>
+          <% else %>
+            <h3><%= position.law.title %></h3>
+          <% end %>
           <p><strong>Adoptée le <%= position.law.last_status_update %></strong>
             - <%= position.law.positions.where(deputy_position: "pour").size %> votes pour,
             <%= position.law.positions.where(deputy_position: "contre").size %> votes contre,
             <%= position.law.positions.where(deputy_position: "abstention").size %> abstentions
           </p>
-          <a href="" class="more-info" data-toggle="modal" data-target="#modal-<%= position.law.id %>">
-            Plus d'informations
-          </a>
+          <% if position.law.content == "" %>
+            <a href="<%= position.law.ressource_link %>" class="more-info" target="blank">
+              Plus d'informations
+            </a>
+          <% else %>
+            <a href="" class="more-info" data-toggle="modal" data-target="#modal-<%= position.law.id %>">
+              Plus d'informations
+            </a>
+          <% end %>
         </div>
 
         <% if user_signed_in? %>
