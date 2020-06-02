@@ -1,3 +1,27 @@
+<% content_for :head do %>
+  <!-- Facebook Open Graph data -->
+  <meta property="og:title" content="<%= @deputy.first_name %> <%= @deputy.last_name %> - Député du <%= @deputy.department %>" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="<%= request.original_url %>" />
+  <meta property="og:image" content="<%= @deputy.img %>" />
+  <meta property="og:description" content="Découvrez les positions de votes de <%= @deputy.first_name %> <%= @deputy.last_name %> à l'Assemblée Nationale sur www.mondepute.info" />
+  <meta property="og:site_name" content=" Mon Député" />
+<% end %>
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId            : '2642641032621465',
+      autoLogAppEvents : true,
+      xfbml            : true,
+      version          : 'v7.0'
+    });
+  };
+</script>
+
+<script async defer src="https://connect.facebook.net/fr_FR/sdk.js"></script>
+
+
 <div class="container-deputy">
   <div class="deputy-card">
      <div class="deputy-card-container">
@@ -18,12 +42,12 @@
         <!-- <div class="deputy-details-container">
           <p>Profil: Frondeur</p>
         </div> -->
-       
+
         <div class="deputy-card-details-container">
           <% if @deputy.fronding == nil %>
             <p>Nous ne pouvons pas savoir si <%= @deputy.first_name %> <%= @deputy.last_name %> est un profil Frondeur ou non</p>
           <% elsif @deputy.fronding > 15%>
-            <p><%= @deputy.first_name %> <%= @deputy.last_name %> a un profil plutôt <strong>Frondeur</strong>: seulement
+            <p><%= @deputy.first_name %> <%= @deputy.last_name %> a un profil plutôt <strong>Frondeur</strong> : seulement
             <%= 100 - @deputy.fronding %>% de ses votes respectent les consignes de son parti  </p>
           <% else %>
             <p><%= @deputy.first_name %> <%= @deputy.last_name %> a un profil plutôt <strong>Suiveur</strong>:
@@ -35,25 +59,35 @@
 
     <% if user_signed_in? %>
       <% if @user.voted_for? @deputy%>
-       <%= link_to unfollow_deputy_path(@deputy), class: 'button button-danger width-grow' do %>
-         Ne plus suivre
+        <%= link_to unfollow_deputy_path(@deputy), class: 'button button-danger width-grow' do %>
+          Ne plus suivre
         <% end %>
       <% else %>
         <%= link_to follow_deputy_path(@deputy), class: 'button button-primary width-grow' do %>
           Suivre
         <% end %>
       <% end %>
-    <% else %>
-      <%= link_to follow_deputy_path(@deputy), class: 'button button-primary width-grow' do %>
-        Suivre
-      <% end %>
     <% end %>
-   
-
   </div>
 
   <div class="laws">
+    <div class="laws-top">
+      <% if @tag %>
+        <h3><%= @deputy.first_name %> <%= @deputy.last_name %> a voté sur
+          <%= @participationRate %>% des votes que nous avons identifiés sur le
+          sujet
+        <%= link_to deputy_path(@deputy) do %>
+          <span class="categorie-label-top"><%= @tag %> <i class="fas fa-times"></i></span></h3>
+        <% end %>
+      <% else %>
+        <h3><%= @deputy.first_name %> <%= @deputy.last_name %> était présent à
+          <%= @participationRate %>% des votes que nous avons identifiés</h3>
+      <% end %>
+    </div>
     <% @positions.each do |position| %>
+      <% if position.deputy_position == nil %>
+        <% position.deputy_position = "Absent" %>
+      <% end %>
       <div class="law-card">
         <div class="law-card-details">
           <ul class="categorie-container">
@@ -65,18 +99,18 @@
           </ul>
           <h3><%= position.law.title %></h3>
           <p><strong>Adoptée le <%= position.law.last_status_update %></strong>
-            - <%= position.law.positions.where(deputy_position: "Pour").size %> votes pour,
-            <%= position.law.positions.where(deputy_position: "Contre").size %> votes contre,
-            <%= position.law.positions.where(deputy_position: "Abstention").size %> abstentions
+            - <%= position.law.positions.where(deputy_position: "pour").size %> votes pour,
+            <%= position.law.positions.where(deputy_position: "contre").size %> votes contre,
+            <%= position.law.positions.where(deputy_position: "abstention").size %> abstentions
           </p>
-          <a href="" data-toggle="modal" data-target="#modal-<%= position.law.id %>">
+          <a href="" class="more-info" data-toggle="modal" data-target="#modal-<%= position.law.id %>">
             Plus d'informations
           </a>
         </div>
 
         <% if user_signed_in? %>
           <div class="law-card-interaction-card <%= position.deputy_position.downcase %>">
-            <h4><%= position.deputy_position %></h4>
+            <h4><%= position.deputy_position.capitalize %></h4>
             <div class="interaction-like">
               <%= link_to like_deputy_path(@deputy, position_id: position.id, like: true) do %>
                 <i class="far fa-thumbs-up <%= @user.liked? position %>"></i>
@@ -87,7 +121,7 @@
             </div>
         <% else %>
           <div class="law-card-interaction-card <%= position.deputy_position.downcase %>">
-            <h4><%= position.deputy_position %></h4>
+            <h4><%= position.deputy_position.capitalize %></h4>
             <div class="interaction-like">
               <%= link_to like_deputy_path(@deputy, position_id: position.id, like: true) do %>
                 <i class="far fa-thumbs-up <%= @user.liked? position %>"></i>
@@ -97,9 +131,6 @@
               <% end %>
             </div>
         <% end %>
-        
-        
-
 
         <!-- Modal -->
         <div class="modal fade" id="modal-<%= position.law.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

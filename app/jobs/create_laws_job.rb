@@ -3,7 +3,7 @@ require "open-uri"
 
 class CreateLawsJob < ApplicationJob
   queue_as :default
-  
+
   def perform
     # Do something later
     laws = [['https://vie-publique.fr/loi/268070-loi-avia-lutte-contre-les-contenus-haineux-sur-internet',2039,'Adoptée',2019,7,9],
@@ -39,8 +39,9 @@ class CreateLawsJob < ApplicationJob
     ['https://www.vie-publique.fr/loi/270746-loi-du-28-decembre-2019-de-finances-pour-2020-budget-2020',2307,'Adoptée',2019,11,19],
     ['https://www.vie-publique.fr/loi/270993-loi-du-24-decembre-2019-de-financement-de-la-securite-sociale-pour-2020',2337,'Adoptée',2019,12,3],
     ['https://www.vie-publique.fr/loi/271281-proposition-de-loi-action-contre-les-violences-au-sein-de-la-famille',2147,'Adoptée',2019,10,15]]
-    laws.each do |law|
+    laws.each_with_index do |law, i|
       createLaw(law)
+      print "\r#{i+1}/#{laws.size} created     "
     end
   end
 
@@ -69,7 +70,9 @@ class CreateLawsJob < ApplicationJob
     tags = []
     nokogiriDocument(link).search(".tagsBox a").each do |element|
       tag = element.text.strip
-      tags << tag
+      if (tag != "Justice - Droits fondamentaux" && tag != "Loi")
+        tags << tag
+      end
     end
     return tags
   end
