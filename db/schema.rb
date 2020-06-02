@@ -34,8 +34,8 @@ ActiveRecord::Schema.define(version: 2020_06_02_134026) do
     t.string "uid"
     t.string "img"
     t.integer "fronding"
-    t.integer "presence"
     t.integer "yearly_revenue"
+    t.integer "presence"
     t.index ["uid"], name: "index_deputies_on_uid", unique: true
   end
 
