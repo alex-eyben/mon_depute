@@ -1,4 +1,5 @@
-<p class="hidden participation-rate"><%= @participationRate.fdiv(100) %></p>
+<p class="hidden participation-rate"><%= @participationRate %></p>
+<p class="hidden fronding-rate"><%= @frondingRate %></p>
 
 
 <div class="container-deputy">
@@ -27,7 +28,7 @@
           <div class="chart" id="presence"></div>
         </div>
         <div class="deputy-card-chart-container">
-          <p>Taux de fronde</p>
+          <p>Taux de votes en accord avec son parti</p>
           <div class="chart" id="fronde"></div>
         </div>
      </div>
@@ -55,11 +56,11 @@
     <div class="laws-top">
         <div class="chart-details">
           <% if @tag %>
-            <p class="hidden filtered-participation-rate"><%= @filteredParticipationRate.fdiv(100) %></p>
-            <h3>Taux de présence sur le sujet </h3>
+            <p class="hidden filtered-participation-rate"><%= @filteredParticipationRate %></p>
             <%= link_to deputy_path(@deputy) do %>
               <span class="categorie-label-top"><%= @tag %> <i class="fas fa-times"></i></span>
             <% end %>
+            <p>Taux de présence sur le sujet </p>
             <div id="filtered" class="filtered-chart"></div>
           <% end %>
         </div>

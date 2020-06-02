@@ -32,7 +32,7 @@ const initProgressbar = () => {
       });
       attendance.animate(attendanceRate);
 
-
+      const frondingRate = document.querySelector(".fronding-rate").innerText
       const fronding = new ProgressBar.Line(fronde, {
         strokeWidth: 4,
         easing: 'easeInOut',
@@ -61,7 +61,7 @@ const initProgressbar = () => {
           bar.setText(Math.round(bar.value() * 100) + ' %');
         }
       });
-      fronding.animate(1.0);
+      fronding.animate(frondingRate);
 
 
       const filteredAttendanceRate = document.querySelector(".filtered-participation-rate").innerText
