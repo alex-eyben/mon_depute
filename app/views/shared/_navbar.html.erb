@@ -3,7 +3,7 @@
 
     <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
       <%= link_to root_path, class: "navbar-brand" do %>
-        <i class="fas fa-landmark "></i>
+        <i class="fas fa-landmark"></i>
         <% end %>
       <% unless params[:action] =="home"%>
         <%= form_tag results_deputies_path, class:"d-flex form-navbar", method: :get do %>
@@ -16,7 +16,7 @@
           <%= submit_tag "Search", class: "btn btn-primary ml-2" %>
         <% end %>
       <% end %>
-      
+
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
