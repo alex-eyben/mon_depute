@@ -21,7 +21,8 @@
 
 <script async defer src="https://connect.facebook.net/fr_FR/sdk.js"></script>
 
-
+<p class="hidden participation-rate"><%= @participationRate %></p>
+<p class="hidden fronding-rate"><%= @frondingRate %></p>
 <div class="container-deputy">
   <div class="deputy-card">
      <div class="deputy-card-container">
@@ -39,21 +40,17 @@
           <a href="mailto:<%= @deputy.email %>" target="blank"><i class="far fa-envelope"></i></a>
           <a href="<%= @deputy.website %>" target="blank"><i class="fab fa-wordpress-simple"></i></a>
         </div>
-        <!-- <div class="deputy-details-container">
-          <p>Profil: Frondeur</p>
-        </div> -->
-
-        <div class="deputy-card-details-container">
-          <% if @deputy.fronding == nil %>
-            <p>Nous ne pouvons pas savoir si <%= @deputy.first_name %> <%= @deputy.last_name %> est un profil Frondeur ou non</p>
-          <% elsif @deputy.fronding > 15%>
-            <p><%= @deputy.first_name %> <%= @deputy.last_name %> a un profil plutôt <strong>Frondeur</strong> : seulement
-            <%= 100 - @deputy.fronding %>% de ses votes respectent les consignes de son parti  </p>
-          <% else %>
-            <p><%= @deputy.first_name %> <%= @deputy.last_name %> a un profil plutôt <strong>Suiveur</strong>:
-            <%= 100 - @deputy.fronding %>% de ses votes respectent les consignes de son parti  </p>
-          <% end %>
+        <div class="deputy-details-container">
           <a href="<%= @deputy.revenue %>" target="blank">Consulter sa déclaration de revenus</a>
+        </div>
+       
+        <div class="deputy-card-chart-container">
+          <p>Taux de présence à l'assemblée</p>
+          <div class="chart" id="presence"></div>
+        </div>
+        <div class="deputy-card-chart-container">
+          <p>Taux de votes en accord avec son parti</p>
+          <div class="chart" id="fronde"></div>
         </div>
      </div>
 
@@ -72,17 +69,37 @@
 
   <div class="laws">
     <div class="laws-top">
-      <% if @tag %>
-        <h3><%= @deputy.first_name %> <%= @deputy.last_name %> a voté sur
-          <%= @participationRate %>% des votes que nous avons identifiés sur le
-          sujet
-        <%= link_to deputy_path(@deputy) do %>
-          <span class="categorie-label-top"><%= @tag %> <i class="fas fa-times"></i></span></h3>
-        <% end %>
-      <% else %>
-        <h3><%= @deputy.first_name %> <%= @deputy.last_name %> était présent à
-          <%= @participationRate %>% des votes que nous avons identifiés</h3>
-      <% end %>
+        <div class="chart-details">
+          <% if @tag %>
+            <p class="hidden filtered-participation-rate"><%= @filteredParticipationRate %></p>
+            <%= link_to deputy_path(@deputy) do %>
+              <span class="categorie-label-top"><%= @tag %> <i class="fas fa-times"></i></span>
+            <% end %>
+            <div class="chart-details-container">
+              <div class="chart-details-card">
+                <p>Lois analysées</p>
+                <div class="chart-details-card-figure">
+                  <h3><%= @positions.count %></h3>
+                </div>
+              </div>
+              <div class="chart-details-card last">
+                <p>Taux de présence sur le sujet </p>
+                <div class="chart-details-card-figure">
+                  <div id="filtered" class="filtered-chart"></div>
+                </div>
+              </div>
+            </div>
+          <% else %>
+            <p id="filter-paragraph"><strong>Filtrer par sujet</strong></p>
+            <ul class="categorie-container top">
+              <% @topTags.each do |tag| %>
+                <%= link_to deputy_path(@deputy, tag: tag) do %>
+                  <li class="categorie-label"><%= tag %></li>
+                <% end %>
+              <% end %>
+            </ul>
+          <% end %>
+        </div>
     </div>
     <% @positions.each do |position| %>
       <% if position.deputy_position == nil %>

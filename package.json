@@ -10,6 +10,7 @@
     "jquery": "^3.5.1",
     "places.js": "^1.19.0",
     "popper.js": "^1.16.1",
+    "progressbar.js": "^1.1.0",
     "sweetalert": "^2.1.2",
     "turbolinks": "^5.2.0"
   },

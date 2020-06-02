@@ -2,6 +2,8 @@
 <html>
   <head>
     <title>Mon Député - Découvrez qui est votre élu et ses positions de vote à l'Assemblée Nationale</title>
+    <%= favicon_link_tag %>
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -15,7 +17,7 @@
     <%= yield :head %>
   </head>
 
-  <body>
+  <body class="<%= params[:controller] %>-<%=params[:action] %>">
     <%= render 'shared/navbar' %>
     <%= render 'shared/flashes' %>
     <div class="content-wrapper">

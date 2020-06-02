@@ -1,0 +1,105 @@
+.deputy-card-chart-container {
+  margin-bottom: 10px;
+  margin-top: 30px;
+  p {
+    text-align: left;
+    margin-bottom: 0;
+  }
+}
+
+#filtered{
+  margin: 20px;
+  width: 200px;
+  height: 100px;
+}
+
+.filtered-chart {
+  margin: 10px;
+  margin-bottom: 60px;
+  width: 400px;
+  height: 8px;
+  position: relative;
+}
+
+.chart {
+  margin: 0px 20px 40px 0px;
+  height: 8px;
+  position: relative;
+}
+
+.laws-top {
+  display: flex;
+  margin-left: 30px;
+  width: 90%;
+  justify-content: space-between;
+  flex-direction: column;
+  h3 {
+    padding: 0 20px 20px 20px;
+    font-size: 1.6rem;
+    text-align: center;
+  }
+  span {
+    margin: 0;
+  }
+}
+
+.chart-details {
+  display: flex;
+  flex-direction: column;
+  p {
+    margin-top: 20px;
+    margin-bottom: 0;
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+.chart-details-container {
+  display: flex;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.chart-details-card {
+  margin-right: 20px;
+  text-align: center;
+  justify-content: center;
+  padding: 10px 20px;
+  border-radius: 3px;
+  box-shadow:  4px 4px 10px #e4e4e4,
+             -4px -4px 10px #ffffff;
+  p {
+    margin: 0;
+    font-weight: 400;
+  }
+  h3 {
+    padding: 0;
+    font-size: 3rem;
+  }
+}
+
+.chart-details-card.last {
+  padding-left: 30px;
+}
+.chart-details-card .filtered-chart {
+  margin: 10px;
+  margin-bottom: 20px;
+  width: 400px;
+  height: 8px;
+  position: relative;
+}
+
+.chart-details-card-figure {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  justify-content: center;
+}
+
+#filter-paragraph {
+  margin-top: 0;
+  font-size: 0.9rem;
+  opacity:0.9;
+}
