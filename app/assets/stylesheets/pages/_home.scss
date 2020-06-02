@@ -1,12 +1,61 @@
 // Specific CSS for your home-page
 .home-container {
-  height: calc(100vh);
+  height: calc(80vh);
   background-size: cover;
   background-position: bottom;
 }
 
-.home-container h1,
-.home-container h2{
-  color: white;
+.home-h1{
+  color: $white;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+  font-weight: 900;
+  text-align: center;
+  font-size: 50px;
+  margin-bottom: 15px;
+}
+
+.home-h3{
+  color: $white;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  font-family: 'Quicksand', sans-serif;
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 40px;
+  font-size: 25px;
+
+}
+
+.home-background-color{
+  background-color: $deep-green;
+  color: $white;
+  padding-top: 10px;
+}
+
+.home-background-color-p{
+  padding: 15px 0px;
+  margin: 0px;
+  color: $white;
+  text-align: justify;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.home-p{
+  padding: 15px 0px;
+  margin: 0px;
+  text-align: justify;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.container-right{
+  background-color: $light-green;
+}
+.home-brand{
+  width: 100px;
+  height: 100px;
+  background-color: $deep-green;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
