@@ -1,3 +1,6 @@
+<p class="hidden participation-rate"><%= @participationRate.fdiv(100) %></p>
+
+
 <div class="container-deputy">
   <div class="deputy-card">
      <div class="deputy-card-container">
@@ -19,17 +22,13 @@
           <p>Profil: Frondeur</p>
         </div> -->
        
-        <div class="deputy-card-details-container">
-          <% if @deputy.fronding == nil %>
-            <p>Nous ne pouvons pas savoir si <%= @deputy.first_name %> <%= @deputy.last_name %> est un profil Frondeur ou non</p>
-          <% elsif @deputy.fronding > 15%>
-            <p><%= @deputy.first_name %> <%= @deputy.last_name %> a un profil plutôt <strong>Frondeur</strong>: seulement
-            <%= 100 - @deputy.fronding %>% de ses votes respectent les consignes de son parti  </p>
-          <% else %>
-            <p><%= @deputy.first_name %> <%= @deputy.last_name %> a un profil plutôt <strong>Suiveur</strong>:
-            <%= 100 - @deputy.fronding %>% de ses votes respectent les consignes de son parti  </p>
-          <% end %>
-          <a href="<%= @deputy.revenue %>" target="blank">Consulter sa déclaration de revenus</a>
+        <div class="deputy-card-chart-container">
+          <p>Taux de présence à l'assemblée</p>
+          <div class="chart" id="presence"></div>
+        </div>
+        <div class="deputy-card-chart-container">
+          <p>Taux de fronde</p>
+          <div class="chart" id="fronde"></div>
         </div>
      </div>
 
@@ -53,19 +52,17 @@
   </div>
 
   <div class="laws">
-    <div id="chart"></div>
     <div class="laws-top">
-      <% if @tag %>
-        <h3><%= @deputy.first_name %> <%= @deputy.last_name %> était présent à 
-          <%= @participationRate %>% des votes que nous avons identifiés sur le 
-          sujet 
-        <%= link_to deputy_path(@deputy) do %>
-          <span class="categorie-label-top"><%= @tag %> <i class="fas fa-times"></i></span></h3>
-        <% end %>
-      <% else %>
-        <h3><%= @deputy.first_name %> <%= @deputy.last_name %> était présent à 
-          <%= @participationRate %>% des votes que nous avons identifiés</h3>
-      <% end %>
+        <div class="chart-details">
+          <% if @tag %>
+            <p class="hidden filtered-participation-rate"><%= @filteredParticipationRate.fdiv(100) %></p>
+            <h3>Taux de présence sur le sujet </h3>
+            <%= link_to deputy_path(@deputy) do %>
+              <span class="categorie-label-top"><%= @tag %> <i class="fas fa-times"></i></span>
+            <% end %>
+            <div id="filtered" class="filtered-chart"></div>
+          <% end %>
+        </div>
     </div>
     <% @positions.each do |position| %>
       <% if position.deputy_position == nil %>

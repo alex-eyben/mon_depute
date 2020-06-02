@@ -7,12 +7,12 @@ class DeputiesController < ApplicationController
   def show
     @deputy = Deputy.find(params[:id])
     @tag = params[:tag]
+    @participationRate = getParticipationRate(@deputy)
     if @tag
       @positions = @deputy.positions.select { |position| position.law.tag_list.include? params[:tag] }
-      @participationRate = getParticipationRateFiltered(@deputy, @tag)
+      @filteredParticipationRate = getParticipationRateFiltered(@deputy, @tag)
     else
       @positions = @deputy.positions.order(:law_id)
-      @participationRate = getParticipationRate(@deputy)
     end
     @user = current_user
   end
