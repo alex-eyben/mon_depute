@@ -1,3 +1,8 @@
+<% content_for :head do %>
+  <meta property="og:title" content="<%= @deputy.first_name %>" />
+
+<% end %>
+
 <script>
   window.fbAsyncInit = function() {
     FB.init({
@@ -6,10 +11,6 @@
       xfbml            : true,
       version          : 'v7.0'
     });
-    FB.ui({
-      method: 'share',
-      href: "https://www.mondepute.info/deputies/<%= @deputy.id %>",
-    }, function(response){});
   };
 </script>
 
