@@ -1,12 +1,34 @@
 // Specific CSS for your home-page
 .home-container {
-  height: calc(100vh);
+  height: calc(50vh);
   background-size: cover;
   background-position: bottom;
 }
 
-.home-container h1,
-.home-container h2{
-  color: white;
+.home-h1,
+.home-h2{
+  color: $white;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  font-weight: 900;
+}
+
+.home-background-color{
+  background-color: $deep-green;
+  color: $white;
+  padding-top: 10px;
+}
+
+.home-background-color-p{
+  padding: 15px 0px;
+  margin: 0px;
+  color: $white;
+  text-align: justify;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.home-p{
+  padding: 15px 0px;
+  margin: 0px;
+  text-align: justify;
+  font-family: 'Quicksand', sans-serif;
 }

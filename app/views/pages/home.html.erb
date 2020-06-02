@@ -1,10 +1,7 @@
 
-<div class="justify-content-center d-flex align-items-center home-container"  style="background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url(https://www.inegalites.fr/IMG/arton59.jpg);">
+<div class="justify-content-center d-flex align-items-center home-container"  style="background-image: linear-gradient(rgba(43, 113, 120, 0.85), rgba(43, 113, 120, 1)), url(https://www.inegalites.fr/IMG/arton59.jpg);">
   <div class="col-8">
-    <div class="d-flex flex-column align-items-center mb-4 background-home">
-      <h1>MonDéputé</h1>
-      <h2>Découvrez qui est votre élu</h2>
-    </div>
+    
     <%= form_tag results_deputies_path, class:"d-flex", method: :get do %>
       <%= text_field_tag :query,
         params[:query],
@@ -12,7 +9,37 @@
         id: "location-search",
         placeholder: "Tapez votre adresse..."
       %>
-      <%= submit_tag "Search", class: "btn btn-primary ml-2" %>
+      <%= submit_tag "Search", class: "btn btn-info ml-2" %>
     <% end %>
+    <div class="d-flex flex-column align-items-center mt-5 pt-5 background-home">
+      <h1 class="home-h1">MonDéputé</h1>
+      <h2 class="home-h2">Découvrez qui est votre élu</h2>
+    </div>
+  </div>
+</div>
+  <div class="d-flex flex-column align-items-center justify-content-center home-background-color ">
+    <div class="col-lg-6 col-md-8 col-sm-12">
+    </div>
+</div>
+<div class="d-flex flex-column align-items-center justify-content-center">
+  <div class="col-lg-6 col-md-8 col-sm-12">
+    <p class=home-p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non ex turpis. 
+    Ut luctus leo vel accumsan laoreet. Pellentesque ac ligula cursus, mattis orci eget, iaculis lectus. 
+    Nulla maximus odio eget nisl finibus fringilla. Proin vel suscipit mi. Nulla varius, 
+    nulla vitae cursus volutpat, justo mi vehicula lacus, eu convallis est magna sit amet magna. 
+    Aenean a interdum orci, nec efficitur nunc. Vestibulum eget turpis sit amet lacus maximus aliquam. 
+    Pellentesque mattis turpis nec felis blandit finibus. Curabitur a dictum dolor. 
+    Donec sagittis id elit ut varius. Vestibulum ante ipsum primis in faucibus orci luctus et 
+    ultrices posuere cubilia curae; Morbi eget ligula ante. Mauris lacinia dictum dolor, 
+    quis scelerisque lorem sollicitudin commodo. Praesent venenatis eu libero ac tincidunt.</p>
+    
+    <p class=home-p>Aenean tincidunt lacus quis orci finibus blandit eget eu ex. Proin congue faucibus pretium. 
+    Vestibulum accumsan dolor a nibh lacinia, in ultricies eros interdum. Nulla facilisis lorem in 
+    sagittis iaculis. Etiam ornare, lectus quis pharetra ultrices, erat purus tempus ligula, 
+    quis elementum nunc leo ac erat. Sed pretium dignissim hendrerit. Nullam laoreet suscipit erat, 
+    sit amet lobortis sapien euismod sit amet. Donec ut iaculis ex. Lorem ipsum dolor sit amet, 
+    consectetur adipiscing elit. Vivamus eleifend aliquam dapibus. Ut non justo sed purus porta 
+    porttitor nec vitae mauris. Cras consequat aliquam dolor, eu vulputate eros faucibus sed. 
+    Quisque pellentesque sodales enim, scelerisque viverra tortor.</p>
   </div>
 </div>
