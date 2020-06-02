@@ -9,14 +9,16 @@ class DeputiesController < ApplicationController
     @tag = params[:tag]
     @participationRate = getParticipationRate(@deputy).fdiv(100)
     if @tag
-      @positions = @deputy.positions.select { |position| position.law.tag_list.include? params[:tag] }
+      positions = @deputy.positions.order(date: :desc)
+      @positions = positions.select { |position| position.law.tag_list.include? params[:tag] }
       @filteredParticipationRate = getParticipationRateFiltered(@deputy, @tag).fdiv(100)
     else
-      @positions = @deputy.positions.order(:law_id)
+      @positions = @deputy.positions.order(date: :desc)
     end
     @user = current_user
     @frondingRate = (100 - @deputy.fronding).fdiv(100)
     @topTags = getTopTags(5)
+    @yearlyRevenue = @deputy.yearly_revenue / 1000
   end
 
   def getTopTags(number)
