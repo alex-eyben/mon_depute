@@ -16,16 +16,38 @@
     <% end %>
   </div>
 </div>
-<div class="d-flex flex-column align-items-center justify-content-center">
-  <div class="col-lg-6 col-md-8 col-sm-12">
-    <% Deputy.order(yearly_revenue: :desc).first(3).each do |deputy| %>
-      <p><%= deputy.first_name %> <%= deputy.last_name %></p>
+<div class="d-flex flex-column align-items-center justify-content-center pt-5">
+
+  <h3 class="mt-5 pt5"> Les plus hauts revenus de députés estimés par an sur une moyenne de trois ans:</h3>
+  <div class="d-flex justify-content-center col-lg-8 col-md-10 col-sm-10 my-3">
+    <% Deputy.order(yearly_revenue: :desc).first(4).each do |deputy| %>
+      <div class="d-flex flex-column align-items-center mx-5">
+        <img src="<%= deputy.img %>" alt="<%= deputy.first_name %> <%= deputy.last_name %>" class="avatar-bordered">
+        <p><%= deputy.first_name %> <%= deputy.last_name %></p>
+        <h2><%= number_with_delimiter( deputy.yearly_revenue, :delimiter => ' ' ) %></h2>
+      </div>
     <% end %>
   </div>
-  
-  <div class="col-lg-6 col-md-8 col-sm-12">
-    <% Deputy.order(fronding: :desc).first(3).each do |deputy| %>
-      <p><%= deputy.first_name %> <%= deputy.last_name %></p>
+
+  <h3 class="mt-4 pt5"> Les deputés les moins présent lors des votes:</h3>
+  <div class="d-flex justify-content-center col-lg-8 col-md-10 col-sm-10 my-3">
+    <% Deputy.order(presence: :desc).reject{|deputy|deputy.last_name == "Galliard-Minier"}.last(4).each do |deputy| %>
+      <div class="d-flex flex-column align-items-center mx-5">
+        <img src="<%= deputy.img %>" alt="<%= deputy.first_name %> <%= deputy.last_name %>" class="avatar-bordered">
+        <p><%= deputy.first_name %> <%= deputy.last_name %></p>
+        <h2><%= deputy.presence %>%</h2>
+      </div>
+    <% end %>
+  </div>
+
+  <h3 class="mt-4 pt5"> Les députés les plus frondeur:</h3>
+  <div class="d-flex justify-content-center col-lg-8 col-md-10 col-sm-10 my-3">
+    <% Deputy.order(fronding: :desc).first(4).each do |deputy| %>
+      <div class="d-flex flex-column align-items-center mx-5">
+        <img src="<%= deputy.img %>" alt="<%= deputy.first_name %> <%= deputy.last_name %>" class="avatar-bordered">
+        <p><%= deputy.first_name %> <%= deputy.last_name %></p>
+        <h2><%= deputy.fronding %>%</h2>
+      </div>
     <% end %>
   </div>
   
