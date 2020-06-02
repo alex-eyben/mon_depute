@@ -91,7 +91,7 @@ class ImportPositionsJob < ApplicationJob
   end
 
   def set_absent_to_others(current_scrutin)
-    Deputy.all.reject{|deputy|deputy.laws.map{|law|law=law.scrutin_id}.include?(current_scrutin.to_i)}.each{|deputy|Position.create!(deputy: deputy, law: Law.where(scrutin_id: current_scrutin).take, votant: false )}
+    Deputy.all.reject{|deputy|deputy.laws.map{|law|law=law.scrutin_id}.include?(current_scrutin.to_i)}.each{|deputy|Position.create!(deputy: deputy, law: Law.where(scrutin_id: current_scrutin).take, date: @scrutin_date.to_date, votant: false )}
     print "\r#{((@counter.fdiv(@total))*100).round(2)}%"
     @counter += 1
   end
