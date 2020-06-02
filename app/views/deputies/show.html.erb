@@ -60,8 +60,22 @@
             <%= link_to deputy_path(@deputy) do %>
               <span class="categorie-label-top"><%= @tag %> <i class="fas fa-times"></i></span>
             <% end %>
-            <p>Taux de présence sur le sujet </p>
-            <div id="filtered" class="filtered-chart"></div>
+            <div class="chart-details-container">
+              <div class="chart-details-card">
+                <p>Lois analysées</p>
+                <div class="chart-details-card-figure">
+                  <h3><%= @positions.count %></h3>
+                </div>
+              </div>
+              <div class="chart-details-card last">
+                <p>Taux de présence sur le sujet </p>
+                <div class="chart-details-card-figure">
+                  <div id="filtered" class="filtered-chart"></div>
+                </div>
+              </div>
+            </div>
+            
+            
           <% end %>
         </div>
     </div>
