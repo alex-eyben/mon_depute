@@ -1,6 +1,10 @@
 <% content_for :head do %>
-  <meta property="og:title" content="<%= @deputy.first_name %>" />
-
+  <!-- Facebook Open Graph data -->
+  <meta property="og:title" content="<%= @deputy.first_name %> <%= @deputy.last_name %>" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="<%= request.original_url %>" />
+  <meta property="og:image" content="<%= @deputy.img %>" />
+  <meta property="og:site_name" content=" Mon Député" />
 <% end %>
 
 <script>
