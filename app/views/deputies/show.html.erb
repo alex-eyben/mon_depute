@@ -90,7 +90,7 @@
             <h4><%= position.deputy_position %></h4>
             <div class="interaction-like">
               <%= link_to like_deputy_path(@deputy, position_id: position.id, like: true) do %>
-                <i class="far fa-thumbs-up"></i>
+                <i class="far fa-thumbs-up <%= @user.liked? position %>"></i>
               <% end %>
               <%= link_to like_deputy_path(@deputy, position_id: position.id, like: false) do %>
                 <i class="far fa-thumbs-down"></i>
