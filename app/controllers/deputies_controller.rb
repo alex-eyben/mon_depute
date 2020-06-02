@@ -2,7 +2,7 @@ require 'open-uri'
 require 'csv'
 
 class DeputiesController < ApplicationController
-  skip_before_action :authenticate_user!, only:  [ :results, :show]
+  skip_before_action :authenticate_user!, only: [ :results, :show]
 
   def show
     @deputy = Deputy.find(params[:id])
@@ -42,6 +42,7 @@ class DeputiesController < ApplicationController
     else
       @user.dislikes @position
     end
+    flash[:notice] = "Merci d'avoir voté !"
     redirect_to deputy_path(@deputy)
   end
 
