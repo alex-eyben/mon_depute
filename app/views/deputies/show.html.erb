@@ -83,7 +83,7 @@
             <%= position.law.positions.where(deputy_position: "contre").size %> votes contre,
             <%= position.law.positions.where(deputy_position: "abstention").size %> abstentions
           </p>
-          <a href="" data-toggle="modal" data-target="#modal-<%= position.law.id %>">
+          <a href="" class="more-info" data-toggle="modal" data-target="#modal-<%= position.law.id %>">
             Plus d'informations
           </a>
         </div>

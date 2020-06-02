@@ -106,9 +106,12 @@
   a {
     font-size: 0.8rem;
     color: $gray;
-    opacity: 0.8;
     text-decoration: underline;
   }
+}
+
+.law-card .more-info {
+  opacity: 0.7;
 }
 
 .law-card-details {
