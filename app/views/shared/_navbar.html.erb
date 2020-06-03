@@ -1,11 +1,11 @@
-<% if params[:action] == "home" %>
+<% if params[:action] == "home" && user_signed_in? == false %>
 <% else %>
 
     <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
       <%= link_to root_path, class: "navbar-brand" do %>
         <i class="fas fa-landmark"></i>
         <% end %>
-      <% unless params[:action] =="home"%>
+      <% unless params[:action] == "home" %>
         <%= form_tag results_deputies_path, class:"d-flex form-navbar", method: :get do %>
           <%= text_field_tag :query,
             params[:query],
