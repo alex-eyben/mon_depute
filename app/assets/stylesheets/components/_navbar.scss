@@ -25,6 +25,7 @@
 
 .dropdown-toggle {
   margin: 0;
+  font-weight: 400;
 }
 
 .dropdown-item {
@@ -69,3 +70,11 @@
   left: -20px;
 }
 
+.navbar-nav {
+  a {
+    color: $gray;
+    opacity: 0.8;
+    margin-right: 20px;
+    font-weight: 300;
+  }
+}
