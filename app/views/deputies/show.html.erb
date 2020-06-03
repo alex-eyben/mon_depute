@@ -85,7 +85,9 @@
           <% if @tag %>
             <p class="hidden filtered-participation-rate"><%= @filteredParticipationRate %></p>
             <%= link_to deputy_path(@deputy) do %>
-              <span class="categorie-label-top"><%= @tag %> <i class="fas fa-times"></i></span>
+              <span class="categorie-label-top"><%= @tag.split(" ").reject{ |word| word == "-"}.map(&:capitalize).unshift("#").join %> 
+                <i class="fas fa-times"></i>
+              </span>
             <% end %>
             <div class="chart-details-container">
               <div class="chart-details-card">
@@ -102,11 +104,13 @@
               </div>
             </div>
           <% else %>
-            <p id="filter-paragraph"><strong>Filtrer par sujet</strong></p>
+            <p id="filter-paragraph"><strong>Tags les plus consultés</strong></p>
             <ul class="categorie-container top">
               <% @topTags.each do |tag| %>
                 <%= link_to deputy_path(@deputy, tag: tag) do %>
-                  <li class="categorie-label"><%= tag %></li>
+                  <li class="categorie-label">
+                    <%= tag.split(" ").reject{ |word| word == "-"}.map(&:capitalize).unshift("#").join %>
+                  </li>
                 <% end %>
               <% end %>
             </ul>
@@ -119,13 +123,7 @@
       <% end %>
       <div class="law-card">
         <div class="law-card-details">
-          <ul class="categorie-container">
-            <% position.law.tag_list.each do |tag|%>
-              <%= link_to deputy_path(@deputy, tag: tag) do %>
-                <li class="categorie-label"><%= tag %></li>
-              <% end %>
-            <% end %>
-          </ul>
+          
           <% if position.law.title.length > 110 %>
             <h3><%= position.law.title.truncate(110, separator: ' ') %></h3>
           <% else %>
@@ -145,6 +143,13 @@
               Plus d'informations
             </a>
           <% end %>
+          <ul class="categorie-container">
+            <% position.law.tag_list.each do |tag|%>
+              <%= link_to deputy_path(@deputy, tag: tag) do %>
+                <li class="categorie-label"><%= tag.split(" ").reject{ |word| word == "-"}.map(&:capitalize).unshift("#").join %></li>
+              <% end %>
+            <% end %>
+          </ul>
         </div>
 
         <% if user_signed_in? %>
