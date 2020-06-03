@@ -178,9 +178,10 @@
         <!-- Modal -->
         <div class="modal fade" id="modal-<%= position.law.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
+            <div class="modal-image">
+            </div>
             <div class="modal-content">
-              <div class="modal-image">
-              </div>
+              
               <div>
                 <div class="modal-header">
                   <h4 class="modal-title" id="exampleModalLabel"><%= position.law.title %></h4>
@@ -188,6 +189,13 @@
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
+                <ul class="categorie-container">
+                  <% position.law.tag_list.each do |tag|%>
+                    <%= link_to deputy_path(@deputy, tag: tag) do %>
+                      <li class="categorie-label"><%= tag %></li>
+                    <% end %>
+                  <% end %>
+                </ul>
                 <div class="modal-body">
                   <p> <%= position.law.content %></p>
                 </div>
