@@ -1,0 +1,57 @@
+.modal-dialog {
+  max-width: 700px;
+  display: flex;
+  flex-direction: row;
+}
+
+.modal-header {
+  padding-bottom: 0;
+}
+
+.modal-body {
+  padding-bottom: 0;
+}
+
+.modal {
+  h4 {
+    flex-grow: 1;
+
+  }
+  p {
+    font-size: 1rem;
+  }
+  a {
+    text-decoration: none;
+    color: white;
+  }
+}
+
+.modal .categorie-container {
+  padding: 0 1rem;
+  margin: 0;
+}
+
+#exampleModalLabel {
+  color: #3AAFA9;
+}
+
+
+.modal-image {
+  width: 50%;
+  background-image: url("https://images.unsplash.com/photo-1589578527966-fdac0f44566c?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80");
+  background-size: cover;
+  background-position: center;
+}
+
+.modal-content {
+  justify-content: start;
+  text-align: start;
+}
+
+.modal-header {
+  border-bottom: 0;
+}
+
+.modal-footer {
+  border-top: 0;
+}
