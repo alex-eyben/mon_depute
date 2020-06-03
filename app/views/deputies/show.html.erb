@@ -51,7 +51,7 @@
             <a href="<%= @deputy.revenue %>" target="blank">Consulter sa déclaration de revenus</a></p>
           <% end %>
         </div>
-       
+
         <div class="deputy-card-chart-container">
           <p>Taux de présence à l'assemblée</p>
           <div class="chart" id="presence"></div>
@@ -151,23 +151,27 @@
           <div class="law-card-interaction-card <%= position.deputy_position.downcase %>">
             <h4><%= position.deputy_position.capitalize %></h4>
             <div class="interaction-like">
+              <p class="green"><%= position.cached_votes_up %></p>
               <%= link_to like_deputy_path(@deputy, position_id: position.id, like: true) do %>
                 <i class="far fa-thumbs-up <%= @user.liked? position %>"></i>
               <% end %>
               <%= link_to like_deputy_path(@deputy, position_id: position.id, like: false) do %>
                 <i class="far fa-thumbs-down <%= @user.disliked? position %>"></i>
               <% end %>
+              <p class="red"><%= position.cached_votes_down %></p>
             </div>
         <% else %>
           <div class="law-card-interaction-card <%= position.deputy_position.downcase %>">
             <h4><%= position.deputy_position.capitalize %></h4>
             <div class="interaction-like">
+              <p class="green"><%= position.cached_votes_up %></p>
               <%= link_to like_deputy_path(@deputy, position_id: position.id, like: true) do %>
                 <i class="far fa-thumbs-up "></i>
               <% end %>
               <%= link_to like_deputy_path(@deputy, position_id: position.id, like: false) do %>
                 <i class="far fa-thumbs-down"></i>
               <% end %>
+              <p class="red"><%= position.cached_votes_down %></p>
             </div>
         <% end %>
 

@@ -152,8 +152,21 @@
   flex-grow: 1;
 }
 
+.law-card-interaction-card .green {
+  color: $light-green;
+}
+
+.law-card-interaction-card .red {
+  color: $red;
+}
+
 .categorie-container a {
   text-decoration: none;
+}
+
+.interaction-like {
+  display:flex;
+  align-items: baseline;
 }
 
 .interaction-like {
