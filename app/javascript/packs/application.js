@@ -31,12 +31,14 @@ import { initAutocomplete } from '../plugins/init_autocomplete';
 import { initProgressbar } from '../plugins/init_progressbar';
 import { initSweetalert } from '../plugins/init_sweetalert';
 import { initRoughnotation } from '../plugins/init_roughnotation';
+// import { initNotification } from '../plugins/init_notification';
 
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
   initAutocomplete();
   initSweetalert();
+  // initNotification();
   initProgressbar();
   initRoughnotation();
 });
