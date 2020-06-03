@@ -16,8 +16,7 @@
   width: 56px;
   border-radius: 50%;
 }
-.avatar-bordered,
-.avatar-bordered img {
+.avatar-bordered {
   width: 120px;
   height: 120px; 
   border-radius: 50%;
@@ -25,6 +24,16 @@
   margin-bottom: 10px;
   object-fit: cover;
 }
+
+.avatar-shame img {
+  width: 120px;
+  height: 120px; 
+  border-radius: 50%;
+  border: $deep-green 1px solid;
+  margin-bottom: 10px;
+  object-fit: cover;
+}
+
 .avatar-square {
   width: 40px;
   border-radius: 0px;
