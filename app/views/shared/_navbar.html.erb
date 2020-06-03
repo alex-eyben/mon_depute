@@ -21,9 +21,10 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <% if user_signed_in? %>
-
+            <%= link_to "Log out", destroy_user_session_path, method: :delete %>
             <li class="nav-item dropdown">
               <%# <p>Mes députés</p> %>
+              
               <p class="dropdown-toggle clickable" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
                 Mes députés
               </p>
