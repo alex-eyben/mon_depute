@@ -52,7 +52,11 @@ class ImportDeputiesJob < ApplicationJob
           # deputy[:adresses_elec] = data['acteur']['adresses']['adresse'][1..-1].map{|address| address = { address["typeLibelle"] => address["valElec"]} } # Maybe better to store this (array of all addresses) instead of having multi columns with each address
           ## deputy[:other_adresses] = data["acteur"]["adresses"]["adresse"].reject{|address|address["typeLibelle"]=="Mèl"} # Can use this one to store email in own column then all other adresses in an array
           elec_addresses = {}
-          data['acteur']['adresses']['adresse'][1..-1].each{|address| elec_addresses[address["typeLibelle"]] = address["valElec"] }
+          if data['acteur']['adresses']['adresse'].class == Array
+            data['acteur']['adresses']['adresse'][1..-1].each{|address| elec_addresses[address["typeLibelle"]] = address["valElec"] }
+          else
+            [data['acteur']['adresses']['adresse']][1..-1].each{|address| elec_addresses[address["typeLibelle"]] = address["valElec"] }
+          end
           deputy[:email] = elec_addresses.has_key?("Mèl") ? elec_addresses["Mèl"] : "N/A"
           deputy[:twitter] = elec_addresses.has_key?("Twitter") ? elec_addresses["Twitter"] : "N/A"
           deputy[:facebook] = elec_addresses.has_key?("Facebook") ? elec_addresses["Facebook"] : "N/A"
