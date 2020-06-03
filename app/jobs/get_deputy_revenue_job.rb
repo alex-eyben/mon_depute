@@ -12,6 +12,7 @@ class GetDeputyRevenueJob < ApplicationJob
 
   def get_xml_version(url)
     return "" unless url.class == String
+    return "" unless url.include?("http")
 
     html_file = open(url).read
     html_doc = Nokogiri::HTML(html_file)
