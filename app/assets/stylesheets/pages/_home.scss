@@ -1,8 +1,8 @@
 // Specific CSS for your home-page
 .home-container {
-  height: calc(80vh);
+  height: calc(75vh);
   background-size: cover;
-  background-position: bottom;
+  background-position: center;
 }
 
 .home-h1{
@@ -58,4 +58,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.name-deputy-home{
+  font-weight: 400;
 }

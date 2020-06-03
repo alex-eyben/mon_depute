@@ -3,9 +3,9 @@
   <div class="d-flex flex-column justify-content-center align-items-center">
     <div class="d-flex flex-column justify-content-center align-items-center background-home">
       <h1 class="home-h1">Découvrez qui est votre élu</h1>
-      <h3 class="home-h3 col-7"> Trouvez ces positions de vote, ses taux de présences, partagez votre avis</h2>
+      <h3 class="home-h3 col-7"> Comprenez ses positions de vote sur les sujets qui vous tiennent à coeur</h2>
     </div>
-    <%= form_tag results_deputies_path, class:"d-flex col-7", method: :get do %>
+    <%= form_tag results_deputies_path, class:"d-flex col-10", method: :get do %>
       <%= text_field_tag :query,
         params[:query],
         class: "form-control",
@@ -16,37 +16,34 @@
     <% end %>
   </div>
 </div>
-<div class="d-flex flex-column align-items-center justify-content-center pt-5">
+<div class="d-flex flex-column align-items-center justify-content-center">
 
-  <h3 class="mt-5 pt5"> Les plus hauts revenus de députés estimés par an sur une moyenne de trois ans:</h3>
-  <div class="d-flex justify-content-center col-lg-8 col-md-10 col-sm-10 my-3">
+  <h3 class="mt-5 pt-3"> Les députés avec les plus hauts revenus</h3>
+  <div class="d-flex justify-content-center col-lg-8 col-md-10 col-sm-10 my-4 ">
     <% Deputy.order(yearly_revenue: :desc).first(4).each do |deputy| %>
       <div class="d-flex flex-column align-items-center mx-5">
-        <img src="<%= deputy.img %>" alt="<%= deputy.first_name %> <%= deputy.last_name %>" class="avatar-bordered">
-        <p><%= deputy.first_name %> <%= deputy.last_name %></p>
-        <h2><%= number_with_delimiter( deputy.yearly_revenue, :delimiter => ' ' ) %></h2>
+        <img src="<%= deputy.img %>" alt="<%= deputy.first_name %> <%= deputy.last_name %>" class="d-inline-flex avatar-bordered">
+        <p class="d-inline-flex justify-content-center name-deputy-home"><%= deputy.first_name %> <%= deputy.last_name %></p>
       </div>
     <% end %>
   </div>
 
-  <h3 class="mt-4 pt5"> Les deputés les moins présent lors des votes:</h3>
-  <div class="d-flex justify-content-center col-lg-8 col-md-10 col-sm-10 my-3">
+  <h3 class="mt-5 pt5"> Les députés les moins présents lors des votes</h3>
+  <div class="d-flex justify-content-center col-lg-8 col-md-10 col-sm-10 my-4">
     <% Deputy.order(presence: :desc).reject{|deputy|deputy.last_name == "Galliard-Minier"}.last(4).each do |deputy| %>
       <div class="d-flex flex-column align-items-center mx-5">
         <img src="<%= deputy.img %>" alt="<%= deputy.first_name %> <%= deputy.last_name %>" class="avatar-bordered">
-        <p><%= deputy.first_name %> <%= deputy.last_name %></p>
-        <h2><%= deputy.presence %>%</h2>
+        <p class="d-inline-flex justify-content-center name-deputy-home"><%= deputy.first_name %> <%= deputy.last_name %></p>
       </div>
     <% end %>
   </div>
 
-  <h3 class="mt-4 pt5"> Les députés les plus frondeur:</h3>
-  <div class="d-flex justify-content-center col-lg-8 col-md-10 col-sm-10 my-3">
+  <h3 class="mt-5 pt5"> Les députés les plus frondeurs</h3>
+  <div class="d-flex justify-content-center col-lg-8 col-md-10 col-sm-10 my-4">
     <% Deputy.order(fronding: :desc).first(4).each do |deputy| %>
       <div class="d-flex flex-column align-items-center mx-5">
         <img src="<%= deputy.img %>" alt="<%= deputy.first_name %> <%= deputy.last_name %>" class="avatar-bordered">
-        <p><%= deputy.first_name %> <%= deputy.last_name %></p>
-        <h2><%= deputy.fronding %>%</h2>
+        <p class="d-inline-flex justify-content-center name-deputy-home"><%= deputy.first_name %> <%= deputy.last_name %></p>
       </div>
     <% end %>
   </div>
