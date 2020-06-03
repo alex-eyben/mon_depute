@@ -1,0 +1,12 @@
+.modal-content {
+  display: flex;
+  flex-direction: row;
+  width: 700px;
+}
+
+.modal-image {
+  width: 200%;
+  background-image: url("https://images.unsplash.com/photo-1589578527966-fdac0f44566c?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80");
+  background-size: cover;
+  background-position: center;
+}
