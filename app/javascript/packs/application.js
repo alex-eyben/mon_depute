@@ -30,6 +30,7 @@ import "bootstrap";
 import { initAutocomplete } from '../plugins/init_autocomplete';
 import { initProgressbar } from '../plugins/init_progressbar';
 import { initSweetalert } from '../plugins/init_sweetalert';
+import { initRoughnotation } from '../plugins/init_roughnotation';
 
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
@@ -37,4 +38,5 @@ document.addEventListener('turbolinks:load', () => {
   initAutocomplete();
   initSweetalert();
   initProgressbar();
+  initRoughnotation();
 });
