@@ -34,11 +34,11 @@ const followButton = () => {
             };
             dropdownElements.forEach((item) => {
               console.log(item);
-              item.addEventListener('click', (event) => {
+              item.childNodes[1].addEventListener('click', (event) => {
                 event.preventDefault();
                 console.log("navbar");
                 console.log(event.currentTarget.childNodes[1]);
-                fetchWithToken(`/deputies/${event.currentTarget.childNodes[1].id}/follow`, {
+                fetchWithToken(`/deputies/${event.currentTarget.id}/follow`, {
                   method: "POST",
                   headers: {
                     "Accept": "application/json",
