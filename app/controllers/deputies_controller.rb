@@ -21,6 +21,10 @@ class DeputiesController < ApplicationController
     @yearlyRevenue = @deputy.yearly_revenue / 1000
   end
 
+  # string.split(" ").reject{ |word| word == "-"}
+  # array.map(&:capitalize)
+  # array.unshift("#").join
+
   def getTopTags(number)
     topTags = []
     ActsAsTaggableOn::Tag.most_used(number).each do |tag|

@@ -23,7 +23,7 @@
 
 <p class="hidden participation-rate"><%= @participationRate %></p>
 <p class="hidden fronding-rate"><%= @frondingRate %></p>
-<div class="container-deputy">
+<div class="container-deputy content-wrapper ">
   <div class="deputy-card">
      <div class="deputy-card-container">
         <div class="deputy-card-avatar-container avatar-bordered">
@@ -86,7 +86,9 @@
           <% if @tag %>
             <p class="hidden filtered-participation-rate"><%= @filteredParticipationRate %></p>
             <%= link_to deputy_path(@deputy) do %>
-              <span class="categorie-label-top"><%= @tag %> <i class="fas fa-times"></i></span>
+              <span class="categorie-label-top"><%= @tag.split(" ").reject{ |word| word == "-"}.map(&:capitalize).unshift("#").join %>
+                <i class="fas fa-times"></i>
+              </span>
             <% end %>
             <div class="chart-details-container">
               <div class="chart-details-card">
@@ -103,11 +105,13 @@
               </div>
             </div>
           <% else %>
-            <p id="filter-paragraph"><strong>Filtrer par sujet</strong></p>
+            <p id="filter-paragraph"><strong>Tags les plus consultés</strong></p>
             <ul class="categorie-container top">
               <% @topTags.each do |tag| %>
                 <%= link_to deputy_path(@deputy, tag: tag) do %>
-                  <li class="categorie-label"><%= tag %></li>
+                  <li class="categorie-label">
+                    <%= tag.split(" ").reject{ |word| word == "-"}.map(&:capitalize).unshift("#").join %>
+                  </li>
                 <% end %>
               <% end %>
             </ul>
@@ -118,15 +122,17 @@
       <% if position.deputy_position == nil %>
         <% position.deputy_position = "Absent" %>
       <% end %>
-      <div class="law-card">
+      <div class="law-card <%= position.deputy_position.downcase %>">
         <div class="law-card-details">
-          <ul class="categorie-container">
-            <% position.law.tag_list.each do |tag|%>
-              <%= link_to deputy_path(@deputy, tag: tag) do %>
-                <li class="categorie-label"><%= tag %></li>
-              <% end %>
-            <% end %>
-          </ul>
+          <% if position.deputy_position == "nonVotant" %>
+            <h4>Non votant lors du vote</h4>
+          <% elsif position.deputy_position == "Absent" %>
+            <h4>Absent lors du vote</h4>
+          <% elsif position.deputy_position == "abstention" %>
+            <h4>S'est abstenu lors du vote</h4>
+          <% else %>
+            <h4>A voté <%= position.deputy_position %></h4>
+          <% end %>
           <% if position.law.title.length > 110 %>
             <h3><%= position.law.title.truncate(110, separator: ' ') %></h3>
           <% else %>
@@ -146,33 +152,48 @@
               Plus d'informations
             </a>
           <% end %>
+          <ul class="categorie-container">
+            <% position.law.tag_list.each do |tag|%>
+              <%= link_to deputy_path(@deputy, tag: tag) do %>
+                <li class="categorie-label"><%= tag.split(" ").reject{ |word| word == "-"}.map(&:capitalize).unshift("#").join %></li>
+              <% end %>
+            <% end %>
+          </ul>
         </div>
 
         <% if user_signed_in? %>
-          <div class="law-card-interaction-card <%= position.deputy_position.downcase %>">
-            <h4><%= position.deputy_position.capitalize %></h4>
+          <div class="law-card-interaction-card">
+            <p>Donnez votre avis</p>
             <div class="interaction-like">
-              <p class="green"><%= position.cached_votes_up %></p>
-              <%= link_to like_deputy_path(@deputy, position_id: position.id, like: true), method: 'post', remote: true do %>
-                <i class="far fa-thumbs-up <%= @user.liked? position %>"></i>
-              <% end %>
-              <%= link_to like_deputy_path(@deputy, position_id: position.id, like: false), method: 'post', remote: true do %>
-                <i class="far fa-thumbs-down <%= @user.disliked? position %>"></i>
-              <% end %>
-              <p class="red"><%= position.cached_votes_down %></p>
+              <div>
+                <%= link_to like_deputy_path(@deputy, position_id: position.id, like: true), method: 'post', remote: true do %>
+                  <i class="far fa-thumbs-up <%= @user.liked? position %>"></i>
+                <% end %>
+                <p class="green"><%= position.cached_votes_up %></p>
+              </div>
+              <div>
+                <%= link_to like_deputy_path(@deputy, position_id: position.id, like: false), method: 'post', remote: true do %>
+                  <i class="far fa-thumbs-down <%= @user.disliked? position %>"></i>
+                <% end %>
+                <p class="red"><%= position.cached_votes_down %></p>
+              </div>
             </div>
         <% else %>
-          <div class="law-card-interaction-card <%= position.deputy_position.downcase %>">
-            <h4><%= position.deputy_position.capitalize %></h4>
+          <div class="law-card-interaction-card">
+            <p>Donnez votre avis</p>
             <div class="interaction-like">
-              <p class="green"><%= position.cached_votes_up %></p>
-              <%= link_to like_deputy_path(@deputy, position_id: position.id, like: true), method: 'post', remote: true do %>
-                <i class="far fa-thumbs-up "></i>
-              <% end %>
-              <%= link_to like_deputy_path(@deputy, position_id: position.id, like: false), method: 'post', remote: true do %>
-                <i class="far fa-thumbs-down"></i>
-              <% end %>
-              <p class="red"><%= position.cached_votes_down %></p>
+              <div>
+                <%= link_to like_deputy_path(@deputy, position_id: position.id, like: true), method: 'post', remote: true do %>
+                  <i class="far fa-thumbs-up"></i>
+                <% end %>
+                <p class="green"><%= position.cached_votes_up %></p>
+              </div>
+              <div>
+                <%= link_to like_deputy_path(@deputy, position_id: position.id, like: false), method: 'post', remote: true do %>
+                  <i class="far fa-thumbs-down"></i>
+                <% end %>
+                <p class="red"><%= position.cached_votes_down %></p>
+              </div>
             </div>
         <% end %>
 
