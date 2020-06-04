@@ -1,16 +1,9 @@
-<%= javascript_pack_tag 'social-share-button' %>
+<%= content_for(:title) { "#{@deputy.first_name} #{@deputy.last_name} - Député du #{@deputy.department}" } %>
+<%= content_for(:image_url) { @deputy.img } %>
+<%= content_for(:content) { "Découvrez les positions de votes de #{@deputy.first_name} #{@deputy.last_name} à l'Assemblée Nationale sur www.mondepute.info" } %>
 
-<% content_for :head do %>
-  <!-- Facebook Open Graph data -->
-  <meta property="og:title" content="<%= @deputy.first_name %> <%= @deputy.last_name %> - Député du <%= @deputy.department %>" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="<%= request.original_url %>" />
-  <meta property="og:image" content="<%= @deputy.img %>" />
-  <meta property="og:description" content="Découvrez les positions de votes de <%= @deputy.first_name %> <%= @deputy.last_name %> à l'Assemblée Nationale sur www.mondepute.info" />
-  <meta property="og:site_name" content=" Mon Député" />
-<% end %>
 
-<script>
+<!-- <script>
   window.fbAsyncInit = function() {
     FB.init({
       appId            : '2642641032621465',
@@ -21,7 +14,7 @@
   };
 </script>
 
-<script async defer src="https://connect.facebook.net/fr_FR/sdk.js"></script>
+<script async defer src="https://connect.facebook.net/fr_FR/sdk.js"></script> -->
 
 <p class="hidden participation-rate"><%= @participationRate %></p>
 <p class="hidden fronding-rate"><%= @frondingRate %></p>
@@ -52,11 +45,11 @@
         </div>
         <div class="deputy-details-container revenue">
           <% if @yearlyRevenue >= 0%>
-            <p>Moyenne des revenus annuels</p> 
-            
+            <p>Moyenne des revenus annuels</p>
+
             <h3><%= number_with_delimiter( @yearlyRevenue, :delimiter => ' ') %> k€</h3>
             <a href="<%= @deputy.revenue %>" target="blank">Consulter sa déclaration de revenus</a>
-            
+
           <% else %>
             <p>Nous n'avons pas réussi à calculer ses revenus.<p>
             <a href="<%= @deputy.revenue %>" target="blank">Consulter sa déclaration de revenus</a>
@@ -190,7 +183,7 @@
               </div>
             </div>
             <div class="share-buttons">
-              <%= social_share_button_tag('Partager', :url => "http://mondepute.info/#{@deputy.id}", desc: "Découvrez les positions de votes de #{@deputy.first_name} #{@deputy.last_name} à l'Assemblée Nationale sur www.mondepute.info") %>
+              <%= social_share_button_tag("#{@deputy.first_name} #{@deputy.last_name}", url: "http://mondepute.info/deputies/#{@deputy.id}", image: "#{@deputy.img}", desc: "Découvrez les positions de votes de #{@deputy.first_name} #{@deputy.last_name} à l Assemblée Nationale sur www.mondepute.info") %>
             </div>
         <% else %>
           <div class="law-card-interaction-card">
