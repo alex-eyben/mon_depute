@@ -3,7 +3,7 @@
 <%= content_for(:content) { "Découvrez les positions de votes de #{@deputy.first_name} #{@deputy.last_name} à l'Assemblée Nationale sur www.mondepute.info" } %>
 
 
-<!-- <script>
+<script>
   window.fbAsyncInit = function() {
     FB.init({
       appId            : '2642641032621465',
@@ -14,7 +14,7 @@
   };
 </script>
 
-<script async defer src="https://connect.facebook.net/fr_FR/sdk.js"></script> -->
+<script async defer src="https://connect.facebook.net/fr_FR/sdk.js"></script>
 
 <p class="hidden participation-rate"><%= @participationRate %></p>
 <p class="hidden fronding-rate"><%= @frondingRate %></p>
@@ -128,15 +128,6 @@
       <% end %>
       <div class="law-card <%= position.deputy_position.downcase %>">
         <div class="law-card-details">
-          <% if position.deputy_position == "nonVotant" %>
-            <h4>Non votant lors du vote</h4>
-          <% elsif position.deputy_position == "Absent" %>
-            <h4>Absent lors du vote</h4>
-          <% elsif position.deputy_position == "abstention" %>
-            <h4>S'est abstenu lors du vote</h4>
-          <% else %>
-            <h4>A voté <%= position.deputy_position %></h4>
-          <% end %>
           <% if position.law.title.length > 110 %>
             <h3><%= position.law.title.truncate(110, separator: ' ') %></h3>
           <% else %>
@@ -165,10 +156,19 @@
           </ul>
         </div>
 
-        <% if user_signed_in? %>
-          <div class="law-card-interaction-card">
-            <p>Donnez votre avis</p>
-            <div class="interaction-like">
+      <div class="law-card-interaction-card">
+        <% if position.deputy_position == "nonVotant" %>
+          <h4>Non votant lors du vote</h4>
+        <% elsif position.deputy_position == "Absent" %>
+          <h4>Absent lors du vote</h4>
+        <% elsif position.deputy_position == "abstention" %>
+          <h4>S'est abstenu lors du vote</h4>
+        <% else %>
+          <h4>A voté <%= position.deputy_position %></h4>
+        <% end %>
+        <p>Donnez votre avis</p>
+        <div class="interaction-like">
+          <% if user_signed_in? %>
               <div>
                 <%= link_to like_deputy_path(@deputy, position_id: position.id, like: true), method: 'post', remote: true do %>
                   <i class="far fa-thumbs-up <%= @user.liked? position %>"></i>
@@ -181,14 +181,7 @@
                 <% end %>
                 <p class="red"><%= position.cached_votes_down %></p>
               </div>
-            </div>
-            <div class="share-buttons">
-              <%= social_share_button_tag("#{@deputy.first_name} #{@deputy.last_name}", url: "http://mondepute.info/deputies/#{@deputy.id}", image: "#{@deputy.img}", desc: "Découvrez les positions de votes de #{@deputy.first_name} #{@deputy.last_name} à l Assemblée Nationale sur www.mondepute.info") %>
-            </div>
-        <% else %>
-          <div class="law-card-interaction-card">
-            <p>Donnez votre avis</p>
-            <div class="interaction-like">
+          <% else %>
               <div>
                 <%= link_to like_deputy_path(@deputy, position_id: position.id, like: true), method: 'post', remote: true do %>
                   <i class="far fa-thumbs-up"></i>
@@ -201,9 +194,13 @@
                 <% end %>
                 <p class="red"><%= position.cached_votes_down %></p>
               </div>
-            </div>
-        <% end %>
-
+          <% end %>
+        </div>
+          <div class="share-buttons">
+            <%= social_share_button_tag("#{@deputy.first_name} #{@deputy.last_name}", url: "http://mondepute.info/deputies/#{@deputy.id}", image: "#{@deputy.img}", desc: "Découvrez les positions de votes de #{@deputy.first_name} #{@deputy.last_name} à l Assemblée Nationale sur www.mondepute.info") %>
+          </div>
+      </div>
+  
         <!-- Modal -->
         <div class="modal fade" id="modal-<%= position.law.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
@@ -234,7 +231,6 @@
               </div>
 
             </div>
-          </div>
         </div>
 
         </div>
