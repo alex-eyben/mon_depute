@@ -27,9 +27,7 @@
   <body class="<%= params[:controller] %>-<%=params[:action] %>">
     <%= render 'shared/navbar' %>
     <%= render 'shared/flashes' %>
-    <div class="content-wrapper">
-      <%= yield %>
-    </div>
+    <%= yield %>
     <%= render 'shared/footer' %>
   </body>
 </html>
