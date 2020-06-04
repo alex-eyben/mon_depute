@@ -43,3 +43,8 @@ document.addEventListener('turbolinks:load', () => {
   initNotification();
   initProgressbar();
 });
+
+
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})

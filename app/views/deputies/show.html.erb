@@ -54,7 +54,7 @@
           <% if @yearlyRevenue >= 0%>
             <p>Moyenne des revenus annuels</p> 
             
-            <h3><%= number_with_delimiter( @yearlyRevenue, :delimiter => ' ') %> k€</h3>
+            <h3><span data-toggle="tooltip" data-placement="right" title="Les revenus sont calculés sur les trois dernières années déclarées auprès de la Haute Autorité pour la Transparence de la Vie Publique"><%= number_with_delimiter( @yearlyRevenue, :delimiter => ' ') %> k€</span></h3>
             <a href="<%= @deputy.revenue %>" target="blank">Consulter sa déclaration de revenus</a>
             
           <% else %>
