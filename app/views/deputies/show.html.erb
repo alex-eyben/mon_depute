@@ -43,10 +43,10 @@
         <div class="deputy-details-container revenue">
           <% if @yearlyRevenue >= 0%>
             <p>Moyenne des revenus annuels</p> 
-            <div class="container-revenue-number">
+            
             <h3><%= number_with_delimiter( @yearlyRevenue, :delimiter => ' ') %> k€</h3>
             <a href="<%= @deputy.revenue %>" target="blank">Consulter sa déclaration de revenus</a>
-            </div>
+            
           <% else %>
             <p>Nous n'avons pas réussi à calculer ses revenus.<p>
             <a href="<%= @deputy.revenue %>" target="blank">Consulter sa déclaration de revenus</a>

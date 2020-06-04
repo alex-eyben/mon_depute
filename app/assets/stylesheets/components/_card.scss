@@ -53,21 +53,26 @@
 }
 
 .deputy-details-container.revenue {
+  text-align: left;
   p {
     font-size: 0.9;
-    text-align: left;
+    
   }
   a {
     font-size: 0.7rem;
+    margin-bottom: 10px;
   }
   h3{
+    font-size: 1.5rem;
     margin-bottom: 0px;
+    margin-top: 5px;
+  }
+  .quote{
+    font-size: 0.7rem;
+    
   }
 }
-.quote{
-  font-size: 0.7rem;
-  text-align: center;
-}
+
 
 .container-revenue-number{
  margin-top: 5px;
