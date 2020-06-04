@@ -35,10 +35,18 @@
           </div>
         </div>
         <div class="deputy-card-social-container">
+          <% if @deputy.facebook != "N/A" %>
           <a href="https://www.facebook.com/<%= @deputy.facebook %>" target="blank"><i class="fab fa-facebook-f"></i></a>
+          <% end %>
+          <% if @deputy.twitter != "N/A" %>
           <a href="https://twitter.com/<%= @deputy.twitter %>" target="blank"><i class="fab fa-twitter"></i></a>
+          <% end %>
+          <% if @deputy.email != "N/A" %>
           <a href="mailto:<%= @deputy.email %>" target="blank"><i class="far fa-envelope"></i></a>
-          <a href="<%= @deputy.website %>" target="blank"><i class="fab fa-wordpress-simple"></i></a>
+          <% end %>
+          <% if @deputy.website != "N/A" %>
+          <a href="http://<%= @deputy.website %>/" target="blank"><i class="fab fa-wordpress-simple"></i></a>
+          <% end %>
         </div>
         <div class="deputy-details-container revenue">
           <% if @yearlyRevenue%>
