@@ -53,12 +53,35 @@
 }
 
 .deputy-details-container.revenue {
+  text-align: left;
   p {
-    font-size: 0.7rem;
+    font-size: 0.9;
+    
   }
   a {
     font-size: 0.7rem;
+    margin-bottom: 10px;
   }
+  h3{
+    font-size: 1.5rem;
+    margin-bottom: 0px;
+    margin-top: 5px;
+  }
+  .quote{
+    font-size: 0.7rem;
+    
+  }
+}
+.deputy-details-container.revenue a:hover{
+  text-decoration: underline;
+}
+
+
+.container-revenue-number{
+ margin-top: 5px;
+ display: flex;
+ justify-content: space-evenly;
+ align-items: baseline;; 
 }
 
 .deputy-details-container p {
@@ -70,7 +93,8 @@
 }
 
 .deputy-card-social-container .fab,
-.deputy-card-social-container .far {
+.deputy-card-social-container .far,
+.deputy-card-social-container .fas {
   background-color: $deep-green;
   color: $white;
   border-radius: 50%;
