@@ -1,10 +1,13 @@
-// const initNotification = () => {
-//   const followButton = document.querySelector(".follow")
-//   const dropdownButton = document.querySelector(".notif")
+const initNotification = () => {
+  const unFollowButton = document.querySelector(".button-danger .follow")
+  const dropdownButton = document.querySelector(".dropdown-toggle")
+  if (unFollowButton){
+    unFollowButton.addEventListener("click", (event) => {
+      console.log("coucou");
+      console.log(event);
+      // dropdownButton.classList.add
+    });
+  }
+};
 
-//   followButton.addEventListener("click", (event) => {
-//     dropdownButton.classList.remove("hidden");
-//   });
-// };
-
-// export { initNotification };
+export { initNotification };

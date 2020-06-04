@@ -2,6 +2,7 @@
   justify-content: space-between;
   background: $white;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  height: 65px;
 }
 
 .navbar-lewagon .navbar-collapse {
@@ -20,7 +21,7 @@
 }
 
 .form-navbar #location-search{
-  min-width: 450px ;
+  min-width: 650px ;
 }
 
 .dropdown-toggle {

@@ -26,10 +26,11 @@ p {
   color: $gray;
   font-weight: 300;
 }
-.content-wrapper {
-  min-height: calc(100vh - 77px - 41px);
-}
 
 a:hover {
   text-decoration: none;
+}
+
+.content-wrapper {
+  min-height: calc(100vh - 65px - 40px);
 }

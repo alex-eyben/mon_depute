@@ -23,7 +23,7 @@
 
 <p class="hidden participation-rate"><%= @participationRate %></p>
 <p class="hidden fronding-rate"><%= @frondingRate %></p>
-<div class="container-deputy">
+<div class="container-deputy content-wrapper ">
   <div class="deputy-card">
      <div class="deputy-card-container">
         <div class="deputy-card-avatar-container avatar-bordered">
@@ -49,14 +49,15 @@
           <% end %>
         </div>
         <div class="deputy-details-container revenue">
-          <% if @yearlyRevenue%>
-            <h3><%= @yearlyRevenue %>k€</h3>
-            <p>Moyenne des revenus annuels sur les trois dernières années connues.
-            <a href="<%= @deputy.revenue %>" target="blank">Consulter sa déclaration de revenus</a></p>
+          <% if @yearlyRevenue >= 0%>
+            <p>Moyenne des revenus annuels</p> 
+            
+            <h3><%= number_with_delimiter( @yearlyRevenue, :delimiter => ' ') %> k€</h3>
+            <a href="<%= @deputy.revenue %>" target="blank">Consulter sa déclaration de revenus</a>
+            
           <% else %>
-            <h3>?k€</h3>
-            <p>Nous n'avons pas réussi à calculer ses revenus.
-            <a href="<%= @deputy.revenue %>" target="blank">Consulter sa déclaration de revenus</a></p>
+            <p>Nous n'avons pas réussi à calculer ses revenus.<p>
+            <a href="<%= @deputy.revenue %>" target="blank">Consulter sa déclaration de revenus</a>
           <% end %>
         </div>
 
@@ -69,22 +70,23 @@
           <div class="chart" id="fronde"></div>
         </div>
      </div>
-
-    <% if user_signed_in? %>
+    <%= render 'followbutton' %>
+    <%= yield %>
+<!--     <% if user_signed_in? %>
       <% if @user.voted_for? @deputy%>
-        <%= link_to unfollow_deputy_path(@deputy), class: 'button button-danger follow width-grow' do %>
+        <%= link_to unfollow_deputy_path(@deputy), remote: true, method: 'post', class: 'button button-danger follow width-grow' do %>
           Ne plus suivre
         <% end %>
       <% else %>
-        <%= link_to follow_deputy_path(@deputy), class: 'button button-primary follow width-grow' do %>
+        <%= link_to follow_deputy_path(@deputy), remote: true, method: 'post', class: 'button button-primary follow width-grow' do %>
           Suivre
         <% end %>
       <% end %>
     <% else %>
-      <%= link_to follow_deputy_path(@deputy), class: 'button button-primary follow width-grow' do %>
+      <%= link_to follow_deputy_path(@deputy), remote:true, method: 'post', class: 'button button-primary follow width-grow' do %>
         Suivre
       <% end %>
-    <% end %>
+    <% end %> -->
   </div>
 
   <div class="laws">
@@ -93,7 +95,7 @@
           <% if @tag %>
             <p class="hidden filtered-participation-rate"><%= @filteredParticipationRate %></p>
             <%= link_to deputy_path(@deputy) do %>
-              <span class="categorie-label-top"><%= @tag.split(" ").reject{ |word| word == "-"}.map(&:capitalize).unshift("#").join %> 
+              <span class="categorie-label-top"><%= @tag.split(" ").reject{ |word| word == "-"}.map(&:capitalize).unshift("#").join %>
                 <i class="fas fa-times"></i>
               </span>
             <% end %>
@@ -129,9 +131,17 @@
       <% if position.deputy_position == nil %>
         <% position.deputy_position = "Absent" %>
       <% end %>
-      <div class="law-card">
+      <div class="law-card <%= position.deputy_position.downcase %>">
         <div class="law-card-details">
-          
+          <% if position.deputy_position == "nonVotant" %>
+            <h4>Non votant lors du vote</h4>
+          <% elsif position.deputy_position == "Absent" %>
+            <h4>Absent lors du vote</h4>
+          <% elsif position.deputy_position == "abstention" %>
+            <h4>S'est abstenu lors du vote</h4>
+          <% else %>
+            <h4>A voté <%= position.deputy_position %></h4>
+          <% end %>
           <% if position.law.title.length > 110 %>
             <h3><%= position.law.title.truncate(110, separator: ' ') %></h3>
           <% else %>
@@ -161,30 +171,38 @@
         </div>
 
         <% if user_signed_in? %>
-          <div class="law-card-interaction-card <%= position.deputy_position.downcase %>">
-            <h4><%= position.deputy_position.capitalize %></h4>
+          <div class="law-card-interaction-card">
+            <p>Donnez votre avis</p>
             <div class="interaction-like">
-              <p class="green"><%= position.cached_votes_up %></p>
-              <%= link_to like_deputy_path(@deputy, position_id: position.id, like: true) do %>
-                <i class="far fa-thumbs-up <%= @user.liked? position %>"></i>
-              <% end %>
-              <%= link_to like_deputy_path(@deputy, position_id: position.id, like: false) do %>
-                <i class="far fa-thumbs-down <%= @user.disliked? position %>"></i>
-              <% end %>
-              <p class="red"><%= position.cached_votes_down %></p>
+              <div>
+                <%= link_to like_deputy_path(@deputy, position_id: position.id, like: true), method: 'post', remote: true do %>
+                  <i class="far fa-thumbs-up <%= @user.liked? position %>"></i>
+                <% end %>
+                <p class="green"><%= position.cached_votes_up %></p>
+              </div>
+              <div>
+                <%= link_to like_deputy_path(@deputy, position_id: position.id, like: false), method: 'post', remote: true do %>
+                  <i class="far fa-thumbs-down <%= @user.disliked? position %>"></i>
+                <% end %>
+                <p class="red"><%= position.cached_votes_down %></p>
+              </div>
             </div>
         <% else %>
-          <div class="law-card-interaction-card <%= position.deputy_position.downcase %>">
-            <h4><%= position.deputy_position.capitalize %></h4>
+          <div class="law-card-interaction-card">
+            <p>Donnez votre avis</p>
             <div class="interaction-like">
-              <p class="green"><%= position.cached_votes_up %></p>
-              <%= link_to like_deputy_path(@deputy, position_id: position.id, like: true) do %>
-                <i class="far fa-thumbs-up "></i>
-              <% end %>
-              <%= link_to like_deputy_path(@deputy, position_id: position.id, like: false) do %>
-                <i class="far fa-thumbs-down"></i>
-              <% end %>
-              <p class="red"><%= position.cached_votes_down %></p>
+              <div>
+                <%= link_to like_deputy_path(@deputy, position_id: position.id, like: true), method: 'post', remote: true do %>
+                  <i class="far fa-thumbs-up"></i>
+                <% end %>
+                <p class="green"><%= position.cached_votes_up %></p>
+              </div>
+              <div>
+                <%= link_to like_deputy_path(@deputy, position_id: position.id, like: false), method: 'post', remote: true do %>
+                  <i class="far fa-thumbs-down"></i>
+                <% end %>
+                <p class="red"><%= position.cached_votes_down %></p>
+              </div>
             </div>
         <% end %>
 
@@ -194,7 +212,7 @@
             <div class="modal-image">
             </div>
             <div class="modal-content">
-              
+
               <div>
                 <div class="modal-header">
                   <h4 class="modal-title" id="exampleModalLabel"><%= position.law.title %></h4>
@@ -216,7 +234,7 @@
                   <a href="<%= position.law.ressource_link %>" target="blank" class="button button-primary">Voir plus sur Vie-publique.fr</a>
                 </div>
               </div>
-              
+
             </div>
           </div>
         </div>
