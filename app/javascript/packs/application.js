@@ -32,6 +32,8 @@ import { initProgressbar } from '../plugins/init_progressbar';
 import { initSweetalert } from '../plugins/init_sweetalert';
 import { initRoughnotation } from '../plugins/init_roughnotation';
 import { initNotification } from '../plugins/init_notification';
+import { followButton } from '../components/follow_button';
+// import {  } from '../behaviors/listen_follow_button';
 
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
@@ -42,4 +44,5 @@ document.addEventListener('turbolinks:load', () => {
   // initSweetalert();
   initNotification();
   initProgressbar();
+  followButton();
 });

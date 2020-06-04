@@ -21,7 +21,7 @@
 <p class="hidden participation-rate"><%= @participationRate %></p>
 <p class="hidden fronding-rate"><%= @frondingRate %></p>
 <div class="container-deputy content-wrapper ">
-  <div class="deputy-card">
+  <div class="deputy-card", data-id="<%= @deputy.id %>", data-name='<%= "#{@deputy.first_name} #{@deputy.last_name}" %>', data-img=<%= @deputy.img %>>
      <div class="deputy-card-container">
         <div class="deputy-card-avatar-container avatar-bordered">
           <img src="<%= @deputy.img %>" alt="" class="avatar-bordered">
@@ -67,24 +67,16 @@
           <div class="chart" id="fronde"></div>
         </div>
      </div>
-    <%= render 'followbutton' %>
-    <%= yield %>
-<!--     <% if user_signed_in? %>
-      <% if @user.voted_for? @deputy%>
-        <%= link_to unfollow_deputy_path(@deputy), remote: true, method: 'post', class: 'button button-danger follow width-grow' do %>
-          Ne plus suivre
-        <% end %>
+      <% if user_signed_in? %>
+        <div class="follow-button">
+
+        </div>
       <% else %>
-        <%= link_to follow_deputy_path(@deputy), remote: true, method: 'post', class: 'button button-primary follow width-grow' do %>
+        <%= link_to follow_guest_deputy_path(@deputy), method: 'get', class: 'button button-primary follow width-grow' do %>
           Suivre
         <% end %>
       <% end %>
-    <% else %>
-      <%= link_to follow_deputy_path(@deputy), remote:true, method: 'post', class: 'button button-primary follow width-grow' do %>
-        Suivre
-      <% end %>
-    <% end %> -->
-  </div>
+    </div>
 
   <div class="laws">
     <div class="laws-top">

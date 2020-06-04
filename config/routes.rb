@@ -11,8 +11,9 @@ Rails.application.routes.draw do
     end
     member do
       get :like
-      get :follow
-      get :unfollow
+      post :follow
+      get :follow_guest
+      get :is_followed
     end
   end
 end
