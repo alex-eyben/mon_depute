@@ -1,5 +1,7 @@
 <%= content_for(:title) { "#{@deputy.first_name} #{@deputy.last_name} - Député du #{@deputy.department}" } %>
 <%= content_for(:image_url) { @deputy.img } %>
+<%= content_for(:image_width) { "150" } %>
+<%= content_for(:image_height) { "192" } %>
 <%= content_for(:content) { "Découvrez les positions de votes de #{@deputy.first_name} #{@deputy.last_name} à l'Assemblée Nationale sur www.mondepute.info" } %>
 
 
@@ -200,7 +202,7 @@
             <%= social_share_button_tag("#{@deputy.first_name} #{@deputy.last_name}", url: "http://mondepute.info/deputies/#{@deputy.id}", image: "#{@deputy.img}", desc: "Découvrez les positions de votes de #{@deputy.first_name} #{@deputy.last_name} à l Assemblée Nationale sur www.mondepute.info") %>
           </div>
       </div>
-  
+
         <!-- Modal -->
         <div class="modal fade" id="modal-<%= position.law.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
