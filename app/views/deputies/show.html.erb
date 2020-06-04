@@ -41,15 +41,15 @@
           <a href="<%= @deputy.website %>" target="blank"><i class="fab fa-wordpress-simple"></i></a>
         </div>
         <div class="deputy-details-container revenue">
-          <% if @yearlyRevenue%>
+          <% if @yearlyRevenue >= 0%>
             <p>Moyenne des revenus annuels</p> 
-            <p class="quote">sur les trois dernières années connues.</p>
+            <div class="container-revenue-number">
             <h3><%= number_with_delimiter( @yearlyRevenue, :delimiter => ' ') %> k€</h3>
-            <p><a href="<%= @deputy.revenue %>" target="blank">Consulter sa déclaration de revenus</a></p>
+            <a href="<%= @deputy.revenue %>" target="blank">Consulter sa déclaration de revenus</a>
+            </div>
           <% else %>
-            <h3>?k€</h3>
-            <p>Nous n'avons pas réussi à calculer ses revenus.
-            <a href="<%= @deputy.revenue %>" target="blank">Consulter sa déclaration de revenus</a></p>
+            <p>Nous n'avons pas réussi à calculer ses revenus.<p>
+            <a href="<%= @deputy.revenue %>" target="blank">Consulter sa déclaration de revenus</a>
           <% end %>
         </div>
 
