@@ -67,7 +67,10 @@ class DeputiesController < ApplicationController
     @user = current_user
     @deputy = Deputy.find(params[:id])
     @deputy.liked_by @user
-    redirect_to deputy_path(@deputy)
+    # redirect_to deputy_path(@deputy)
+    redirect_to request.referrer
+    # render :nothing => true
+    # render partial: 'followbutton'
   end
 
   def unfollow
@@ -76,6 +79,7 @@ class DeputiesController < ApplicationController
     @deputy = Deputy.find(params[:id])
     @deputy.unliked_by @user
     redirect_to request.referrer
+    # render partial: 'followbutton'
   end
 
   def results
