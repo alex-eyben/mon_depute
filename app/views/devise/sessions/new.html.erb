@@ -1,5 +1,5 @@
-<div class="d-flex flex-column align-items-center pt-5">
-  <h2>Log in</h2>
+<div class="d-flex flex-column align-items-center pt-5 content-wrapper">
+  <h2>Se connecter</h2>
 
   <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="form-inputs">
@@ -14,7 +14,8 @@
     </div>
 
     <div class="form-actions">
-      <%= f.button :submit, "Log in" %>
+      <%= f.button :submit, "Se connecter",
+                    class: "button button-primary width-grow mb-4"  %>
     </div>
   <% end %>
 
