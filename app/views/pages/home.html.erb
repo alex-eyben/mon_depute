@@ -16,7 +16,7 @@
   </div>
 </div>
 <div class="d-flex flex-column align-items-center justify-content-center">
-  
+
   <h3 class="mt-5 pt-3"> Les députés avec les <span class="highlight">plus hauts revenus</span></h3>
   <p>Les revenus sont calculés sur les trois dernières années déclarées auprès de la Haute Autorité pour la Transparence de la Vie Publique.</p>
   <div class="d-flex justify-content-between col-lg-8 col-md-10 col-sm-10 my-3 ">
@@ -28,11 +28,11 @@
       </div>
     <% end %>
   </div>
-   
+
   <h3 class="mt-5 pt5"> Les députés <span class="highlight">les moins présents</span> lors des votes</h3>
   <p>Ce taux de présence concerne les 33 scrutins publics solennels que nous avons analysés à ce jour.</p>
   <div class="d-flex justify-content-between col-lg-8 col-md-10 col-sm-10 my-3">
-    <% Deputy.order(presence: :desc).reject{|deputy|deputy.last_name == "Galliard-Minier"}.last(4).each do |deputy| %>
+    <% Deputy.order(presence: :desc).reject{|deputy|deputy.last_name == "Galliard-Minier" || deputy.first_name == "Sandrine"}.last(4).each do |deputy| %>
       <div class="d-flex flex-column align-items-center flex-fill">
         <%=link_to(image_tag(deputy.img), deputy_path(deputy), :class=>"d-inline-flex avatar-bordered") %>
         <p class="d-inline-flex justify-content-center name-deputy-home"><%= deputy.first_name %> <%= deputy.last_name %></p>
