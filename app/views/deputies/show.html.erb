@@ -1,3 +1,5 @@
+<%= javascript_pack_tag 'social-share-button' %>
+
 <% content_for :head do %>
   <!-- Facebook Open Graph data -->
   <meta property="og:title" content="<%= @deputy.first_name %> <%= @deputy.last_name %> - Député du <%= @deputy.department %>" />
@@ -186,6 +188,9 @@
                 <% end %>
                 <p class="red"><%= position.cached_votes_down %></p>
               </div>
+            </div>
+            <div class="share-buttons">
+              <%= social_share_button_tag('Partager', :url => "http://mondepute.info/#{@deputy.id}", desc: "Découvrez les positions de votes de #{@deputy.first_name} #{@deputy.last_name} à l'Assemblée Nationale sur www.mondepute.info") %>
             </div>
         <% else %>
           <div class="law-card-interaction-card">
