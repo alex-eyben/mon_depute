@@ -38,6 +38,7 @@ gem 'acts-as-taggable-on', '~> 6.0'
 
 gem 'rubyzip'
 gem 'acts_as_votable'
+gem 'social-share-button'
 
 gem 'turbolinks_render'
 

@@ -39,7 +39,7 @@ document.addEventListener('turbolinks:load', () => {
   console.log("hello from turbo");
   initRoughnotation();
   initAutocomplete();
-  initSweetalert();
+  // initSweetalert();
   initNotification();
   initProgressbar();
 });
