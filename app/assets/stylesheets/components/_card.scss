@@ -34,10 +34,12 @@
 }
 
 .deputy-card-avatar-container-details {
-  margin-left: 20px;
-  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   h3 {
     font-size: 1.3rem;
+    
   }
   h4 {
     font-size: 1.2rem;
@@ -54,11 +56,14 @@
 
 .deputy-details-container.revenue {
   p {
-    font-size: 0.7rem;
+    font-size: 0.9;
   }
   a {
     font-size: 0.7rem;
   }
+}
+.quote{
+  font-size: 0.7rem;
 }
 
 .deputy-details-container p {
