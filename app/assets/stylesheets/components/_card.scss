@@ -89,7 +89,6 @@
 .law-card {
   display: flex;
   justify-content: space-between;
-  align-items: center;
   border-radius: 3px;
   box-shadow:  2px 2px 10px #e4e4e4;
   padding-right: 30px;
@@ -146,13 +145,12 @@
 .law-card-interaction-card {
   text-align: center;
   margin-left: 15px;
-  justify-content: space-between;
   display:flex;
   flex-direction: column;
   flex-grow: 1;
   p {
-    margin-top: 20px;
     font-size: 0.8rem;
+    margin-bottom: 3px;
   }
 }
 
@@ -171,6 +169,9 @@
 .interaction-like {
   display:flex;
   align-items: baseline;
+  p {
+    margin-top: 10px;
+  }
 }
 
 .interaction-like {

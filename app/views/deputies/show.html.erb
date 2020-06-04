@@ -162,33 +162,37 @@
 
         <% if user_signed_in? %>
           <div class="law-card-interaction-card">
+            <p>Donnez votre avis</p>
             <div class="interaction-like">
               <div>
-                <p class="green"><%= position.cached_votes_up %></p>
                 <%= link_to like_deputy_path(@deputy, position_id: position.id, like: true) do %>
                   <i class="far fa-thumbs-up <%= @user.liked? position %>"></i>
                 <% end %>
+                <p class="green"><%= position.cached_votes_up %></p>
               </div>
               <div>
-                <p class="red"><%= position.cached_votes_down %></p>
                 <%= link_to like_deputy_path(@deputy, position_id: position.id, like: false) do %>
                   <i class="far fa-thumbs-down <%= @user.disliked? position %>"></i>
                 <% end %>
+                <p class="red"><%= position.cached_votes_down %></p>
               </div>
             </div>
-            <p>Donnez votre avis</p>
         <% else %>
-          <div class="law-card-interaction-card <%= position.deputy_position.downcase %>">
-            <h4><%= position.deputy_position.capitalize %></h4>
+          <div class="law-card-interaction-card">
+            <p>Donnez votre avis</p>
             <div class="interaction-like">
-              <p class="green"><%= position.cached_votes_up %></p>
-              <%= link_to like_deputy_path(@deputy, position_id: position.id, like: true) do %>
-                <i class="far fa-thumbs-up "></i>
-              <% end %>
-              <%= link_to like_deputy_path(@deputy, position_id: position.id, like: false) do %>
-                <i class="far fa-thumbs-down"></i>
-              <% end %>
-              <p class="red"><%= position.cached_votes_down %></p>
+              <div>
+                <%= link_to like_deputy_path(@deputy, position_id: position.id, like: true) do %>
+                  <i class="far fa-thumbs-up"></i>
+                <% end %>
+                <p class="green"><%= position.cached_votes_up %></p>
+              </div>
+              <div>
+                <%= link_to like_deputy_path(@deputy, position_id: position.id, like: false) do %>
+                  <i class="far fa-thumbs-down"></i>
+                <% end %>
+                <p class="red"><%= position.cached_votes_down %></p>
+              </div>
             </div>
         <% end %>
 
