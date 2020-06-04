@@ -196,14 +196,10 @@
 .interaction-like {
   display:flex;
   align-items: baseline;
+  justify-content: space-evenly;
   p {
     margin-top: 5px;
   }
-}
-
-.interaction-like {
-  display: flex;
-  justify-content: space-around;
 }
 
 .interaction-like .far {

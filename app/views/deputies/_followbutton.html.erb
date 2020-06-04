@@ -1,15 +1,15 @@
 <% if user_signed_in? %>
   <% if @user.voted_for? @deputy%>
-    <%= link_to unfollow_deputy_path(@deputy), remote: true, method: 'post', class: 'button button-danger follow width-grow' do %>
+    <%= link_to unfollow_deputy_path(@deputy), class: 'button button-danger follow width-grow' do %>
       Ne plus suivre
     <% end %>
   <% else %>
-    <%= link_to follow_deputy_path(@deputy), remote: true, method: 'post', class: 'button button-primary follow width-grow' do %>
+    <%= link_to follow_deputy_path(@deputy), class: 'button button-primary follow width-grow' do %>
       Suivre
     <% end %>
   <% end %>
 <% else %>
-  <%= link_to follow_deputy_path(@deputy), remote:true, method: 'post', class: 'button button-primary follow width-grow' do %>
+  <%= link_to follow_deputy_path(@deputy), class: 'button button-primary follow width-grow' do %>
     Suivre
   <% end %>
 <% end %>

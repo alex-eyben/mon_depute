@@ -170,26 +170,26 @@
         <div class="interaction-like">
           <% if user_signed_in? %>
               <div>
-                <%= link_to like_deputy_path(@deputy, position_id: position.id, like: true), method: 'post', remote: true do %>
+                <%= link_to like_deputy_path(@deputy, position_id: position.id, like: true) do %>
                   <i class="far fa-thumbs-up <%= @user.liked? position %>"></i>
                 <% end %>
                 <p class="green"><%= position.cached_votes_up %></p>
               </div>
               <div>
-                <%= link_to like_deputy_path(@deputy, position_id: position.id, like: false), method: 'post', remote: true do %>
+                <%= link_to like_deputy_path(@deputy, position_id: position.id, like: false) do %>
                   <i class="far fa-thumbs-down <%= @user.disliked? position %>"></i>
                 <% end %>
                 <p class="red"><%= position.cached_votes_down %></p>
               </div>
           <% else %>
               <div>
-                <%= link_to like_deputy_path(@deputy, position_id: position.id, like: true), method: 'post', remote: true do %>
+                <%= link_to like_deputy_path(@deputy, position_id: position.id, like: true) do %>
                   <i class="far fa-thumbs-up"></i>
                 <% end %>
                 <p class="green"><%= position.cached_votes_up %></p>
               </div>
               <div>
-                <%= link_to like_deputy_path(@deputy, position_id: position.id, like: false), method: 'post', remote: true do %>
+                <%= link_to like_deputy_path(@deputy, position_id: position.id, like: false) do %>
                   <i class="far fa-thumbs-down"></i>
                 <% end %>
                 <p class="red"><%= position.cached_votes_down %></p>
