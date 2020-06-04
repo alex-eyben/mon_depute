@@ -61,22 +61,23 @@
           <div class="chart" id="fronde"></div>
         </div>
      </div>
-
-    <% if user_signed_in? %>
+    <%= render 'followbutton' %>
+    <%= yield %>
+<!--     <% if user_signed_in? %>
       <% if @user.voted_for? @deputy%>
-        <%= link_to unfollow_deputy_path(@deputy), class: 'button button-danger follow width-grow' do %>
+        <%= link_to unfollow_deputy_path(@deputy), remote: true, method: 'post', class: 'button button-danger follow width-grow' do %>
           Ne plus suivre
         <% end %>
       <% else %>
-        <%= link_to follow_deputy_path(@deputy), class: 'button button-primary follow width-grow' do %>
+        <%= link_to follow_deputy_path(@deputy), remote: true, method: 'post', class: 'button button-primary follow width-grow' do %>
           Suivre
         <% end %>
       <% end %>
     <% else %>
-      <%= link_to follow_deputy_path(@deputy), class: 'button button-primary follow width-grow' do %>
+      <%= link_to follow_deputy_path(@deputy), remote:true, method: 'post', class: 'button button-primary follow width-grow' do %>
         Suivre
       <% end %>
-    <% end %>
+    <% end %> -->
   </div>
 
   <div class="laws">
@@ -152,10 +153,10 @@
             <h4><%= position.deputy_position.capitalize %></h4>
             <div class="interaction-like">
               <p class="green"><%= position.cached_votes_up %></p>
-              <%= link_to like_deputy_path(@deputy, position_id: position.id, like: true) do %>
+              <%= link_to like_deputy_path(@deputy, position_id: position.id, like: true), method: 'post', remote: true do %>
                 <i class="far fa-thumbs-up <%= @user.liked? position %>"></i>
               <% end %>
-              <%= link_to like_deputy_path(@deputy, position_id: position.id, like: false) do %>
+              <%= link_to like_deputy_path(@deputy, position_id: position.id, like: false), method: 'post', remote: true do %>
                 <i class="far fa-thumbs-down <%= @user.disliked? position %>"></i>
               <% end %>
               <p class="red"><%= position.cached_votes_down %></p>
@@ -165,10 +166,10 @@
             <h4><%= position.deputy_position.capitalize %></h4>
             <div class="interaction-like">
               <p class="green"><%= position.cached_votes_up %></p>
-              <%= link_to like_deputy_path(@deputy, position_id: position.id, like: true) do %>
+              <%= link_to like_deputy_path(@deputy, position_id: position.id, like: true), method: 'post', remote: true do %>
                 <i class="far fa-thumbs-up "></i>
               <% end %>
-              <%= link_to like_deputy_path(@deputy, position_id: position.id, like: false) do %>
+              <%= link_to like_deputy_path(@deputy, position_id: position.id, like: false), method: 'post', remote: true do %>
                 <i class="far fa-thumbs-down"></i>
               <% end %>
               <p class="red"><%= position.cached_votes_down %></p>
@@ -181,7 +182,7 @@
             <div class="modal-image">
             </div>
             <div class="modal-content">
-              
+
               <div>
                 <div class="modal-header">
                   <h4 class="modal-title" id="exampleModalLabel"><%= position.law.title %></h4>
@@ -203,7 +204,7 @@
                   <a href="<%= position.law.ressource_link %>" target="blank" class="button button-primary">Voir plus sur Vie-publique.fr</a>
                 </div>
               </div>
-              
+
             </div>
           </div>
         </div>
