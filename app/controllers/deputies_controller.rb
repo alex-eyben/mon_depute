@@ -59,7 +59,7 @@ class DeputiesController < ApplicationController
       @user.dislikes @position
     end
     flash[:notice] = "Merci d'avoir voté !"
-    redirect_to deputy_path(@deputy)
+    redirect_to request.referrer
   end
 
   def follow
@@ -67,8 +67,8 @@ class DeputiesController < ApplicationController
     @user = current_user
     @deputy = Deputy.find(params[:id])
     @deputy.liked_by @user
-    # redirect_to deputy_path(@deputy)
-    redirect_to request.referrer
+    redirect_to deputy_path(@deputy)
+    # redirect_to request.referrer
     # render :nothing => true
     # render partial: 'followbutton'
   end

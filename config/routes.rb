@@ -10,9 +10,9 @@ Rails.application.routes.draw do
       get :results
     end
     member do
-      post :like
-      post :follow
-      post :unfollow
+      get :like
+      get :follow
+      get :unfollow
     end
   end
 end
