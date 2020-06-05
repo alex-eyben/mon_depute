@@ -57,7 +57,7 @@
   text-align: left;
   p {
     font-size: 0.9;
-    
+
   }
   a {
     font-size: 0.7rem;
@@ -70,7 +70,7 @@
   }
   .quote{
     font-size: 0.7rem;
-    
+
   }
 }
 .deputy-details-container.revenue a:hover{
@@ -82,7 +82,7 @@
  margin-top: 5px;
  display: flex;
  justify-content: space-evenly;
- align-items: baseline;; 
+ align-items: baseline;;
 }
 
 .deputy-details-container p {
@@ -234,4 +234,8 @@
 .share-buttons {
   flex-grow: 1 !important;
   align-items: center !important;
+}
+
+.follow-button {
+  width: 100%;
 }

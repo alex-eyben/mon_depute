@@ -2,7 +2,7 @@ require 'open-uri'
 require 'csv'
 
 class DeputiesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [ :results, :show]
+  skip_before_action :authenticate_user!, only: [:results, :show]
 
   def show
     @deputy = Deputy.find(params[:id])
@@ -63,24 +63,54 @@ class DeputiesController < ApplicationController
   end
 
   def follow
-
     @user = current_user
     @deputy = Deputy.find(params[:id])
-    @deputy.liked_by @user
-    redirect_to deputy_path(@deputy)
+    if @user.voted_for?(@deputy)
+      @deputy.unliked_by @user
+    else
+      @deputy.liked_by @user
+    end
+    respond_to do |format|
+      format.html
+      format.json { render json: { is_followed: @user.voted_for?(@deputy) } }
+    end
+    # redirect_to deputy_path(@deputy)
     # redirect_to request.referrer
     # render :nothing => true
     # render partial: 'followbutton'
   end
 
-  def unfollow
-
+  def follow_guest
     @user = current_user
     @deputy = Deputy.find(params[:id])
-    @deputy.unliked_by @user
-    redirect_to request.referrer
-    # render partial: 'followbutton'
+    @deputy.liked_by @user
+    redirect_to deputy_path(@deputy)
   end
+
+  def is_followed
+    @deputy = Deputy.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.json { render json: { is_followed: @user.voted_for?(@deputy),
+                                   deputies: self.followedDeputies } }
+    end
+    # get_followed_deputies
+  end
+
+  def get_followed_deputies
+    respond_to do |format|
+      format.html
+      format.json { render json: { deputies: self.followedDeputies } }
+    end
+  end
+  # def unfollow
+
+  #   @user = current_user
+  #   @deputy = Deputy.find(params[:id])
+  #   @deputy.unliked_by @user
+  #   redirect_to request.referrer
+  #   # render partial: 'followbutton'
+  # end
 
   def results
     query = params[:query]

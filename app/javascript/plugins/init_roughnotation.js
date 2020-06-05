@@ -22,16 +22,20 @@ const initRoughnotation = () => {
       const annotation = annotate(box, { type: 'box', color: '#FFF176' });
       annotation.show();
     });
-    const followButton = document.querySelector(".follow")
+    const followButton = document.querySelector(".follow-button")
     const dropdownButton = document.querySelector(".dropdown-toggle")
 
     if (followButton) {
+      const annotation = annotate(dropdownButton, { type: 'box', color: '#FFF176' });
       followButton.addEventListener("click", (event) => {
         console.log("coucou");
-        const annotation = annotate(dropdownButton, { type: 'box', color: '#FFF176' });
         annotation.show();
       });
-    }
+      dropdownButton.addEventListener("click", (event) => {
+        console.log("byebye");
+        annotation.hide();
+      });
+    };
   });
 };
 
