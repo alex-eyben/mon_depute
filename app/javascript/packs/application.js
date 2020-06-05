@@ -48,3 +48,8 @@ document.addEventListener('turbolinks:load', () => {
   followButton();
   deputiesDropdown();
 });
+
+
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
