@@ -94,6 +94,14 @@ class DeputiesController < ApplicationController
       format.json { render json: { is_followed: @user.voted_for?(@deputy),
                                    deputies: self.followedDeputies } }
     end
+    # get_followed_deputies
+  end
+
+  def get_followed_deputies
+    respond_to do |format|
+      format.html
+      format.json { render json: { deputies: self.followedDeputies } }
+    end
   end
   # def unfollow
 

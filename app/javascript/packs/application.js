@@ -33,6 +33,7 @@ import { initSweetalert } from '../plugins/init_sweetalert';
 import { initRoughnotation } from '../plugins/init_roughnotation';
 import { initNotification } from '../plugins/init_notification';
 import { followButton } from '../components/follow_button';
+import { deputiesDropdown } from '../components/deputies_dropdown';
 // import {  } from '../behaviors/listen_follow_button';
 
 document.addEventListener('turbolinks:load', () => {
@@ -45,4 +46,5 @@ document.addEventListener('turbolinks:load', () => {
   initNotification();
   initProgressbar();
   followButton();
+  deputiesDropdown();
 });
