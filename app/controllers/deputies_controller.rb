@@ -59,7 +59,7 @@ class DeputiesController < ApplicationController
       @user.dislikes @position
     end
     flash[:notice] = "Merci d'avoir voté !"
-    redirect_to request.referrer
+    redirect_to deputy_path(@deputy)
   end
 
   def follow
