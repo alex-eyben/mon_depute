@@ -80,3 +80,16 @@
     font-weight: 300;
   }
 }
+
+
+@media (max-width: 768px) {
+  .form-navbar #location-search {
+    min-width: 200px;
+  }
+}
+
+@media (max-width: 600px) {
+  .navbar-lewagon {
+    flex-wrap: inherit;
+  }
+}
