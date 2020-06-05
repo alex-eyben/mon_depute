@@ -64,7 +64,6 @@
 }
 
 .chart-details-card {
-  margin-right: 20px;
   text-align: center;
   justify-content: center;
   padding: 10px 20px;
@@ -81,7 +80,7 @@
 }
 
 .chart-details-card.last {
-  padding-left: 30px;
+  margin-left: 30px;
 }
 .chart-details-card .filtered-chart {
   margin: 10px;
@@ -102,4 +101,18 @@
   margin-top: 0;
   font-size: 0.9rem;
   opacity:0.9;
+}
+
+
+@media (max-width: 900px) {
+  .chart-details-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  .chart-details-card.last {
+  margin-top: 10px;
+  margin-left: 00px;
+  }
 }

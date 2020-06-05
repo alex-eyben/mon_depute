@@ -241,7 +241,7 @@
 }
 
 
-@media (max-width: 640px) {
+@media (max-width: 900px) {
   .container-deputy {
     margin: 10px;
     display: block;
@@ -264,14 +264,15 @@
     width: 98% !important;;
   }
   .law-card {
-    padding: 10px;
+    padding: 15px;
     margin-left: 0px;
     margin-bottom: 20px;
     width: 98%;
     display: block;
     h4 {
       margin-bottom: 0;
-      width: 30%;
+      width: 33%;
+      text-align: left;
     }
   }
   .law-card-details {
@@ -292,6 +293,9 @@
     margin-left: 0px;
     align-items: center;
     margin-top: 15px;
-    justify-content: space-between;
+    justify-content: center;
+  }
+  .thumb-down {
+    margin-left: 15px;
   }
 }

@@ -169,7 +169,7 @@
                 <% end %>
                 <p class="green"><%= position.cached_votes_up %></p>
               </div>
-              <div>
+              <div class="thumb-down">
                 <%= link_to like_deputy_path(@deputy, position_id: position.id, like: false) do %>
                   <i class="far fa-thumbs-down <%= @user.disliked? position %>"></i>
                 <% end %>
@@ -182,7 +182,7 @@
                 <% end %>
                 <p class="green"><%= position.cached_votes_up %></p>
               </div>
-              <div>
+              <div class="thumb-down">
                 <%= link_to like_deputy_path(@deputy, position_id: position.id, like: false) do %>
                   <i class="far fa-thumbs-down"></i>
                 <% end %>
@@ -212,7 +212,7 @@
                 <ul class="categorie-container">
                   <% position.law.tag_list.each do |tag|%>
                     <%= link_to deputy_path(@deputy, tag: tag) do %>
-                      <li class="categorie-label"><%= tag %></li>
+                      <li class="categorie-label"><%= tag.split(" ").reject{ |word| word == "-"}.map(&:capitalize).unshift("#").join %></li>
                     <% end %>
                   <% end %>
                 </ul>
