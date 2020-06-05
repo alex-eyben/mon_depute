@@ -118,10 +118,10 @@
   box-shadow:  2px 2px 10px #e4e4e4;
   padding-top: 15px;
   padding-bottom: 20px;
-  padding-left: 30px;
+  padding-left: 30px; // Delete
   margin-bottom: 30px;
-  margin-left: 30px;
-  width: 90%;
+  margin-left: 30px; // Delete
+  width: 90%; // Delete
   h3 {
     font-size: 1.3rem;
   }
@@ -238,4 +238,60 @@
 
 .follow-button {
   width: 100%;
+}
+
+
+@media (max-width: 640px) {
+  .container-deputy {
+    margin: 10px;
+    display: block;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+  .deputy-card {
+    position: inherit;
+    width: 98%;
+  }
+  .laws {
+    display: flex;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+  .laws-top {
+    margin: 0 !important;
+    width: 98% !important;;
+  }
+  .law-card {
+    padding: 10px;
+    margin-left: 0px;
+    margin-bottom: 20px;
+    width: 98%;
+    display: block;
+    h4 {
+      margin-bottom: 0;
+      width: 30%;
+    }
+  }
+  .law-card-details {
+    width: 100%;
+  }
+  .avis {
+    display: none;
+  }
+  .interaction-like {
+    width: 45%;
+    justify-content: space-around;
+  }
+  #filter-paragraph {
+    margin-top: 20px !important;
+  }
+  .law-card-interaction-card {
+    flex-direction: row;
+    margin-left: 0px;
+    align-items: center;
+    margin-top: 15px;
+    justify-content: space-between;
+  }
 }
