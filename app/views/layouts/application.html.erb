@@ -5,11 +5,13 @@
     <%= favicon_link_tag %>
 
     <!-- Facebook Open Graph data -->
-    <meta property="og:title" content="Mon Député" />
-    <meta property="og:type" content="website" />
+    <meta property="og:title" content="<%= yield(:title) || "Mon Député" %>" />
+    <meta property="og:type" content="article" />
     <meta property="og:url" content="<%= request.original_url %>" />
-    <meta property="og:image" content="<%= image_url "cover-image.png" %>" />
-    <meta property="og:description" content="Découvrez qui est votre élu et ses positions de vote à l'Assemblée Nationale" />
+    <meta property="og:image" content="<%= image_url_with_fallback(yield(:image_url)) %>" />
+    <meta property="og:image:width" content="<%= yield(:image_width) || "1200" %>" />
+    <meta property="og:image:height" content="<%= yield(:image_height) || "630" %>" />
+    <meta property="og:description" content="<%= yield(:content) || "Découvrez qui est votre élu et ses positions de vote à l'Assemblée Nationale" %>" />
 
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -21,7 +23,9 @@
 
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
 
-    <%= yield :head %>
+    <%= javascript_pack_tag 'social-share-button' %>
+
+    <%#= yield :head %>
   </head>
 
   <body class="<%= params[:controller] %>-<%=params[:action] %>">
@@ -29,5 +33,6 @@
     <%= render 'shared/flashes' %>
     <%= yield %>
     <%= render 'shared/footer' %>
+
   </body>
 </html>

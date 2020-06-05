@@ -1,14 +1,9 @@
-<%= javascript_pack_tag 'social-share-button' %>
+<%= content_for(:title) { "#{@deputy.first_name} #{@deputy.last_name} - Député du #{@deputy.department}" } %>
+<%= content_for(:image_url) { @deputy.img } %>
+<%= content_for(:image_width) { "150" } %>
+<%= content_for(:image_height) { "192" } %>
+<%= content_for(:content) { "Découvrez les positions de votes de #{@deputy.first_name} #{@deputy.last_name} à l'Assemblée Nationale sur www.mondepute.info" } %>
 
-<% content_for :head do %>
-  <!-- Facebook Open Graph data -->
-  <meta property="og:title" content="<%= @deputy.first_name %> <%= @deputy.last_name %> - Député du <%= @deputy.department %>" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="<%= request.original_url %>" />
-  <meta property="og:image" content="<%= @deputy.img %>" />
-  <meta property="og:description" content="Découvrez les positions de votes de <%= @deputy.first_name %> <%= @deputy.last_name %> à l'Assemblée Nationale sur www.mondepute.info" />
-  <meta property="og:site_name" content=" Mon Député" />
-<% end %>
 
 <script>
   window.fbAsyncInit = function() {
@@ -52,11 +47,11 @@
         </div>
         <div class="deputy-details-container revenue">
           <% if @yearlyRevenue >= 0%>
+
             <p>Moyenne des revenus annuels</p> 
-            
             <h3><span data-toggle="tooltip" data-placement="right" title="Les revenus sont calculés sur les trois dernières années déclarées auprès de la Haute Autorité pour la Transparence de la Vie Publique"><%= number_with_delimiter( @yearlyRevenue, :delimiter => ' ') %> k€</span></h3>
             <a href="<%= @deputy.revenue %>" target="blank">Consulter sa déclaration de revenus</a>
-            
+
           <% else %>
             <p>Nous n'avons pas réussi à calculer ses revenus.<p>
             <a href="<%= @deputy.revenue %>" target="blank">Consulter sa déclaration de revenus</a>
@@ -135,15 +130,6 @@
       <% end %>
       <div class="law-card <%= position.deputy_position.downcase %>">
         <div class="law-card-details">
-          <% if position.deputy_position == "nonVotant" %>
-            <h4>Non votant lors du vote</h4>
-          <% elsif position.deputy_position == "Absent" %>
-            <h4>Absent lors du vote</h4>
-          <% elsif position.deputy_position == "abstention" %>
-            <h4>S'est abstenu lors du vote</h4>
-          <% else %>
-            <h4>A voté <%= position.deputy_position %></h4>
-          <% end %>
           <% if position.law.title.length > 110 %>
             <h3><%= position.law.title.truncate(110, separator: ' ') %></h3>
           <% else %>
@@ -172,44 +158,50 @@
           </ul>
         </div>
 
-        <% if user_signed_in? %>
-          <div class="law-card-interaction-card">
-            <p>Donnez votre avis</p>
-            <div class="interaction-like">
+      <div class="law-card-interaction-card">
+        <% if position.deputy_position == "nonVotant" %>
+          <h4>Non votant lors du vote</h4>
+        <% elsif position.deputy_position == "Absent" %>
+          <h4>Absent lors du vote</h4>
+        <% elsif position.deputy_position == "abstention" %>
+          <h4>S'est abstenu lors du vote</h4>
+        <% else %>
+          <h4>A voté <%= position.deputy_position %></h4>
+        <% end %>
+        <p>Donnez votre avis</p>
+        <div class="interaction-like">
+          <% if user_signed_in? %>
               <div>
-                <%= link_to like_deputy_path(@deputy, position_id: position.id, like: true), method: 'post', remote: true do %>
+                <%= link_to like_deputy_path(@deputy, position_id: position.id, like: true) do %>
                   <i class="far fa-thumbs-up <%= @user.liked? position %>"></i>
                 <% end %>
                 <p class="green"><%= position.cached_votes_up %></p>
               </div>
               <div>
-                <%= link_to like_deputy_path(@deputy, position_id: position.id, like: false), method: 'post', remote: true do %>
+                <%= link_to like_deputy_path(@deputy, position_id: position.id, like: false) do %>
                   <i class="far fa-thumbs-down <%= @user.disliked? position %>"></i>
                 <% end %>
                 <p class="red"><%= position.cached_votes_down %></p>
               </div>
-            </div>
-            <div class="share-buttons">
-              <%= social_share_button_tag('Partager', :url => "http://mondepute.info/#{@deputy.id}", desc: "Découvrez les positions de votes de #{@deputy.first_name} #{@deputy.last_name} à l'Assemblée Nationale sur www.mondepute.info") %>
-            </div>
-        <% else %>
-          <div class="law-card-interaction-card">
-            <p>Donnez votre avis</p>
-            <div class="interaction-like">
+          <% else %>
               <div>
-                <%= link_to like_deputy_path(@deputy, position_id: position.id, like: true), method: 'post', remote: true do %>
+                <%= link_to like_deputy_path(@deputy, position_id: position.id, like: true) do %>
                   <i class="far fa-thumbs-up"></i>
                 <% end %>
                 <p class="green"><%= position.cached_votes_up %></p>
               </div>
               <div>
-                <%= link_to like_deputy_path(@deputy, position_id: position.id, like: false), method: 'post', remote: true do %>
+                <%= link_to like_deputy_path(@deputy, position_id: position.id, like: false) do %>
                   <i class="far fa-thumbs-down"></i>
                 <% end %>
                 <p class="red"><%= position.cached_votes_down %></p>
               </div>
-            </div>
-        <% end %>
+          <% end %>
+        </div>
+          <div class="share-buttons">
+            <%= social_share_button_tag("#{@deputy.first_name} #{@deputy.last_name}", url: "http://mondepute.info/deputies/#{@deputy.id}", image: "#{@deputy.img}", desc: "Découvrez les positions de votes de #{@deputy.first_name} #{@deputy.last_name} à l Assemblée Nationale sur www.mondepute.info") %>
+          </div>
+      </div>
 
         <!-- Modal -->
         <div class="modal fade" id="modal-<%= position.law.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -241,7 +233,6 @@
               </div>
 
             </div>
-          </div>
         </div>
 
         </div>
