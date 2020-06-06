@@ -32,3 +32,9 @@ ul {
     font-size: 0.9rem;
   }
 }
+
+@media (max-width: 900px) {
+  .categorie-label-top {
+    margin-top: 10px !important;
+  }
+}

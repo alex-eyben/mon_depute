@@ -65,3 +65,9 @@
   text-align: center;
   margin-bottom: 0;
 }
+
+@media (max-width: 900px) {
+  .explaination {
+    padding: 10px;
+  }
+}
