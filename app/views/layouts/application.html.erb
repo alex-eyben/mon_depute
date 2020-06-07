@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-168781893-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-168781893-1');
+    </script>
+
     <title>Mon Député - Découvrez qui est votre élu et ses positions de vote à l'Assemblée Nationale</title>
     <%= favicon_link_tag %>
 
@@ -22,7 +32,6 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
-
     <%= javascript_pack_tag 'social-share-button' %>
 
     <%#= yield :head %>
