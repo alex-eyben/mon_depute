@@ -165,13 +165,17 @@
           <% if user_signed_in? %>
               <div>
                 <%= link_to like_deputy_path(@deputy, position_id: position.id, like: true) do %>
-                  <i class="far fa-thumbs-up <%= @user.liked? position %>"></i>
+                  <i class="far fa-thumbs-up <%= @user.liked? position %>" 
+                    data-deputyid="<%= @deputy.id %>"
+                    data-positionid="<%= position.id %>"></i>
                 <% end %>
                 <p class="green"><%= position.cached_votes_up %></p>
               </div>
               <div class="thumb-down">
                 <%= link_to like_deputy_path(@deputy, position_id: position.id, like: false) do %>
-                  <i class="far fa-thumbs-down <%= @user.disliked? position %>"></i>
+                  <i class="far fa-thumbs-down <%= @user.disliked? position %>"
+                    data-deputyid="<%= @deputy.id %>"
+                    data-positionid="<%= position.id %>"></i>
                 <% end %>
                 <p class="red"><%= position.cached_votes_down %></p>
               </div>

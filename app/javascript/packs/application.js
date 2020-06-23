@@ -34,18 +34,19 @@ import { initRoughnotation } from '../plugins/init_roughnotation';
 import { initNotification } from '../plugins/init_notification';
 import { followButton } from '../components/follow_button';
 import { deputiesDropdown } from '../components/deputies_dropdown';
+import { likePosition } from '../components/like_position';
 // import {  } from '../behaviors/listen_follow_button';
 
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
-  console.log("hello from turbo");
   initRoughnotation();
   initAutocomplete();
   // initSweetalert();
   initNotification();
   initProgressbar();
   followButton();
+  likePosition();
   deputiesDropdown();
 });
 

@@ -52,7 +52,6 @@ class DeputiesController < ApplicationController
     @user = current_user
     @position = Position.find(params[:position_id])
     @deputy = Deputy.find(params[:id])
-    # @user.likes @position
     if params[:like] == "true"
       @user.likes @position
     else
