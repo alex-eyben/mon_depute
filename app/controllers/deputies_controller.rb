@@ -21,10 +21,6 @@ class DeputiesController < ApplicationController
     @yearlyRevenue = @deputy.yearly_revenue / 1000
   end
 
-  # string.split(" ").reject{ |word| word == "-"}
-  # array.map(&:capitalize)
-  # array.unshift("#").join
-
   def getTopTags(number)
     topTags = []
     ActsAsTaggableOn::Tag.most_used(number).each do |tag|
@@ -58,6 +54,23 @@ class DeputiesController < ApplicationController
       @user.dislikes @position
     end
     flash[:notice] = "Merci d'avoir voté !"
+    respond_to do |format|
+      format.html
+      format.json { render json: { likes: @position.get_likes.size,
+                                    dislikes: @position.get_dislikes.size } }
+    end
+  end
+
+  def like_guest
+    @user = current_user
+    @position = Position.find(params[:position_id])
+    @deputy = Deputy.find(params[:id])
+    if params[:like] == "true"
+      @user.likes @position
+    else
+      @user.dislikes @position
+    end
+    flash[:notice] = "Merci d'avoir voté !"
     redirect_to deputy_path(@deputy)
   end
 
@@ -73,10 +86,6 @@ class DeputiesController < ApplicationController
       format.html
       format.json { render json: { is_followed: @user.voted_for?(@deputy) } }
     end
-    # redirect_to deputy_path(@deputy)
-    # redirect_to request.referrer
-    # render :nothing => true
-    # render partial: 'followbutton'
   end
 
   def follow_guest
@@ -93,7 +102,6 @@ class DeputiesController < ApplicationController
       format.json { render json: { is_followed: @user.voted_for?(@deputy),
                                    deputies: self.followedDeputies } }
     end
-    # get_followed_deputies
   end
 
   def get_followed_deputies
@@ -102,15 +110,7 @@ class DeputiesController < ApplicationController
       format.json { render json: { deputies: self.followedDeputies } }
     end
   end
-  # def unfollow
-
-  #   @user = current_user
-  #   @deputy = Deputy.find(params[:id])
-  #   @deputy.unliked_by @user
-  #   redirect_to request.referrer
-  #   # render partial: 'followbutton'
-  # end
-
+  
   def results
     query = params[:query]
     url = "https://api-adresse.data.gouv.fr/search/?q=#{URI.escape(query)}"
