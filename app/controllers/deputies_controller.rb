@@ -74,10 +74,6 @@ class DeputiesController < ApplicationController
       format.html
       format.json { render json: { is_followed: @user.voted_for?(@deputy) } }
     end
-    # redirect_to deputy_path(@deputy)
-    # redirect_to request.referrer
-    # render :nothing => true
-    # render partial: 'followbutton'
   end
 
   def follow_guest
