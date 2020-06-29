@@ -21,12 +21,6 @@ class DeputiesController < ApplicationController
     @yearlyRevenue = @deputy.yearly_revenue / 1000
   end
 
-  def orderPositions(positions)
-    laws = positions.map do |position|
-      Law.find(law_id).last_status_update
-    end 
-  end
-
   # string.split(" ").reject{ |word| word == "-"}
   # array.map(&:capitalize)
   # array.unshift("#").join
