@@ -14,6 +14,7 @@ class LawsController < ApplicationController
     else
       render :new
     end
+    ImportPositionsJob.perform_now(10000,[@law.scrutin_id])
   end
 
   private
