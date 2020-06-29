@@ -2,7 +2,8 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users
   root to: 'pages#home'
-  get 'laws/:id', to: 'laws#show'
+  # get 'laws/:id', to: 'laws#show'
+  resources :laws, only: [:show, :new, :create]
   get 'votes/:id', to: 'votes#show'
   get '/dashboard', to: 'pages#dashboard'
   get '/get_followed_deputies', to: 'deputies#get_followed_deputies'
