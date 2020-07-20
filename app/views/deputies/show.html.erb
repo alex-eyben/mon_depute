@@ -127,7 +127,7 @@
           <% else %>
             <h3><%= position.law.title %></h3>
           <% end %>
-          <p><strong>Adoptée le <%= position.law.last_status_update %></strong>
+          <p><strong><%= position.law.current_status %> le <%= position.law.last_status_update %></strong>
             - <%= position.law.positions.where(deputy_position: "pour").size %> votes pour,
             <%= position.law.positions.where(deputy_position: "contre").size %> votes contre,
             <%= position.law.positions.where(deputy_position: "abstention").size %> abstentions

@@ -1,0 +1,14 @@
+<div class="d-flex flex-column align-items-center pt-5 content-wrapper">
+  <h2>Nouvelle loi</h2>
+
+    <%= simple_form_for(@law) do |f| %>
+      <%= f.input :title %>
+      <%= f.input :content %>
+      <%= f.input :ressource_link %>
+      <%= f.input :current_status %>
+      <%= f.input :last_status_update %>
+      <%= f.input :scrutin_id %>
+      <%= f.submit class:"button button-primary width-grow mb-4", id:"submit" %>
+    <% end %>
+
+</div>
