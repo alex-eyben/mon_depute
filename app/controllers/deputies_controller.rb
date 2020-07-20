@@ -9,11 +9,11 @@ class DeputiesController < ApplicationController
     @tag = params[:tag]
     @participationRate = getParticipationRate(@deputy).fdiv(100)
     if @tag
-      positions = @deputy.positions.order(date: :desc)
+      positions = @deputy.positions.sort_by { |position| Law.find(position.law_id).last_status_update }.reverse
       @positions = positions.select { |position| position.law.tag_list.include? params[:tag] }
       @filteredParticipationRate = getParticipationRateFiltered(@deputy, @tag).fdiv(100)
     else
-      @positions = @deputy.positions.order(date: :desc)
+      @positions = @deputy.positions.sort_by { |position| Law.find(position.law_id).last_status_update }.reverse
     end
     @user = current_user
     @frondingRate = (100 - @deputy.fronding).fdiv(100)
