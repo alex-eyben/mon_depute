@@ -28,11 +28,9 @@ const initRoughnotation = () => {
     if (followButton) {
       const annotation = annotate(dropdownButton, { type: 'box', color: '#FFF176' });
       followButton.addEventListener("click", (event) => {
-        console.log("coucou");
         annotation.show();
       });
       dropdownButton.addEventListener("click", (event) => {
-        console.log("byebye");
         annotation.hide();
       });
     };

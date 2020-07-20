@@ -39,7 +39,6 @@ import { deputiesDropdown } from '../components/deputies_dropdown';
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
-  console.log("hello from turbo");
   initRoughnotation();
   initAutocomplete();
   // initSweetalert();
@@ -53,3 +52,5 @@ document.addEventListener('turbolinks:load', () => {
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
+
+import "controllers"

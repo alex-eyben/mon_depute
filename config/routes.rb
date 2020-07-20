@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     end
     member do
       get :like
+      get :like_guest
       post :follow
       get :follow_guest
       get :is_followed
