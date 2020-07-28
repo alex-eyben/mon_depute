@@ -7,18 +7,15 @@ class DeputiesController < ApplicationController
   def show
     @deputy = Deputy.find(params[:id])
     @tag = params[:tag]
-    @participationRate = getParticipationRate(@deputy).fdiv(100)
     if @tag
       positions = @deputy.positions.sort_by { |position| Law.find(position.law_id).last_status_update }.reverse
       @positions = positions.select { |position| position.law.tag_list.include? params[:tag] }
-      @filteredParticipationRate = getParticipationRateFiltered(@deputy, @tag).fdiv(100)
+      @filteredParticipationRate = getParticipationRateFiltered(@deputy, @tag)
     else
       @positions = @deputy.positions.sort_by { |position| Law.find(position.law_id).last_status_update }.reverse
     end
     @user = current_user
-    @frondingRate = (100 - @deputy.fronding).fdiv(100)
     @topTags = getTopTags(5)
-    @yearlyRevenue = @deputy.yearly_revenue / 1000
   end
 
   def getTopTags(number)
@@ -29,19 +26,12 @@ class DeputiesController < ApplicationController
     return topTags
   end
 
-  def getParticipationRate(deputy)
-    positionsCount = deputy.positions.count
-    absentVotes = deputy.positions.select { |position| position.votant == false }
-    absentCount = absentVotes.count
-    ((1 - absentCount.fdiv(positionsCount)) * 100).truncate
-  end
-
   def getParticipationRateFiltered(deputy, tag)
     positions = deputy.positions.select { |position| position.law.tag_list.include? tag }
     positionsCount = positions.count
     absentVotes = positions.select { |position| position.votant == false }
     absentCount = absentVotes.count
-    ((1 - absentCount.fdiv(positionsCount)) * 100).truncate
+    ((1 - absentCount.fdiv(positionsCount)) * 100).truncate.fdiv(100)
   end
 
   def like

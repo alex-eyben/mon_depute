@@ -18,8 +18,8 @@
 
 <script async defer src="https://connect.facebook.net/fr_FR/sdk.js"></script>
 
-<p class="hidden participation-rate"><%= @participationRate %></p>
-<p class="hidden fronding-rate"><%= @frondingRate %></p>
+<p class="hidden participation-rate"><%= @deputy.participationRate %></p>
+<p class="hidden fronding-rate"><%= @deputy.frondingRate %></p>
 <div class="container-deputy content-wrapper ">
   <div class="deputy-card", data-id="<%= @deputy.id %>", data-name='<%= "#{@deputy.first_name} #{@deputy.last_name}" %>', data-img=<%= @deputy.img %>>
      <div class="deputy-card-container">
@@ -46,10 +46,10 @@
           <% end %>
         </div>
         <div class="deputy-details-container revenue">
-          <% if @yearlyRevenue >= 0%>
+          <% if @deputy.yearlyRevenue >= 0%>
 
             <p>Moyenne des revenus annuels</p> 
-            <h3><span data-toggle="tooltip" data-placement="right" title="Les revenus sont calculés sur les trois dernières années déclarées auprès de la Haute Autorité pour la Transparence de la Vie Publique"><%= number_with_delimiter( @yearlyRevenue, :delimiter => ' ') %> k€</span></h3>
+            <h3><span data-toggle="tooltip" data-placement="right" title="Les revenus sont calculés sur les trois dernières années déclarées auprès de la Haute Autorité pour la Transparence de la Vie Publique"><%= number_with_delimiter( @deputy.yearlyRevenue, :delimiter => ' ') %> k€</span></h3>
             <a href="<%= @deputy.revenue %>" target="blank">Consulter sa déclaration de revenus</a>
 
           <% else %>
