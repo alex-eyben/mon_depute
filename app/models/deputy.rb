@@ -2,6 +2,8 @@ class Deputy < ApplicationRecord
   has_many :positions
   has_many :laws, through: :positions
   acts_as_votable
+  extend FriendlyId
+  friendly_id :last_name, use: :slugged
 
   # def frondeur
   #   same_group_different_votes = 0

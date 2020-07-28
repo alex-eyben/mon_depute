@@ -36,6 +36,7 @@ gem 'font-awesome-sass'
 gem 'simple_form'
 gem 'geocoder'
 gem 'acts-as-taggable-on', '~> 6.0'
+gem 'friendly_id', '~> 5.2.4'
 
 gem 'rubyzip'
 gem 'acts_as_votable'

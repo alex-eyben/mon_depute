@@ -5,7 +5,7 @@ class DeputiesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:results, :show]
 
   def show
-    @deputy = Deputy.find(params[:id])
+    @deputy = Deputy.friendly.find(params[:id])
     @tag = params[:tag]
     @participationRate = getParticipationRate(@deputy).fdiv(100)
     if @tag
