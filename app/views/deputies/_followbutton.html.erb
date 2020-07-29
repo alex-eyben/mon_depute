@@ -1,0 +1,8 @@
+<% if user_signed_in? %>
+  <div class="follow-button">
+  </div>
+<% else %>
+  <%= link_to follow_guest_deputy_path(@deputy), method: 'get', class: 'button button-primary follow width-grow' do %>
+    Suivre
+  <% end %>
+<% end %>

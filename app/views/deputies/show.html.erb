@@ -32,30 +32,10 @@
           </div>
         </div>
         <div class="deputy-card-social-container">
-          <% if @deputy.facebook != "N/A" %>
-          <a href="https://www.facebook.com/<%= @deputy.facebook %>" target="blank"><i class="fab fa-facebook-f"></i></a>
-          <% end %>
-          <% if @deputy.twitter != "N/A" %>
-          <a href="https://twitter.com/<%= @deputy.twitter %>" target="blank"><i class="fab fa-twitter"></i></a>
-          <% end %>
-          <% if @deputy.email != "N/A" %>
-          <a href="mailto:<%= @deputy.email %>" target="blank"><i class="far fa-envelope"></i></a>
-          <% end %>
-          <% if @deputy.website != "N/A" %>
-          <a href="http://<%= @deputy.website %>/" target="blank"><i class="fas fa-globe"></i></a>
-          <% end %>
+          <%= render 'socialcontainer' %>
         </div>
         <div class="deputy-details-container revenue">
-          <% if @deputy.yearlyRevenue >= 0%>
-
-            <p>Moyenne des revenus annuels</p> 
-            <h3><span data-toggle="tooltip" data-placement="right" title="Les revenus sont calculés sur les trois dernières années déclarées auprès de la Haute Autorité pour la Transparence de la Vie Publique"><%= number_with_delimiter( @deputy.yearlyRevenue, :delimiter => ' ') %> k€</span></h3>
-            <a href="<%= @deputy.revenue %>" target="blank">Consulter sa déclaration de revenus</a>
-
-          <% else %>
-            <p>Nous n'avons pas réussi à calculer ses revenus.<p>
-            <a href="<%= @deputy.revenue %>" target="blank">Consulter sa déclaration de revenus</a>
-          <% end %>
+          <%= render 'revenuecontainer' %>
         </div>
 
         <div class="deputy-card-chart-container">
@@ -67,53 +47,13 @@
           <div class="chart" id="fronde"></div>
         </div>
      </div>
-      <% if user_signed_in? %>
-        <div class="follow-button">
-
-        </div>
-      <% else %>
-        <%= link_to follow_guest_deputy_path(@deputy), method: 'get', class: 'button button-primary follow width-grow' do %>
-          Suivre
-        <% end %>
-      <% end %>
+      <%= render 'followbutton' %>
     </div>
 
   <div class="laws">
     <div class="laws-top">
         <div class="chart-details">
-          <% if @tag %>
-            <p class="hidden filtered-participation-rate"><%= @filteredParticipationRate %></p>
-            <%= link_to deputy_path(@deputy) do %>
-              <span class="categorie-label-top"><%= @tag.split(" ").reject{ |word| word == "-"}.map(&:capitalize).unshift("#").join %>
-                <i class="fas fa-times"></i>
-              </span>
-            <% end %>
-            <div class="chart-details-container">
-              <div class="chart-details-card">
-                <p>Lois analysées</p>
-                <div class="chart-details-card-figure">
-                  <h3><%= @positions.count %></h3>
-                </div>
-              </div>
-              <div class="chart-details-card last">
-                <p>Taux de présence sur le sujet </p>
-                <div class="chart-details-card-figure">
-                  <div id="filtered" class="filtered-chart"></div>
-                </div>
-              </div>
-            </div>
-          <% else %>
-            <p id="filter-paragraph"><strong>Tags les plus consultés</strong></p>
-            <ul class="categorie-container top">
-              <% @topTags.each do |tag| %>
-                <%= link_to deputy_path(@deputy, tag: tag) do %>
-                  <li class="categorie-label">
-                    <%= tag.split(" ").reject{ |word| word == "-"}.map(&:capitalize).unshift("#").join %>
-                  </li>
-                <% end %>
-              <% end %>
-            </ul>
-          <% end %>
+          <%= render 'charts' %>
         </div>
     </div>
     <% @positions.each do |position| %>
@@ -122,11 +62,7 @@
       <% end %>
       <div class="law-card <%= position.deputy_position.downcase %>">
         <div class="law-card-details">
-          <% if position.law.title.length > 110 %>
-            <h3><%= position.law.title.truncate(110, separator: ' ') %></h3>
-          <% else %>
-            <h3><%= position.law.title %></h3>
-          <% end %>
+          <h3><%= position.law.title.truncate(110, separator: ' ') %></h3>
           <p><strong><%= position.law.current_status %> le <%= position.law.last_status_update %></strong>
             - <%= position.law.positions.where(deputy_position: "pour").size %> votes pour,
             <%= position.law.positions.where(deputy_position: "contre").size %> votes contre,
@@ -144,7 +80,7 @@
           <ul class="categorie-container">
             <% position.law.tag_list.each do |tag|%>
               <%= link_to deputy_path(@deputy, tag: tag) do %>
-                <li class="categorie-label"><%= tag.split(" ").reject{ |word| word == "-"}.map(&:capitalize).unshift("#").join %></li>
+                <li class="categorie-label"><%= hashtag_sentence(tag) %></li>
               <% end %>
             <% end %>
           </ul>
