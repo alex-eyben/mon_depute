@@ -1,0 +1,35 @@
+          <% if user_signed_in? %>
+              <div>
+                <%= link_to like_deputy_path(@deputy, position_id: position.id, like: true) do %>
+                  <i class="far fa-thumbs-up <%= @user.liked? position %>" 
+                    data-deputyid="<%= @deputy.id %>"
+                    data-positionid="<%= position.id %>"
+                    data-action="click->like#update"
+                    data-target="like.likeButton"></i>
+                <% end %>
+                <p class="green" data-target="like.likeCount"><%= position.cached_votes_up %></p>
+              </div>
+              <div class="thumb-down">
+                <%= link_to like_deputy_path(@deputy, position_id: position.id, like: false) do %>
+                  <i class="far fa-thumbs-down <%= @user.disliked? position %>"
+                    data-deputyid="<%= @deputy.id %>"
+                    data-positionid="<%= position.id %>"
+                    data-action="click->like#update"
+                    data-target="like.dislikeButton"></i>
+                <% end %>
+                <p class="red" data-target="like.dislikeCount"><%= position.cached_votes_down %></p>
+              </div>
+          <% else %>
+              <div>
+                <%= link_to like_guest_deputy_path(@deputy, position_id: position.id, like: true) do %>
+                  <i class="far fa-thumbs-up"></i>
+                <% end %>
+                <p class="green"><%= position.cached_votes_up %></p>
+              </div>
+              <div class="thumb-down">
+                <%= link_to like_guest_deputy_path(@deputy, position_id: position.id, like: false) do %>
+                  <i class="far fa-thumbs-down"></i>
+                <% end %>
+                <p class="red"><%= position.cached_votes_down %></p>
+              </div>
+          <% end %>

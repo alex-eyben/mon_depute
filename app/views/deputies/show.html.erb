@@ -68,15 +68,7 @@
             <%= position.law.positions.where(deputy_position: "contre").size %> votes contre,
             <%= position.law.positions.where(deputy_position: "abstention").size %> abstentions
           </p>
-          <% if position.law.content == "" %>
-            <a href="<%= position.law.ressource_link %>" class="more-info" target="blank">
-              Plus d'informations
-            </a>
-          <% else %>
-            <a href="" class="more-info" data-toggle="modal" data-target="#modal-<%= position.law.id %>">
-              Plus d'informations
-            </a>
-          <% end %>
+          <%= render 'moreinfo', :position => position %>
           <ul class="categorie-container">
             <% position.law.tag_list.each do |tag|%>
               <%= link_to deputy_path(@deputy, tag: tag) do %>
@@ -87,52 +79,10 @@
         </div>
 
       <div class="law-card-interaction-card">
-        <% if position.deputy_position == "nonVotant" %>
-          <h4>Non votant lors du vote</h4>
-        <% elsif position.deputy_position == "Absent" %>
-          <h4>Absent lors du vote</h4>
-        <% elsif position.deputy_position == "abstention" %>
-          <h4>S'est abstenu lors du vote</h4>
-        <% else %>
-          <h4>A voté <%= position.deputy_position %></h4>
-        <% end %>
+        <%= render 'deputyposition', :position => position %>
         <p class="avis">Donnez votre avis</p>
         <div class="interaction-like" data-controller="like">
-          <% if user_signed_in? %>
-              <div>
-                <%= link_to like_deputy_path(@deputy, position_id: position.id, like: true) do %>
-                  <i class="far fa-thumbs-up <%= @user.liked? position %>" 
-                    data-deputyid="<%= @deputy.id %>"
-                    data-positionid="<%= position.id %>"
-                    data-action="click->like#update"
-                    data-target="like.likeButton"></i>
-                <% end %>
-                <p class="green" data-target="like.likeCount"><%= position.cached_votes_up %></p>
-              </div>
-              <div class="thumb-down">
-                <%= link_to like_deputy_path(@deputy, position_id: position.id, like: false) do %>
-                  <i class="far fa-thumbs-down <%= @user.disliked? position %>"
-                    data-deputyid="<%= @deputy.id %>"
-                    data-positionid="<%= position.id %>"
-                    data-action="click->like#update"
-                    data-target="like.dislikeButton"></i>
-                <% end %>
-                <p class="red" data-target="like.dislikeCount"><%= position.cached_votes_down %></p>
-              </div>
-          <% else %>
-              <div>
-                <%= link_to like_guest_deputy_path(@deputy, position_id: position.id, like: true) do %>
-                  <i class="far fa-thumbs-up"></i>
-                <% end %>
-                <p class="green"><%= position.cached_votes_up %></p>
-              </div>
-              <div class="thumb-down">
-                <%= link_to like_guest_deputy_path(@deputy, position_id: position.id, like: false) do %>
-                  <i class="far fa-thumbs-down"></i>
-                <% end %>
-                <p class="red"><%= position.cached_votes_down %></p>
-              </div>
-          <% end %>
+          <%= render 'likebuttons', :position => position %>
         </div>
           <div class="share-buttons">
             <%= social_share_button_tag("#{@deputy.first_name} #{@deputy.last_name}", url: "http://mondepute.info/deputies/#{@deputy.id}", image: "#{@deputy.img}", desc: "Découvrez les positions de votes de #{@deputy.first_name} #{@deputy.last_name} à l Assemblée Nationale sur www.mondepute.info") %>

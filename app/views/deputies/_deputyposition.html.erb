@@ -1,0 +1,9 @@
+<% if position.deputy_position == "nonVotant" %>
+  <h4>Non votant lors du vote</h4>
+<% elsif position.deputy_position == "Absent" %>
+  <h4>Absent lors du vote</h4>
+<% elsif position.deputy_position == "abstention" %>
+  <h4>S'est abstenu lors du vote</h4>
+<% else %>
+  <h4>A voté <%= position.deputy_position %></h4>
+<% end %>
