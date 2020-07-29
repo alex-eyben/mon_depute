@@ -22,33 +22,33 @@
 <p class="hidden fronding-rate"><%= @deputy.frondingRate %></p>
 <div class="container-deputy content-wrapper ">
   <div class="deputy-card", data-id="<%= @deputy.id %>", data-name='<%= "#{@deputy.first_name} #{@deputy.last_name}" %>', data-img=<%= @deputy.img %>>
-     <div class="deputy-card-container">
-        <div class="deputy-card-avatar-container avatar-bordered">
-          <img src="<%= @deputy.img %>" alt="" class="avatar-bordered">
-          <div class="deputy-card-avatar-container-details">
-            <h3><%= @deputy.first_name %> <%= @deputy.last_name %></h3>
-            <h4><%= @deputy.party %></h4>
-            <p> Département: <%= @deputy.department %></p>
-          </div>
+    <div class="deputy-card-container">
+      <div class="deputy-card-avatar-container avatar-bordered">
+        <img src="<%= @deputy.img %>" alt="" class="avatar-bordered">
+        <div class="deputy-card-avatar-container-details">
+          <h3><%= @deputy.first_name %> <%= @deputy.last_name %></h3>
+          <h4><%= @deputy.party %></h4>
+          <p> Département: <%= @deputy.department %></p>
         </div>
-        <div class="deputy-card-social-container">
-          <%= render 'socialcontainer' %>
-        </div>
-        <div class="deputy-details-container revenue">
-          <%= render 'revenuecontainer' %>
-        </div>
+      </div>
+      <div class="deputy-card-social-container">
+        <%= render 'socialcontainer' %>
+      </div>
+      <div class="deputy-details-container revenue">
+        <%= render 'revenuecontainer' %>
+      </div>
 
-        <div class="deputy-card-chart-container">
-          <p>Taux de présence à l'assemblée</p>
-          <div class="chart" id="presence"></div>
-        </div>
-        <div class="deputy-card-chart-container">
-          <p>Taux de votes en accord avec son parti</p>
-          <div class="chart" id="fronde"></div>
-        </div>
-     </div>
-      <%= render 'followbutton' %>
+      <div class="deputy-card-chart-container">
+        <p>Taux de présence à l'assemblée</p>
+        <div class="chart" id="presence"></div>
+      </div>
+      <div class="deputy-card-chart-container">
+        <p>Taux de votes en accord avec son parti</p>
+        <div class="chart" id="fronde"></div>
+      </div>
     </div>
+    <%= render 'followbutton' %>
+  </div>
 
   <div class="laws">
     <div class="laws-top">
@@ -78,50 +78,46 @@
           </ul>
         </div>
 
-      <div class="law-card-interaction-card">
-        <%= render 'deputyposition', :position => position %>
-        <p class="avis">Donnez votre avis</p>
-        <div class="interaction-like" data-controller="like">
-          <%= render 'likebuttons', :position => position %>
-        </div>
+        <div class="law-card-interaction-card">
+          <%= render 'deputyposition', :position => position %>
+          <p class="avis">Donnez votre avis</p>
+          <div class="interaction-like" data-controller="like">
+            <%= render 'likebuttons', :position => position %>
+          </div>
           <div class="share-buttons">
             <%= social_share_button_tag("#{@deputy.first_name} #{@deputy.last_name}", url: "http://mondepute.info/deputies/#{@deputy.id}", image: "#{@deputy.img}", desc: "Découvrez les positions de votes de #{@deputy.first_name} #{@deputy.last_name} à l Assemblée Nationale sur www.mondepute.info") %>
           </div>
-      </div>
+        </div>
 
         <!-- Modal -->
         <div class="modal fade" id="modal-<%= position.law.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
-            <div class="modal-image">
-            </div>
-            <div class="modal-content">
-
-              <div>
-                <div class="modal-header">
-                  <h4 class="modal-title" id="exampleModalLabel"><%= position.law.title %></h4>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <ul class="categorie-container">
-                  <% position.law.tag_list.each do |tag|%>
-                    <%= link_to deputy_path(@deputy, tag: tag) do %>
-                      <li class="categorie-label"><%= tag.split(" ").reject{ |word| word == "-"}.map(&:capitalize).unshift("#").join %></li>
-                    <% end %>
-                  <% end %>
-                </ul>
-                <div class="modal-body">
-                  <p> <%= position.law.content %></p>
-                </div>
-                <div class="modal-footer d-flex justify-content-center">
-                  <a href="<%= position.law.ressource_link %>" target="blank" class="button button-primary">Voir plus sur Vie-publique.fr</a>
-                </div>
+            <div class="modal-image"></div>
+            <div class="modal-content"><div>
+              <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel"><%= position.law.title %></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
               </div>
-
+              <ul class="categorie-container">
+                <% position.law.tag_list.each do |tag|%>
+                  <%= link_to deputy_path(@deputy, tag: tag) do %>
+                    <li class="categorie-label"><%= tag.split(" ").reject{ |word| word == "-"}.map(&:capitalize).unshift("#").join %></li>
+                  <% end %>
+                <% end %>
+              </ul>
+              <div class="modal-body">
+                <p> <%= position.law.content %></p>
+              </div>
+              <div class="modal-footer d-flex justify-content-center">
+                <a href="<%= position.law.ressource_link %>" target="blank" class="button button-primary">Voir plus sur Vie-publique.fr</a>
+              </div>
             </div>
+          </div>
         </div>
 
-        </div>
+      </div>
       </div>
     <% end %>
   </div>
