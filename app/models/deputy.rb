@@ -1,13 +1,17 @@
 class Deputy < ApplicationRecord
-  has_many :positions
+  has_many :positions, dependent: :destroy
   has_many :laws, through: :positions
   acts_as_votable
 
   def participationRate
     positionsCount = self.positions.count
-    absentVotes = self.positions.select { |position| position.votant == false }
-    absentCount = absentVotes.count
-    ((1 - absentCount.fdiv(positionsCount)) * 100).truncate.fdiv(100)
+    if positions.count > 0
+      absentVotes = self.positions.select { |position| position.votant == false }
+      absentCount = absentVotes.count
+      ((1 - absentCount.fdiv(positionsCount)) * 100).truncate.fdiv(100)
+    else
+      0
+    end
   end
 
   def frondingRate

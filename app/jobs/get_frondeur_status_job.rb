@@ -26,12 +26,14 @@ class GetFrondeurStatusJob < ApplicationJob
     print "\r#{((@counter.fdiv(@total))*100).round(2)}%" + " ...Computing fronding score..." + ['/', '-', '\\'].sample
     @counter += 1
     same_group_different_votes = 0
-    deputy.positions.each do |position|
-      if position.votant?
-        same_group_different_votes += 1 if position.deputy_position != position.deputy_group_position
+    if deputy.positions.any?
+      deputy.positions.each do |position|
+        if position.votant?
+          same_group_different_votes += 1 if position.deputy_position != position.deputy_group_position
+        end
       end
-    end
     deputy.update(fronding: (same_group_different_votes.fdiv(deputy.positions.size)*100).round(0))
+    end
     deputy.fronding
   end
 end
