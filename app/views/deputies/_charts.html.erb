@@ -1,5 +1,5 @@
           <% if @tag %>
-            <p class="hidden filtered-participation-rate"><%= @filteredParticipationRate %></p>
+            <p class="hidden filtered-participation-rate"><%= @deputy.filteredParticipationRate(@tag) %></p>
             <%= link_to deputy_path(@deputy) do %>
               <span class="categorie-label-top"><%= @tag.split(" ").reject{ |word| word == "-"}.map(&:capitalize).unshift("#").join %>
                 <i class="fas fa-times"></i>

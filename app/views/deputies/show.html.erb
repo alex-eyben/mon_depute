@@ -64,9 +64,9 @@
         <div class="law-card-details">
           <h3><%= position.law.title.truncate(110, separator: ' ') %></h3>
           <p><strong><%= position.law.current_status %> le <%= position.law.last_status_update %></strong>
-            - <%= position.law.positions.where(deputy_position: "pour").size %> votes pour,
-            <%= position.law.positions.where(deputy_position: "contre").size %> votes contre,
-            <%= position.law.positions.where(deputy_position: "abstention").size %> abstentions
+            - <%= position.law.pour %> votes pour,
+            <%= position.law.contre %> votes contre,
+            <%= position.law.abstenu %> abstentions
           </p>
           <%= render 'moreinfo', :position => position %>
           <ul class="categorie-container">
