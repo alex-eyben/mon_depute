@@ -10,7 +10,6 @@ class DeputiesController < ApplicationController
     if @tag
       positions = @deputy.positions.sort_by { |position| Law.find(position.law_id).last_status_update }.reverse
       @positions = positions.select { |position| position.law.tag_list.include? params[:tag] }
-      @filteredParticipationRate = getParticipationRateFiltered(@deputy, @tag)
     else
       @positions = @deputy.positions.sort_by { |position| Law.find(position.law_id).last_status_update }.reverse
     end
@@ -24,14 +23,6 @@ class DeputiesController < ApplicationController
       topTags << tag.name
     end
     return topTags
-  end
-
-  def getParticipationRateFiltered(deputy, tag)
-    positions = deputy.positions.select { |position| position.law.tag_list.include? tag }
-    positionsCount = positions.count
-    absentVotes = positions.select { |position| position.votant == false }
-    absentCount = absentVotes.count
-    ((1 - absentCount.fdiv(positionsCount)) * 100).truncate.fdiv(100)
   end
 
   def like
