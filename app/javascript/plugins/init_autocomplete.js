@@ -1,17 +1,16 @@
-import places from 'places.js';
 require('dotenv').config()
 
 const initAutocomplete = () => {
   const key = process.env.ALGOLIA_API_KEY;
   console.log(key);
   console.log("hey");
-  const addressInput = document.getElementById('location-search');
-  if (addressInput) {
-    places({ container: addressInput
-    }).configure({
-    countries: ['fr']
-  });
-  }
+  const placesAutocomplete = places({
+    appId: process.env.ALGOLIA_APP_ID,
+    apiKey: process.env.ALGOLIA_API_KEY,
+    container: document.getElementById('location-search')
+  }).configure({
+      countries: ['fr']
+    });
 };
 
 export { initAutocomplete };
