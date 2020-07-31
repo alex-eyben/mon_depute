@@ -20,6 +20,7 @@ class LawsController < ApplicationController
     end
     ImportPositionsJob.perform_now(10000,[@law.scrutin_id])
     AddTagsToLawJob.perform_now(@law)
+    CountPositionsOnLawJob.perform_now(@law)
   end
 
   private
