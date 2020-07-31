@@ -1,7 +1,6 @@
 require('dotenv').config()
 
 const initAutocomplete = () => {
-  console.log(process.env.NODE_ENV);
   let indexName = "";
   if (process.env.NODE_ENV == "development") {
     indexName = "dev_DEPUTY"
@@ -32,7 +31,7 @@ const initAutocomplete = () => {
       templates: {
         header: '<div class="ad-example-header">Députés</div>',
         suggestion: function(suggestion) {
-          return '<div>' + suggestion._highlightResult.full_name.value + '</div>';
+          return '<div>' + suggestion["First name"] + ' ' + suggestion["Last name"] + '</div>';
         }
       }
     }, placesAutocompleteDataset({
@@ -47,7 +46,7 @@ const initAutocomplete = () => {
     })
   ]).on('autocomplete:selected', function(event, suggestion, dataset, context) {
     if (dataset == 1) {
-      location.href = '/deputies/' + suggestion.id;
+      location.href = '/deputies/' + suggestion.Id;
     }    
   });
 };
