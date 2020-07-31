@@ -2,7 +2,7 @@ require('dotenv').config()
 
 const initAutocomplete = () => {
   var client = algoliasearch(process.env.ALGOLIA_APP_ID, process.env.ALGOLIA_API_KEY);
-  var index = client.initIndex('Deputy');
+  var index = client.initIndex('Deputy'); 
 
   function newHitsSource(index, params) {
     return function doSearch(query, cb) {
