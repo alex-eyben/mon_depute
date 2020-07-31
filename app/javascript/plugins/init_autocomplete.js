@@ -47,7 +47,7 @@ const initAutocomplete = () => {
     })
   ]).on('autocomplete:selected', function(event, suggestion, dataset, context) {
     if (dataset == 1) {
-      location.href = '/deputies/' + suggestion.objectID;
+      location.href = '/deputies/' + suggestion.id;
     }    
   });
 };
