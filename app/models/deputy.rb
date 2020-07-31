@@ -2,6 +2,11 @@ class Deputy < ApplicationRecord
   has_many :positions, dependent: :destroy
   has_many :laws, through: :positions
   acts_as_votable
+  include AlgoliaSearch
+
+  algoliasearch per_environment: true do
+    attribute :first_name, :last_name
+  end
 
   def participationRate
     positionsCount = self.positions.count
