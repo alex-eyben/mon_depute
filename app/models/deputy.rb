@@ -5,7 +5,11 @@ class Deputy < ApplicationRecord
   include AlgoliaSearch
 
   algoliasearch per_environment: true do
-    attribute :first_name, :last_name
+    attribute :full_name, :first_name, :last_name
+  end
+
+  def full_name
+    "#{first_name} #{last_name}"
   end
 
   def participationRate
