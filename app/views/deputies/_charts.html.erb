@@ -1,0 +1,33 @@
+          <% if @tag %>
+            <p class="hidden filtered-participation-rate"><%= @deputy.filteredParticipationRate(@tag) %></p>
+            <%= link_to deputy_path(@deputy) do %>
+              <span class="categorie-label-top"><%= @tag.split(" ").reject{ |word| word == "-"}.map(&:capitalize).unshift("#").join %>
+                <i class="fas fa-times"></i>
+              </span>
+            <% end %>
+            <div class="chart-details-container">
+              <div class="chart-details-card">
+                <p>Lois analysées</p>
+                <div class="chart-details-card-figure">
+                  <h3><%= @positions.count %></h3>
+                </div>
+              </div>
+              <div class="chart-details-card last">
+                <p>Taux de présence sur le sujet </p>
+                <div class="chart-details-card-figure">
+                  <div id="filtered" class="filtered-chart"></div>
+                </div>
+              </div>
+            </div>
+          <% else %>
+            <p id="filter-paragraph"><strong>Tags les plus consultés</strong></p>
+            <ul class="categorie-container top">
+              <% @topTags.each do |tag| %>
+                <%= link_to deputy_path(@deputy, tag: tag) do %>
+                  <li class="categorie-label">
+                    <%= tag.split(" ").reject{ |word| word == "-"}.map(&:capitalize).unshift("#").join %>
+                  </li>
+                <% end %>
+              <% end %>
+            </ul>
+          <% end %>

@@ -1,0 +1,9 @@
+<% if position.law.content == "" %>
+  <a href="<%= position.law.ressource_link %>" class="more-info" target="blank">
+    Plus d'informations
+  </a>
+<% else %>
+  <a href="" class="more-info" data-toggle="modal" data-target="#modal-<%= position.law.id %>">
+    Plus d'informations
+  </a>
+<% end %>
