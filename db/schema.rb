@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_29_205614) do
+ActiveRecord::Schema.define(version: 2020_07_30_101608) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 2020_07_29_205614) do
     t.integer "presence"
     t.integer "yearly_revenue"
     t.string "slug"
+    t.date "entry_date"
     t.index ["slug"], name: "index_deputies_on_slug", unique: true
     t.index ["uid"], name: "index_deputies_on_uid", unique: true
   end
