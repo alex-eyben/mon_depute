@@ -1,6 +1,6 @@
 // Specific CSS for your home-page
 .home-container {
-  height: calc(75vh);
+  height: calc(100vh);
   background-size: cover;
   background-position: center;
 }
@@ -14,7 +14,7 @@
   margin-bottom: 15px;
 }
 
-.home-h3{
+.home-h3 {
   color: $white;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
   font-family: 'Quicksand', sans-serif;
@@ -22,7 +22,12 @@
   font-weight: 600;
   margin-bottom: 40px;
   font-size: 25px;
+}
 
+.black-h3 {
+  color: #393E41;
+  border-bottom: 1px solid #393E41;
+  padding-bottom: 0.2rem;
 }
 
 .home-background-color{
@@ -35,13 +40,6 @@
   padding: 15px 0px;
   margin: 0px;
   color: $white;
-  text-align: justify;
-  font-family: 'Quicksand', sans-serif;
-}
-
-.home-p{
-  padding: 15px 0px;
-  margin: 0px;
   text-align: justify;
   font-family: 'Quicksand', sans-serif;
 }
