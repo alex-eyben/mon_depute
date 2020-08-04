@@ -15,42 +15,54 @@
     <% end %>
   </div>
 </div>
-<div class="d-flex flex-column align-items-center justify-content-center text-center">
 
-  <h3 class="mt-3 pt-3"> Les députés avec les <span>plus hauts revenus</span></h3>
-  <p class="explaination">Les revenus sont calculés sur les trois dernières années déclarées auprès de la Haute Autorité pour la Transparence de la Vie Publique.</p>
-  <div class="avatar-list-container justify-content-between col-lg-8 col-md-10 col-sm-10 my-3 text-center">
-    <% Deputy.order(yearly_revenue: :desc).first(4).each do |deputy| %>
-      <div class="d-flex flex-column align-items-center flex-fill">
-        <%= link_to( image_tag(deputy.img), deputy_path(deputy), :class=>"d-inline-flex avatar-bordered") %>
-        <p class="d-inline-flex justify-content-center name-deputy-home"><%= deputy.first_name %> <%= deputy.last_name %></p>
-        <h5><%= number_with_delimiter(deputy.yearly_revenue, :delimiter => ' ') %> €</h5>
+
+<div class="d-flex flex-column justify-content-center align-items-center">
+  <h3 class="m-5 text-center black-h3"> Dernières lois analysées</h3>
+
+
+  <% @laws.each do |law| %>
+      <div class="law-card-home">
+        <div class="law-card-home-details">
+          <h3><%= law.title %></h3>
+          <p class="mt-2 mb-2"><strong><%= law.current_status %> le <%= law.last_status_update %></strong>
+            - <%= law.pour %> votes pour,
+            <%= law.contre %> votes contre,
+            <%= law.abstenu %> abstentions
+          </p>
+          <% if law.content == "" %>
+            <a href="<%= law.ressource_link %>" class="more-info" target="blank">
+              Plus d'informations
+            </a>
+          <% else %>
+            <a href="" class="more-info" data-toggle="modal" data-target="#modal-<%= law.id %>">
+              Plus d'informations
+            </a>
+          <% end %>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="modal-<%= law.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-image"></div>
+            <div class="modal-content"><div>
+              <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel"><%= law.title %></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p> <%= law.content %></p>
+              </div>
+              <div class="modal-footer d-flex justify-content-center">
+                <a href="<%= law.ressource_link %>" target="blank" class="button button-primary">Voir plus sur Vie-publique.fr</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
       </div>
     <% end %>
-  </div>
-
-  <h3 class="mt-3"> Les députés <span>les moins présents</span> lors des votes</h3>
-  <p class="explaination">Ce taux de présence concerne les 33 scrutins publics solennels que nous avons analysés à ce jour.</p>
-  <div class="avatar-list-container justify-content-between col-lg-8 col-md-10 col-sm-10 my-3 text-center">
-    <% Deputy.order(presence: :desc).reject{|deputy|deputy.last_name == "Galliard-Minier" || deputy.first_name == "Sandrine"}.last(4).each do |deputy| %>
-      <div class="d-flex flex-column align-items-center flex-fill">
-        <%=link_to(image_tag(deputy.img), deputy_path(deputy), :class=>"d-inline-flex avatar-bordered") %>
-        <p class="d-inline-flex justify-content-center name-deputy-home"><%= deputy.first_name %> <%= deputy.last_name %></p>
-        <h5><%= deputy.presence %>%</h5>
-      </div>
-    <% end %>
-  </div>
-
-  <h3 class="mt-3"> Les députés <span>les plus frondeurs</span></h3>
-  <p class="explaination">Ce taux représente le nombre de fois où le député a voté contre la majorité de son parti sur les 33 scrutins publics solennels que nous avons analysés à ce jour.</p>
-  <div class="avatar-list-container justify-content-between col-lg-8 col-md-10 col-sm-10 my-3 text-center">
-    <% Deputy.order(fronding: :desc).reject{|deputy|deputy.last_name == "de Rugy" || deputy.last_name == "Ferrand"}.first(4).each do |deputy| %>
-      <div class="d-flex flex-column align-items-center flex-fill">
-        <%=link_to( image_tag( deputy.img), deputy_path(deputy), :class=>"d-inline-flex avatar-bordered") %>
-        <p class="d-inline-flex justify-content-center name-deputy-home"><%= deputy.first_name %> <%= deputy.last_name %></p>
-        <h5><%= deputy.fronding %>%</h5>
-      </div>
-    <% end %>
-  </div>
-
 </div>
