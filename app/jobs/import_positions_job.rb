@@ -80,7 +80,7 @@ class ImportPositionsJob < ApplicationJob
                               deputy_group_position: deputy_group_position,
                               majority: @scrutin_maj_position,
                               votant: true
-                            ) unless Deputy.where(uid: votant['acteurRef']).empty? || Deputy.find_by(uid: votant['acteurRef']).positions.any?
+                            ) unless Deputy.where(uid: votant['acteurRef']).empty?
             # print "position for #{Position.last.deputy.last_name} created - "
             print "\r#{((@counter.fdiv(@total))*100).round(2)}%"
             @counter += 1
