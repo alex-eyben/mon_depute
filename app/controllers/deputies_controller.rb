@@ -5,7 +5,7 @@ class DeputiesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:results, :show]
 
   def show
-    @deputy = Deputy.find(params[:id])
+    @deputy = Deputy.friendly.find(params[:id])
     @tag = params[:tag]
     if @tag
       positions = @deputy.positions.sort_by { |position| Law.find(position.law_id).last_status_update }.reverse

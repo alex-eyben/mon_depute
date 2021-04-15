@@ -4,6 +4,9 @@ class Deputy < ApplicationRecord
   acts_as_votable
   include AlgoliaSearch
 
+  extend FriendlyId
+  friendly_id :full_name, use: :slugged
+
   algoliasearch do
     attribute :full_name, :last_name, :first_name
   end
