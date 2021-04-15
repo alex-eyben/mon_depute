@@ -27,25 +27,30 @@ import "bootstrap";
 
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
+// import { initSweetalert } from '../plugins/init_sweetalert';
+
 import { initAutocomplete } from '../plugins/init_autocomplete';
 import { initProgressbar } from '../plugins/init_progressbar';
-import { initSweetalert } from '../plugins/init_sweetalert';
 import { initRoughnotation } from '../plugins/init_roughnotation';
-import { initNotification } from '../plugins/init_notification';
-import { followButton } from '../components/follow_button';
-import { deputiesDropdown } from '../components/deputies_dropdown';
-// import {  } from '../behaviors/listen_follow_button';
+
+// Reactivate when follow deputy logic reactivared
+// import { initNotification } from '../plugins/init_notification';
+// import { followButton } from '../components/follow_button';
+// import { deputiesDropdown } from '../components/deputies_dropdown';
 
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
+  // initSweetalert();
+
   initRoughnotation();
   initAutocomplete();
-  // initSweetalert();
-  initNotification();
   initProgressbar();
-  followButton();
-  deputiesDropdown();
+
+  // Reactivate when follow deputy logic reactivared
+  // deputiesDropdown();
+  // followButton();
+  // initNotification();
 });
 
 

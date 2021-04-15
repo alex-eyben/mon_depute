@@ -1,0 +1,5 @@
+<div class="contact-button">
+  <% if @deputy.email != "N/A" %>
+    <a class="button button-primary contact width-grow" href="mailto:<%= @deputy.email %>" target="blank">Contacter</a>
+  <% end %>
+</div>
