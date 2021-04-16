@@ -28,7 +28,7 @@ class DeputiesController < ApplicationController
   def like
     @user = current_user
     @position = Position.find(params[:position_id])
-    @deputy = Deputy.find(params[:id])
+    @deputy = Deputy.friendly.find(params[:id])
     if params[:like] == "true"
       @user.likes @position
     else
@@ -45,7 +45,7 @@ class DeputiesController < ApplicationController
   def like_guest
     @user = current_user
     @position = Position.find(params[:position_id])
-    @deputy = Deputy.find(params[:id])
+    @deputy = Deputy.friendly.find(params[:id])
     if params[:like] == "true"
       @user.likes @position
     else
@@ -57,7 +57,7 @@ class DeputiesController < ApplicationController
 
   def follow
     @user = current_user
-    @deputy = Deputy.find(params[:id])
+    @deputy = Deputy.friendly.find(params[:id])
     if @user.voted_for?(@deputy)
       @deputy.unliked_by @user
     else
@@ -71,13 +71,13 @@ class DeputiesController < ApplicationController
 
   def follow_guest
     @user = current_user
-    @deputy = Deputy.find(params[:id])
+    @deputy = Deputy.friendly.find(params[:id])
     @deputy.liked_by @user
     redirect_to deputy_path(@deputy)
   end
 
   def is_followed
-    @deputy = Deputy.find(params[:id])
+    @deputy = Deputy.friendly.find(params[:id])
     respond_to do |format|
       format.html
       format.json { render json: { is_followed: @user.voted_for?(@deputy),
