@@ -41,6 +41,7 @@ gem "algoliasearch-rails"
 gem 'rubyzip'
 gem 'acts_as_votable'
 gem 'social-share-button'
+gem 'friendly_id', '~> 5.4.0'
 
 gem 'mailchimp-api', '~> 2.0', '>= 2.0.6'
 
