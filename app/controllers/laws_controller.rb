@@ -18,9 +18,11 @@ class LawsController < ApplicationController
     else
       render :new
     end
-    ImportPositionsJob.perform_now(10000,[@law.scrutin_id])
+    ImportPositionsJob.perform_now([@law.scrutin_id])
     AddTagsToLawJob.perform_now(@law)
     CountPositionsOnLawJob.perform_now(@law)
+    GetFrondeurStatusJob.perform_now(Deputy.all)
+    GetPresenceScoreJob.perform_now(Deputy.all)
   end
 
   private
