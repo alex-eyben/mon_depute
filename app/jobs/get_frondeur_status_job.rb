@@ -3,7 +3,6 @@ class GetFrondeurStatusJob < ApplicationJob
 
   def perform(deputies)
     @counter = 1
-    @total = deputies.size
     puts " Done! ----- moyenne de fronde : #{deputies.map{|deputy| deputy = fronding_score(deputy)}.sum/deputies.size}%"
     # is_frondeur?(deputy)
   end
@@ -23,7 +22,6 @@ class GetFrondeurStatusJob < ApplicationJob
   #   deputy.fronding
   # end
   def fronding_score(deputy)
-    print "\r#{((@counter.fdiv(@total))*100).round(2)}%" + " ...Computing fronding score..." + ['/', '-', '\\'].sample
     @counter += 1
     same_group_different_votes = 0
     if deputy.positions.any?

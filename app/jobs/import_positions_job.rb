@@ -4,15 +4,13 @@ require 'open-uri'
 class ImportPositionsJob < ApplicationJob
   queue_as :default
 
-  def perform(quantity = 1000, scrutin_id_array = [2039]) #"2039", "138", "2065"
+  def perform(scrutin_id_array = [2039]) #"2039", "138", "2065"
     @counter = 0
     @total = scrutin_id_array.size*Deputy.all.size
     @url = "http://data.assemblee-nationale.fr/static/openData/repository/15/loi/scrutins/Scrutins_XV.json.zip"
     file = open(@url)
-    attr = {file: file, quantity: quantity, scrutins: scrutin_id_array}
+    attr = {file: file, scrutins: scrutin_id_array}
     create_positions(attr)
-    GetFrondeurStatusJob.perform_now(Deputy.all)
-    GetPresenceScoreJob.perform_now(Deputy.all)
     puts "-------computed!"
   end
 
@@ -20,7 +18,7 @@ class ImportPositionsJob < ApplicationJob
     # attr[scrutins][0]
     Zip::File.open(attr[:file]) do |zip_file|
       zip_file_size = zip_file.size
-      zip_file.first(attr[:quantity]).each_with_index do |entry, i|
+      zip_file.each_with_index do |entry, i|
         data = JSON.parse(entry.get_input_stream.read)
         current_scrutin = get_scrutin_num(data)
         if attr[:scrutins].map{|scrutin_id|scrutin_id = scrutin_id.to_s}.include?(current_scrutin)
