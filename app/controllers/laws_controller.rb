@@ -18,11 +18,11 @@ class LawsController < ApplicationController
     else
       render :new
     end
-    ImportPositionsJob.perform_now([@law.scrutin_id])
-    AddTagsToLawJob.perform_now(@law)
-    CountPositionsOnLawJob.perform_now(@law)
-    GetFrondeurStatusJob.perform_now(Deputy.all)
-    GetPresenceScoreJob.perform_now(Deputy.all)
+    ImportPositionsJob.perform_later([@law.scrutin_id])
+    AddTagsToLawJob.perform_later(@law)
+    CountPositionsOnLawJob.perform_later(@law)
+    # GetFrondeurStatusJob.perform_later(Deputy.all)
+    # GetPresenceScoreJob.perform_later(Deputy.all)
   end
 
   private
