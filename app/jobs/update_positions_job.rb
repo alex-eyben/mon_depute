@@ -11,8 +11,8 @@ class UpdatePositionsJob < ApplicationJob
     file = open(@url)
     attr = {file: file, scrutins: scrutin_id_array}
     create_positions(attr)
-    GetFrondeurStatusJob.perform_now(Deputy.all)
-    GetPresenceScoreJob.perform_now(Deputy.all)
+    GetFrondeurStatusJob.perform_now
+    GetPresenceScoreJob.perform_now
     puts "-------computed!"
   end
 

@@ -14,7 +14,7 @@ class Law < ApplicationRecord
     ImportPositionsJob.perform_now([self.scrutin_id])
     AddTagsToLawJob.perform_now(self)
     CountPositionsOnLawJob.perform_now(self)
-    GetFrondeurStatusJob.perform_now(Deputy.all)
-    GetPresenceScoreJob.perform_now(Deputy.all)
+    GetFrondeurStatusJob.perform_now
+    GetPresenceScoreJob.perform_now
   end
 end
