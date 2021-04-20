@@ -47,6 +47,9 @@ gem 'mailchimp-api', '~> 2.0', '>= 2.0.6'
 
 gem 'turbolinks_render'
 
+gem 'sidekiq'
+gem 'sidekiq-failures', '~> 1.0'
+
 group :development, :test do  gem 'pry-byebug'
   gem 'pry-rails'
   gem 'dotenv-rails'
