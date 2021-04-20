@@ -7,8 +7,9 @@ class UpdateDeputiesJob < ApplicationJob
 
   def perform(*args)
     deputy_uids = []
-    file = open("http://data.assemblee-nationale.fr/static/openData/repository/15/amo/deputes_actifs_mandats_actifs_organes/AMO10_deputes_actifs_mandats_actifs_organes_XV.json.zip")
-    Zip::File.open(file) do |zip_file|
+    @file = open("http://data.assemblee-nationale.fr/static/openData/repository/15/amo/deputes_actifs_mandats_actifs_organes/AMO10_deputes_actifs_mandats_actifs_organes_XV.json.zip")
+    @parties = import_parties(quantity + 577)
+    Zip::File.open(@file) do |zip_file|
       zip_file.each_with_index do |entry, index|
         if entry.name.include?("acteur")
           data = JSON.parse(entry.get_input_stream.read)
@@ -59,6 +60,25 @@ class UpdateDeputiesJob < ApplicationJob
         end
         deputy.delete
       end
+    end
+  end
+
+  def import_parties
+    puts "import_parties is starting up"
+    # quantity += 577
+    parties = {}
+    Zip::File.open(@file) do |zip_file|
+      zip_file.first(quantity).each_with_index do |entry, index|
+          if entry.name.include?("organe")
+            data = JSON.parse(entry.get_input_stream.read)
+            if data["organe"]["codeType"] == "PARPOL" # we keep only the PARPOL aka political parties for the moment
+              parties["#{data["organe"]["uid"]}"] = data["organe"]["libelleEdition"] # I went with easy way key-value where key = uid and value = party name
+            end
+          end
+      end
+      puts JSON.pretty_generate(parties)
+      puts "All OK ===> in parties"
+      return parties
     end
   end
 end
