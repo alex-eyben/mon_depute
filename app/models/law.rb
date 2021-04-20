@@ -11,10 +11,10 @@ class Law < ApplicationRecord
   end
 
   def populate_law
-    ImportPositionsJob.perform_now([self.scrutin_id])
-    AddTagsToLawJob.perform_now(self)
-    CountPositionsOnLawJob.perform_now(self)
-    GetFrondeurStatusJob.perform_now
-    GetPresenceScoreJob.perform_now
+    ImportPositionsJob.perform_later([self.scrutin_id])
+    AddTagsToLawJob.perform_later(self)
+    CountPositionsOnLawJob.perform_later(self)
+    GetFrondeurStatusJob.perform_later
+    GetPresenceScoreJob.perform_later
   end
 end

@@ -20,4 +20,9 @@ Rails.application.routes.draw do
       get :is_followed
     end
   end
+
+  require "sidekiq/web"
+  authenticate :user, ->(user) { user.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 end
