@@ -5,7 +5,7 @@ require 'nokogiri'
 class UpdateDeputiesJob < ApplicationJob
   queue_as :default
 
-  def perform(*args)
+  def perform(quantity = 1500)
     deputy_uids = []
     @file = open("http://data.assemblee-nationale.fr/static/openData/repository/15/amo/deputes_actifs_mandats_actifs_organes/AMO10_deputes_actifs_mandats_actifs_organes_XV.json.zip")
     @parties = import_parties(quantity + 577)
@@ -63,7 +63,7 @@ class UpdateDeputiesJob < ApplicationJob
     end
   end
 
-  def import_parties
+  def import_parties(quantity)
     puts "import_parties is starting up"
     # quantity += 577
     parties = {}
