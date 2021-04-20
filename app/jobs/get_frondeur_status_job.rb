@@ -22,6 +22,8 @@ class GetFrondeurStatusJob < ApplicationJob
   #   deputy.fronding
   # end
   def fronding_score(deputy)
+    puts deputy.id
+    puts deputy.positions.first
     @counter += 1
     same_group_different_votes = 0
     if deputy.positions.any?
