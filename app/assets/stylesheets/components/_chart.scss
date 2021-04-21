@@ -31,6 +31,7 @@
 .laws-top {
   display: flex;
   margin-left: 30px;
+  margin-bottom: 10px;
   width: 90%;
   justify-content: space-between;
   flex-direction: column;
@@ -38,9 +39,6 @@
     padding: 0 20px 20px 20px;
     font-size: 1.6rem;
     text-align: center;
-  }
-  span {
-    margin: 0;
   }
 }
 

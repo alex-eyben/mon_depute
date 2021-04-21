@@ -1,3 +1,12 @@
+.categories-list {
+  display: flex;
+  flex-direction: column;
+  p {
+    margin-top: 15px;
+    margin-bottom: 0;
+  }
+}
+
 .categorie-label,
 .categorie-label-top {
   color: $tag;
@@ -9,12 +18,12 @@
   transition: 0.3s;
   border-bottom: 1px solid $tag;
   padding-bottom: 0.1rem;
+  cursor: pointer;
 }
 
-// .categorie-label:hover {
-//   color: white;
-//   background-color: $tag;
-// }
+.categorie-label-top {
+  margin-bottom: 20px;
+}
 
 .categorie-container {
   list-style: none;
@@ -27,7 +36,7 @@ ul {
 
 .categorie-container.top {
   margin-top: 0;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   p {
     font-size: 0.9rem;
   }
@@ -35,6 +44,7 @@ ul {
 
 @media (max-width: 900px) {
   .categorie-label-top {
-    margin-top: 10px !important;
+    margin-top: 30px !important;
+    margin-bottom: 20px !important;
   }
 }

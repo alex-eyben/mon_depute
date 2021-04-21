@@ -30,10 +30,13 @@ import "bootstrap";
 // import { initSweetalert } from '../plugins/init_sweetalert';
 
 import { initAutocomplete } from '../plugins/init_autocomplete';
-import { initProgressbar } from '../plugins/init_progressbar';
 import { initRoughnotation } from '../plugins/init_roughnotation';
+import { filterLaws, initFilterLaws } from '../behaviors/filter_laws_categories';
 
-// Reactivate when follow deputy logic reactivared
+// Reactivate when dataviz reactivated
+// import { initProgressbar } from '../plugins/init_progressbar';
+
+// Reactivate when follow deputy logic reactivated
 // import { initNotification } from '../plugins/init_notification';
 // import { followButton } from '../components/follow_button';
 // import { deputiesDropdown } from '../components/deputies_dropdown';
@@ -45,9 +48,12 @@ document.addEventListener('turbolinks:load', () => {
 
   initRoughnotation();
   initAutocomplete();
-  initProgressbar();
+  initFilterLaws();
+  
+  // Reactivate when dataviz reactivated
+  // initProgressbar();
 
-  // Reactivate when follow deputy logic reactivared
+  // Reactivate when follow deputy logic reactivated
   // deputiesDropdown();
   // followButton();
   // initNotification();
