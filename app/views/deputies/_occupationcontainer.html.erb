@@ -1,0 +1,9 @@
+<% if @deputy.entry_date %>
+  <p>A l'assemblée depuis le <%= @deputy.entry_date.strftime('%d/%m/%Y') %></p>
+<% end %>
+<% if @deputy.job %>
+  <p>Profession précédente : <%= @deputy.job %></p>
+<% else %>
+  <p>Pas de profession précédente connue</p>
+<% end %>
+<a href="<%= @deputy.revenue %>" target="blank">Consulter sa déclaration de revenus</a>

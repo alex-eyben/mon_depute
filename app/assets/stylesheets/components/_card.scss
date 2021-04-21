@@ -11,7 +11,7 @@
   flex-direction: column;
   border-radius: 3px;
   box-shadow:  2px 2px 10px #e4e4e4;
-  width: 40%;
+  width: 30%;
   text-align: center;
   position: sticky;
   top: 0;
@@ -23,6 +23,7 @@
 
 .deputy-card-avatar-container {
   display: flex;
+  flex-direction: column;
   align-items: center;
   img {
     flex-shrink: 0;
@@ -35,10 +36,9 @@
 }
 
 .deputy-card-avatar-container-details {
-  margin-left: 20px;
-  text-align: left;
-  h3 {
-    font-size: 1.3rem;
+  text-align: center;
+  h1 {
+    font-size: 1.7rem;
   }
   h4 {
     font-size: 1.2rem;
@@ -53,28 +53,29 @@
   margin-top: 10px;
 }
 
-.deputy-details-container.revenue {
-  text-align: left;
+.deputy-details-container.revenue,
+.deputy-details-container.occupation {
+  text-align: center;
   p {
     font-size: 0.9;
-
   }
   a {
-    font-size: 0.7rem;
+    font-size: 0.9rem;
+    font-weight: 300;
     margin-bottom: 10px;
   }
-  h3{
+  h3 {
     font-size: 1.5rem;
     margin-bottom: 0px;
     margin-top: 5px;
   }
-  .quote{
+  .quote {
     font-size: 0.7rem;
-
   }
 }
 
-.deputy-details-container.revenue a:hover{
+.deputy-details-container.revenue a:hover,
+.deputy-details-container.occupation a:hover {
   text-decoration: underline;
 }
 
@@ -90,7 +91,7 @@
 }
 
 .deputy-card-social-container {
-  margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 .deputy-card-social-container .fab,
@@ -99,7 +100,7 @@
   background-color: $deep-green;
   color: $white;
   border-radius: 50%;
-  margin: 10px;
+  margin: 10px 10px 5px 10px;
   padding: 10px;
   width: 35px;
 }

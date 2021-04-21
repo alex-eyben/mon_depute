@@ -26,18 +26,20 @@
       <div class="deputy-card-avatar-container avatar-bordered">
         <img src="<%= @deputy.img %>" alt="" class="avatar-bordered">
         <div class="deputy-card-avatar-container-details">
-          <h3><%= @deputy.first_name %> <%= @deputy.last_name %></h3>
+          <h1><%= @deputy.first_name %> <%= @deputy.last_name %></h1>
           <h4><%= @deputy.party %></h4>
-          <p> Département: <%= @deputy.department %></p>
         </div>
+      </div>
+      <div class="deputy-details-container occupation">
+        <%= render 'occupationcontainer' %>
       </div>
       <div class="deputy-card-social-container">
         <%= render 'socialcontainer' %>
       </div>
-      <div class="deputy-details-container revenue">
+
+      <!-- <div class="deputy-details-container revenue">
         <%= render 'revenuecontainer' %>
       </div>
-
       <div class="deputy-card-chart-container">
         <p>Taux de présence à l'assemblée</p>
         <div class="chart" id="presence"></div>
@@ -45,16 +47,16 @@
       <div class="deputy-card-chart-container">
         <p>Taux de votes en accord avec son parti</p>
         <div class="chart" id="fronde"></div>
-      </div>
+      </div> -->
     </div>
     <%= render 'contactbutton' %>
   </div>
 
   <div class="laws">
     <div class="laws-top">
-        <div class="chart-details">
-          <%= render 'charts' %>
-        </div>
+      <div class="chart-details">
+        <%= render 'charts' %>
+      </div>
     </div>
     <% @positions.each do |position| %>
       <% if position.deputy_position == nil %>
