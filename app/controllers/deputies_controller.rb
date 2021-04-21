@@ -20,7 +20,7 @@ class DeputiesController < ApplicationController
   def getTopTags(number)
     topTags = []
     ActsAsTaggableOn::Tag.most_used(number).each do |tag|
-      topTags << tag.name
+      topTags << tag.name.split(" ").reject{ |word| word == "-"}.map(&:capitalize).join
     end
     return topTags
   end

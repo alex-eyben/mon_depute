@@ -54,15 +54,15 @@
 
   <div class="laws">
     <div class="laws-top">
-      <div class="chart-details">
-        <%= render 'charts' %>
+      <div class="categories-list">
+        <%= render 'categories' %>
       </div>
     </div>
     <% @positions.each do |position| %>
       <% if position.deputy_position == nil %>
         <% position.deputy_position = "Absent" %>
       <% end %>
-      <div class="law-card <%= position.deputy_position.downcase %>">
+      <div class="law-card <%= position.deputy_position.downcase %> <%= position.law.write_tag_list %>">
         <div class="law-card-details">
           <h3><%= position.law.title.truncate(110, separator: ' ') %></h3>
           <p><strong><%= position.law.current_status %> le <%= position.law.last_status_update %></strong>
@@ -72,10 +72,8 @@
           </p>
           <%= render 'moreinfo', :position => position %>
           <ul class="categorie-container">
-            <% position.law.tag_list.each do |tag|%>
-              <%= link_to deputy_path(@deputy, tag: tag) do %>
-                <li class="categorie-label"><%= hashtag_sentence(tag) %></li>
-              <% end %>
+            <% position.law.generate_tag_list.each do |tag|%>
+              <li class="categorie-label <%= tag %>">#<%= tag %></li>
             <% end %>
           </ul>
         </div>

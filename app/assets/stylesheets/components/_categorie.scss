@@ -1,3 +1,12 @@
+.categories-list {
+  display: flex;
+  flex-direction: column;
+  p {
+    margin-top: 15px;
+    margin-bottom: 0;
+  }
+}
+
 .categorie-label,
 .categorie-label-top {
   color: $tag;
@@ -9,6 +18,7 @@
   transition: 0.3s;
   border-bottom: 1px solid $tag;
   padding-bottom: 0.1rem;
+  cursor: pointer;
 }
 
 .categorie-label-top {
