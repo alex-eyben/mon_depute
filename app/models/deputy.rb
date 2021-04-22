@@ -42,4 +42,9 @@ class Deputy < ApplicationRecord
     ((1 - absentCount.fdiv(positionsCount)) * 100).truncate.fdiv(100)
   end
 
+  def make_img_https
+    self.img = self.img.gsub('http', 'https')
+    self.save
+  end
+
 end

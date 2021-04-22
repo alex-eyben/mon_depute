@@ -44,7 +44,7 @@ class UpdateDeputiesJob < ApplicationJob
             new_deputy[:party] = data["acteur"]["mandats"]["mandat"].select{|mandat|mandat["typeOrgane"]=="PARPOL"}.empty? ? "Parti non renseigné" : @parties[data["acteur"]["mandats"]["mandat"].select{|mandat|mandat["typeOrgane"]=="PARPOL"}.first["organes"]["organeRef"]]
             new_deputy[:circonscription] = data["acteur"]["mandats"]["mandat"].select{|mandat|mandat["organes"]["organeRef"]=="PO717460"}.first["election"]["lieu"]["numCirco"]
             new_deputy[:department] = data["acteur"]["mandats"]["mandat"].select{|mandat|mandat["organes"]["organeRef"]=="PO717460"}.first["election"]["lieu"]["numDepartement"]
-            new_deputy[:img] = "http://www2.assemblee-nationale.fr/static/tribun/15/photos/#{data['acteur']['uid']['#text'][2..-1]}.jpg"
+            new_deputy[:img] = "https://www2.assemblee-nationale.fr/static/tribun/15/photos/#{data['acteur']['uid']['#text'][2..-1]}.jpg"
             new_deputy[:entry_date] = data["acteur"]["mandats"]["mandat"].select{|mandat|mandat["organes"]["organeRef"]=="PO717460"}.first["mandature"]["datePriseFonction"]
             Deputy.create!(new_deputy)
           end
