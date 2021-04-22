@@ -3,9 +3,9 @@ require('dotenv').config()
 const initAutocomplete = () => {
   let indexName = "";
   if (process.env.NODE_ENV == "development") {
-    indexName = "dev_DEPUTY"
+    indexName = "Deputy_development"
   } else {
-    indexName = "prod_DEPUTY"
+    indexName = "Deputy_production"
   }
   const client = algoliasearch(process.env.ALGOLIA_APP_ID, process.env.ALGOLIA_SEARCH_API_KEY);
   const index = client.initIndex(indexName); 
@@ -31,7 +31,7 @@ const initAutocomplete = () => {
       templates: {
         header: '<div class="ad-example-header">Députés</div>',
         suggestion: function(suggestion) {
-          return '<div>' + suggestion["First name"] + ' ' + suggestion["Last name"] + '</div>';
+          return '<div>' + suggestion["first_name"] + ' ' + suggestion["last_name"] + '</div>';
         }
       }
     }, placesAutocompleteDataset({
@@ -46,7 +46,7 @@ const initAutocomplete = () => {
     })
   ]).on('autocomplete:selected', function(event, suggestion, dataset, context) {
     if (dataset == 1) {
-      location.href = '/deputies/' + suggestion.Slug;
+      location.href = '/deputies/' + suggestion.slug;
     }    
   });
 };
