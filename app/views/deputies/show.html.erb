@@ -85,7 +85,7 @@
             <%= render 'likebuttons', :position => position %>
           </div>
           <div class="share-buttons">
-            <%= social_share_button_tag("#{@deputy.first_name} #{@deputy.last_name}", url: "http://mondepute.info/deputies/#{@deputy.id}", image: "#{@deputy.img}", desc: "Découvrez les positions de votes de #{@deputy.first_name} #{@deputy.last_name} à l Assemblée Nationale sur www.mondepute.info") %>
+            <%= social_share_button_tag("#{@deputy.first_name} #{@deputy.last_name}", url: "http://mondepute.info/deputies/#{@deputy.slug}", image: "#{@deputy.img}", desc: "Découvrez les positions de votes de #{@deputy.first_name} #{@deputy.last_name} à l Assemblée Nationale sur www.mondepute.info") %>
           </div>
         </div>
 

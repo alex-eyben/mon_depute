@@ -7,8 +7,8 @@ class Deputy < ApplicationRecord
   extend FriendlyId
   friendly_id :full_name, use: :slugged
 
-  algoliasearch do
-    attribute :full_name, :last_name, :first_name
+  algoliasearch per_environment: true do
+    attribute :last_name, :first_name, :slug, :id
   end
 
   def full_name
