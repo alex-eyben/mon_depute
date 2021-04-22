@@ -11,19 +11,34 @@ const initFilterLaws = () => {
       const lawsToHide = document.querySelectorAll(`.law-card:not(.${selectedCategory})`);
       hideElements(lawsToHide);
       hideElements(originalTagList);
-      currentTagContainer.insertAdjacentHTML('beforeEnd', `
-        <li class="categorie-label ${selectedCategory} current-label">
-          #${selectedCategory} <i class="fas fa-times"></i>
-        </li>`);
+      const checkIfListAlreadyFiltered = document.querySelector(".current-label") == null;
+        if (checkIfListAlreadyFiltered) {
+          insertFilteredTag(currentTagContainer, selectedCategory);
+        } else {
+          removeLastChild(currentTagContainer);
+          insertFilteredTag(currentTagContainer, selectedCategory);
+        };
       const newTrigger = document.querySelector(".current-label")
       newTrigger.addEventListener("click", () => {
         showElements(allLaws);
         showElements(originalTagList);
-        currentTagContainer.removeChild(currentTagContainer.lastChild);
+        removeLastChild(currentTagContainer);
       });
     });
   })
 }
+
+const insertFilteredTag = (container, category) => {
+  container.insertAdjacentHTML('beforeEnd', `
+    <li class="categorie-label ${category} current-label">
+      #${category} <i class="fas fa-times"></i>
+    </li>`)
+  ;
+}
+
+const removeLastChild = (element) => {
+  element.removeChild(element.lastChild);
+};
 
 const hideElements = (elements) => {
   elements.forEach((element) => {
@@ -32,7 +47,6 @@ const hideElements = (elements) => {
 }
 
 const showElements = (elements) => {
-
   elements.forEach((element) => {
     element.classList.remove("hidden");
   });
