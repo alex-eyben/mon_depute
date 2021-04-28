@@ -7,68 +7,69 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <style>
   .mon-depute-error-page {
-    background-color: #EFEFEF;
-    color: #2E2F30;
-    text-align: center;
-    font-family: arial, sans-serif;
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "Roboto", "Helvetica", "sans-serif";
     margin: 0;
+    padding: 0 200px 0 200px;
   }
 
-  .mon-depute-error-page div.dialog {
-    width: 95%;
-    max-width: 33em;
-    margin: 4em auto 0;
+  .photo {
+    width: 170px;
+    height: 170px; 
+    border-radius: 50%;
+    border: #2B7178 1px solid;
+    margin-bottom: 10px;
+    object-fit: cover;
+    margin-top: 50px;
   }
 
-  img {
-    width: 95%;
+  .text-container h1 {
+    font-weight: 400;
+    font-size: 3rem;
+    color: #2B7178;
   }
 
-  .mon-depute-error-page div.dialog > div {
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #BBB;
-    border-top: #B00100 solid 4px;
-    border-top-left-radius: 9px;
-    border-top-right-radius: 9px;
-    background-color: white;
-    padding: 7px 12% 0;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
+  .text-container h2 {
+    font-weight: 300;
+    font-size: 2rem;
+    color: #3AAFA9;
   }
 
-  .mon-depute-error-page h1 {
-    font-size: 100%;
-    color: #730E15;
-    line-height: 1.5em;
+  .button-container {
+    margin-top: 40px;
   }
 
-  .mon-depute-error-page div.dialog > p {
-    margin: 0 0 1em;
-    padding: 1em;
-    background-color: #F7F7F7;
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #999;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-top-color: #DADADA;
-    color: #666;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
+  .home {
+    color: white;
+    padding: 8px 24px;
+    border-radius: 2px;
+    background: #2B7178;
+    text-decoration: none;
+    margin-right: 10px;
   }
+
+  .back {
+    color: rgba(0,0,0,0.5);
+    text-decoration: none;
+    margin-left: 10px;
+  }
+
   </style>
 </head>
 
 <body class="mon-depute-error-page">
   <!-- This file lives in public/404.html -->
-  <div class="dialog">
-    <div>
-      <h1>L'assemblée nationale n'a pas adopté cette page.</h1>
-      <p>Erreur 404</p>
-    </div>
-      <p><img src="/images/president.jpg" alt=""></p>
-    <p><a href="/">Retour à l'accueil</a></p>
+  <img src="/images/richardferrand.jpeg" alt="" class="photo">
+  <div class="text-container">
+    <h1>Hmm.</h1>
+    <h2>Il semblerait que l’Assemblée Nationale n’a pas adopté la proposition de loi n°404...</h2>
+  </div>
+  <div class="button-container">
+    <a href="/" class="home">Page d'accueil</a>
+    <a href="javascript:history.back()" class="back">Retour à la page précédente</a>
   </div>
 </body>
 </html>

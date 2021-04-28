@@ -8,13 +8,13 @@
 
   <div class="form-inputs">
     <%= f.input :password,
-                label: "New password",
+                label: "Nouveau mot de passe",
                 required: true,
                 autofocus: true,
-                hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                hint: ("#{@minimum_password_length} caractères minimum" if @minimum_password_length),
                 input_html: { autocomplete: "new-password" } %>
     <%= f.input :password_confirmation,
-                label: "Confirm your new password",
+                label: "Confirmez votre nouveau mot de passe",
                 required: true,
                 input_html: { autocomplete: "new-password" } %>
   </div>
