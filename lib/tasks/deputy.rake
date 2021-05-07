@@ -5,6 +5,7 @@ namespace :deputy do
     DeleteWrongPositionsJob.perform_now
     GetFrondeurStatusJob.perform_now
     GetPresenceScoreJob.perform_now
+    PrettifyDeputiesJob.perform_now
     Deputy.reindex!
   end
 end

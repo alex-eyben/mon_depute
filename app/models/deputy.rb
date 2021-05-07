@@ -22,6 +22,34 @@ class Deputy < ApplicationRecord
     end
   end
 
+  def prettify_party
+    if self.party.include?("N/A")
+      self.party = "Parti non renseigné"
+      self.save
+    end
+  end
+
+  def prettify_birth_place
+    if self.birth_place.include?("@xmlns:xsi")
+      self.birth_place = "Inconnue"
+      self.save
+    end
+  end
+
+  def prettify_revenue
+    if self.revenue.include?("@xmlns:xsi")
+      self.revenue = "Déclaration de revenu indisponible"
+      self.save
+    end
+  end
+
+  def prettify
+    self.prettify_job
+    self.prettify_party
+    self.prettify_revenue
+    self.prettify_birth_place
+  end
+
   def participationRate
     positionsCount = self.positions.count
     if positions.count > 0

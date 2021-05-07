@@ -6,4 +6,8 @@
 <% else %>
   <p>Pas de profession précédente connue</p>
 <% end %>
-<a href="<%= @deputy.revenue %>" target="blank">Consulter sa déclaration de revenus</a>
+<% if @deputy.revenue = "Déclaration de revenu indisponible" %>
+  <p><%= deputy.revenue %></p>
+<% else %>
+  <a href="<%= @deputy.revenue %>" target="blank">Consulter sa déclaration de revenus</a>
+<% end %>
