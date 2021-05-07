@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users
   root to: 'pages#home'
+  get '/sitemap', to: 'sitemaps#index', :defaults => {:format => 'xml'}
   # get 'laws/:id', to: 'laws#show'
   resources :laws, only: [:show, :new, :create]
   get 'votes/:id', to: 'votes#show'
