@@ -18,8 +18,6 @@
 
 <script async defer src="https://connect.facebook.net/fr_FR/sdk.js"></script>
 
-<p class="hidden participation-rate"><%= @deputy.participationRate %></p>
-<p class="hidden fronding-rate"><%= @deputy.frondingRate %></p>
 <div class="container-deputy content-wrapper ">
   <div class="deputy-card", data-id="<%= @deputy.id %>", data-name='<%= "#{@deputy.first_name} #{@deputy.last_name}" %>', data-img=<%= @deputy.img %>>
     <div class="deputy-card-container">

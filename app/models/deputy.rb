@@ -15,6 +15,13 @@ class Deputy < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  def prettify_job
+    if self.job.include?("@xmlns:xsi")
+      self.job = "Inconnue"
+      self.save
+    end
+  end
+
   def participationRate
     positionsCount = self.positions.count
     if positions.count > 0

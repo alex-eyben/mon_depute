@@ -46,7 +46,8 @@ class UpdateDeputiesJob < ApplicationJob
             new_deputy[:department] = data["acteur"]["mandats"]["mandat"].select{|mandat|mandat["organes"]["organeRef"]=="PO717460"}.first["election"]["lieu"]["numDepartement"]
             new_deputy[:img] = "https://www2.assemblee-nationale.fr/static/tribun/15/photos/#{data['acteur']['uid']['#text'][2..-1]}.jpg"
             new_deputy[:entry_date] = data["acteur"]["mandats"]["mandat"].select{|mandat|mandat["organes"]["organeRef"]=="PO717460"}.first["mandature"]["datePriseFonction"]
-            Deputy.create!(new_deputy)
+            deputy = Deputy.create!(new_deputy)
+            deputy.prettify_job
           end
         end
       end
